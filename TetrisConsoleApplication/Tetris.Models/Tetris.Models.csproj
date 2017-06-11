@@ -41,6 +41,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Board.cs" />
+    <Compile Include="Contracts\ITetromino.cs" />
+    <Compile Include="Contracts\ITetrominoFactory.cs" />
+    <Compile Include="Enums\TetrominoType.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tetrominoes\Block.cs" />

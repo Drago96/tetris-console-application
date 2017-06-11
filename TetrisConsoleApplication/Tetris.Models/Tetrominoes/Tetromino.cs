@@ -1,17 +1,42 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Tetris.Models.Contracts;
 
 namespace Tetris.Models.Tetrominoes
 {
-    public interface Tetromino
+    public abstract class Tetromino : ITetromino
     {
-        
-        byte[,] Blocks { get; set; }
-        void Rotate();
-        void MoveLeft();
-        void MoveRight();
+        private byte[,] blocks;
+
+        protected Tetromino(byte[,] blocks)
+        {
+            this.Blocks = blocks;
+        }
+
+        public byte[,] Blocks
+        {   
+            get
+            {
+                return blocks;
+            }
+            private set
+            {
+                this.blocks = value;
+            }         
+        }
+
+        public void MoveLeft()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void MoveRight()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Rotate()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

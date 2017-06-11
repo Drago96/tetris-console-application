@@ -1,35 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Tetris.Models.Tetrominoes
+﻿namespace Tetris.Models.Tetrominoes
 {
     public class RightSnake : Tetromino
     {
-        public RightSnake()
+        private static readonly byte[,] rightSnakeFigure = new byte[,] { { 0, 1, 1 }, { 1, 1, 0 } };
+
+        protected RightSnake() : base(rightSnakeFigure)
         {
-            this.Blocks = new byte[,] { { 0, 1, 1 }, { 1, 1, 0 } };
         }
-
-        public void Rotate()
-        {
-
-        }
-
-        public void MoveLeft()
-        {
-
-        }
-
-        public void MoveRight()
-        {
-
-        }
-
-        public byte[,] Blocks { get; set; }
-
-       
     }
 }
