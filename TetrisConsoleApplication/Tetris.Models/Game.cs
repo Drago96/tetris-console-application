@@ -9,9 +9,9 @@ namespace Tetris.Models
 {
     public class Game
     {
-        public Game(int boardWidth, int boardHeight)
+        public Game(int boardWidth, int boardHeight,int level, int score, int linesCleared)
         {
-            this.Board = new Board(boardWidth,boardHeight);
+            this.Board = new Board(boardWidth,boardHeight,level,score,linesCleared);
             this.Timer = new Stopwatch();
             this.DropTimer = new Stopwatch();
         }
@@ -21,5 +21,7 @@ namespace Tetris.Models
         public Stopwatch Timer { get; set; }
 
         public Stopwatch DropTimer { get; set; }
+
+        
     }
 }

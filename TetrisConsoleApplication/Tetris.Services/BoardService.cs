@@ -29,6 +29,17 @@ namespace Tetris.Services
             {
                 Console.Write(Constants.BoardBottomSprite);
             }
+            this.DisplayInfo();
+        }
+
+        private void DisplayInfo()
+        {
+            Console.SetCursorPosition(Board.Height + 2, 0);
+            Console.WriteLine(Constants.LevelLable + Board.Level);
+            Console.SetCursorPosition(Board.Height + 2, 1);
+            Console.WriteLine(Constants.ScoreLable + Board.Score);
+            Console.SetCursorPosition(Board.Height + 2, 2);
+            Console.WriteLine(Constants.LinesClearedLable + Board.LinesCleared);
         }
 
 

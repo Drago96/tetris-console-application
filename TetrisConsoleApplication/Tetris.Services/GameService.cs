@@ -13,18 +13,18 @@ namespace Tetris.Services
     {
         public GameService()
         {
-            this.Game = new Game(Constants.BoardWidth,Constants.BoardHeight);
+            this.Game = new Game(Constants.BoardWidth,Constants.BoardHeight,Constants.StartLevel,Constants.StartScore,Constants.StartLinesCleared);
             
         }
         
         public void InitializeGame()
         {
             Console.CursorVisible = false;
-            this.Game = new Game(Constants.BoardWidth,Constants.BoardHeight);
             BoardService boardService = new BoardService(this.Game.Board);
             boardService.DrawBoard();
             this.StartGamePrompt();
             this.StartTimers();
+            
         }
 
         private void StartTimers()
