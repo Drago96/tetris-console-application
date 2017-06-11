@@ -16,11 +16,13 @@ namespace Tetris.Models.Tetrominoes
             this.TetrominoTypes = AppDomain.CurrentDomain.GetAssemblies()
                 .SelectMany(s => s.GetTypes())
                 .Where(p => type.IsAssignableFrom(p)).ToList();
-
+            this.IsTetrominoSpawned = false;
         }
 
         public Queue<Tetromino> Tetrominoes { get; set; }
 
         public List<Type> TetrominoTypes { get; set; }
+
+        public bool IsTetrominoSpawned { get; set; }
     }
 }

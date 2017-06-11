@@ -18,6 +18,16 @@ namespace Tetris.Models.Tetrominoes
 
         }
 
+        public void MoveLeft()
+        {
+            
+        }
+
+        public void MoveRight()
+        {
+
+        }
+
         public byte[,] Blocks { get; set; }
     }
 }

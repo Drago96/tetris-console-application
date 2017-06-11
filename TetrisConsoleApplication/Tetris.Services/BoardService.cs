@@ -15,7 +15,23 @@ namespace Tetris.Services
             this.Board = board;
         }
 
+
         public void DrawBoard()
+        {
+            for (int i = 0; i < Constants.BoardHeight; ++i)
+            {
+                Console.SetCursorPosition(1, i);
+                for (int j = 0; j < Constants.BoardWidth; j++)
+                {
+                    Console.Write(this.Board.Grid[i,j] == 0 ? " " : Constants.BlockSprite.ToString());
+                    Console.Write(" ");
+                }
+                
+                Console.WriteLine();
+            }
+        }
+
+        public void DrawBorder()
         {
             for (int lengthCount = 0; lengthCount < Board.Height; ++lengthCount)
             {
@@ -30,6 +46,8 @@ namespace Tetris.Services
                 Console.Write(Constants.BoardBottomSprite);
             }
             this.DisplayInfo();
+            DrawBoard();
+            
         }
 
         private void DisplayInfo()

@@ -14,18 +14,20 @@ namespace Tetris.Services
         public GameService()
         {
             this.Game = new Game(Constants.BoardWidth,Constants.BoardHeight,Constants.StartLevel,Constants.StartScore,Constants.StartLinesCleared);
+            this.BoardService = new BoardService(this.Game.Board);
+            this.TetrominoService = new TetrominoService();
             
         }
         
         public void InitializeGame()
         {
             Console.CursorVisible = false;
-            BoardService boardService = new BoardService(this.Game.Board);
-            boardService.DrawBoard();
+            BoardService.DrawBorder();
             this.StartGamePrompt();
             this.StartTimers();
-            TetrominoService tetrominoService = new TetrominoService();
-            tetrominoService.RefillTetrominoes();
+            
+          
+            
         }
 
         private void StartTimers()
@@ -42,5 +44,7 @@ namespace Tetris.Services
         }
 
         public Game Game { get; set; }
+        public BoardService BoardService { get; set; }
+        public TetrominoService TetrominoService { get; set; }
     }
 }

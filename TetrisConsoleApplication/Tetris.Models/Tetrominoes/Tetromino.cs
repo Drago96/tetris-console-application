@@ -11,5 +11,7 @@ namespace Tetris.Models.Tetrominoes
         
         byte[,] Blocks { get; set; }
         void Rotate();
+        void MoveLeft();
+        void MoveRight();
     }
 }
