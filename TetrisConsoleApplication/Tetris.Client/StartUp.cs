@@ -6,8 +6,10 @@ namespace Tetris.Client
     {
         static void Main(string[] args)
         {
+
             GameService gameService = new GameService();
             gameService.InitializeGame();
+
         }
     }
 }

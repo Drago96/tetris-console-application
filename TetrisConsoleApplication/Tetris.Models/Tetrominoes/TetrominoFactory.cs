@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,13 +11,15 @@ namespace Tetris.Models.Tetrominoes
 {
     public class TetrominoFactory
     {
-        public TetrominoFactory()
+        public TetrominoFactory()   
         {
             this.Tetrominoes = new Queue<ITetromino>();
-            var type = typeof(ITetromino);
-            this.TetrominoTypes = AppDomain.CurrentDomain.GetAssemblies()
-                .SelectMany(s => s.GetTypes())
-                .Where(p => type.IsAssignableFrom(p)).ToList();
+
+            var type = typeof(Tetromino);
+
+            this.TetrominoTypes = Assembly.GetExecutingAssembly().GetTypes()
+                .Where(v => v != type && v.IsSubclassOf(type)).ToList();
+
             this.IsTetrominoSpawned = false;
         }
 

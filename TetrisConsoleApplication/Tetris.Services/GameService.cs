@@ -21,10 +21,12 @@ namespace Tetris.Services
         
         public void InitializeGame()
         {
+            TetrominoService.GetNextTetromino();
             Console.CursorVisible = false;
             BoardService.DrawBorder();
             this.StartGamePrompt();
             this.StartTimers();
+            
             
           
             

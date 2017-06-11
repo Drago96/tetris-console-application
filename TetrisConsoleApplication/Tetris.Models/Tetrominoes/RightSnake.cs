@@ -4,7 +4,7 @@
     {
         private static readonly byte[,] rightSnakeFigure = new byte[,] { { 0, 1, 1 }, { 1, 1, 0 } };
 
-        protected RightSnake() : base(rightSnakeFigure)
+        public RightSnake() : base(rightSnakeFigure)
         {
         }
     }

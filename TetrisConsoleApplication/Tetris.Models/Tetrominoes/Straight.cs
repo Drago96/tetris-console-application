@@ -4,7 +4,7 @@
     {
         private static readonly byte[,] straightFigure = new byte[,] { { 1, 1, 1, 1 } };
 
-        protected Straight() : base(straightFigure)
+        public Straight() : base(straightFigure)
         {
         }
     }

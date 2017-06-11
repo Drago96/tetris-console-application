@@ -10,7 +10,7 @@ namespace Tetris.Models.Tetrominoes
     {
         private static readonly byte[,] rightGunFigure = new byte[,] { { 0, 0, 1 }, { 1, 1, 1 } };
 
-        protected RightGun() : base(rightGunFigure)
+        public RightGun() : base(rightGunFigure)
         {
         }
     }
