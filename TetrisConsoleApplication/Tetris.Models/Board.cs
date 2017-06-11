@@ -9,8 +9,15 @@
             this.Level = level;
             this.Score = score;
             this.LinesCleared = linesCleared;
+            this.Grid = new byte[this.Width][];
+            for (int i = 0; i < Grid.Length; i++)
+            {
+                Grid[i] = new byte[this.Height];
+            }
 
         }
+
+        public byte[][] Grid { get; set; }
 
         public int Width { get; set; }
 

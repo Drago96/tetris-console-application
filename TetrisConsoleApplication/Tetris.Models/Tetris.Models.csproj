@@ -43,6 +43,13 @@
     <Compile Include="Board.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tetrominoes\Block.cs" />
+    <Compile Include="Tetrominoes\LeftGun.cs" />
+    <Compile Include="Tetrominoes\LeftSnake.cs" />
+    <Compile Include="Tetrominoes\Pyramid.cs" />
+    <Compile Include="Tetrominoes\RightGun.cs" />
+    <Compile Include="Tetrominoes\RightSnake.cs" />
+    <Compile Include="Tetrominoes\Straight.cs" />
     <Compile Include="Tetrominoes\Tetromino.cs" />
   </ItemGroup>
   <ItemGroup />
