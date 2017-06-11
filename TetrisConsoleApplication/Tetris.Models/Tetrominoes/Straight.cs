@@ -2,9 +2,9 @@
 {
     public class Straight : Tetromino
     {
-        private static readonly byte[,] straightFigure = new byte[,] { { 1, 1, 1, 1 } };
+        private static readonly byte[,] StraightFigure = new byte[,] { { 1, 1, 1, 1 } };
 
-        public Straight() : base(straightFigure)
+        public Straight() : base(StraightFigure)
         {
         }
     }

@@ -2,9 +2,9 @@
 {
     public class Block : Tetromino
     {
-        private static readonly byte[,] blockFigure =  new byte[,] { {1,1}, {1,1} };
+        private static readonly byte[,] BlockFigure =  new byte[,] { {1,1}, {1,1} };
 
-        public Block() : base(blockFigure)
+        public Block() : base(BlockFigure)
         {
         }        
 

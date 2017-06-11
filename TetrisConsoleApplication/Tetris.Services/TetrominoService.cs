@@ -42,7 +42,7 @@ namespace Tetris.Services
             for (int i = 0; i < Constants.TetrominoRefillCount; i++)
             {
 
-                int nextTetronimoTypeNumber = rnd.Next(0, TetrominoFactory.TetrominoTypes.Count - 1);
+                int nextTetronimoTypeNumber = rnd.Next(0, TetrominoFactory.TetrominoTypes.Count);
                 Type tetrominoType = TetrominoFactory.TetrominoTypes[nextTetronimoTypeNumber];
                 var nextTetromino = Activator.CreateInstance(tetrominoType);
                 TetrominoFactory.Tetrominoes.Enqueue((ITetromino)nextTetromino);
