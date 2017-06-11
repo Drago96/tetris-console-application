@@ -10,9 +10,14 @@ namespace Tetris.Services
 {
     public class BoardService
     {
-        public void DrawBoard(Board board)
+        public BoardService(Board board)
         {
-            for (int lengthCount = 0; lengthCount < board.Height; ++lengthCount)
+            this.Board = board;
+        }
+
+        public void DrawBoard()
+        {
+            for (int lengthCount = 0; lengthCount < Board.Height; ++lengthCount)
             {
                 Console.SetCursorPosition(0, lengthCount);
                 Console.Write(Constants.BoardRearWallSprite);
@@ -20,10 +25,14 @@ namespace Tetris.Services
                 Console.Write(Constants.BoardRearWallSprite);
             }
             Console.SetCursorPosition(0, Constants.BoardHeight);
-            for (int widthCount = 0; widthCount <= board.Width; widthCount++)
+            for (int widthCount = 0; widthCount <= Board.Width; widthCount++)
             {
                 Console.Write(Constants.BoardBottomSprite);
             }
         }
+
+
+        public Board Board { get; set; }
+        
     }
 }

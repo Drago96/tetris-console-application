@@ -15,5 +15,7 @@ namespace Tetris.Utilities
 
         public const string BoardRearWallSprite = "*";
         public const string BoardBottomSprite = "*-";
+
+        public const string StartGamePromptMessage = "Press any key";
     }
 }
