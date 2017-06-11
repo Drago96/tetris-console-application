@@ -24,7 +24,8 @@ namespace Tetris.Services
             boardService.DrawBoard();
             this.StartGamePrompt();
             this.StartTimers();
-            
+            TetrominoService tetrominoService = new TetrominoService();
+            tetrominoService.RefillTetrominoes();
         }
 
         private void StartTimers()

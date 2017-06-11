@@ -51,6 +51,7 @@
     <Compile Include="Tetrominoes\RightSnake.cs" />
     <Compile Include="Tetrominoes\Straight.cs" />
     <Compile Include="Tetrominoes\Tetromino.cs" />
+    <Compile Include="Tetrominoes\TetrominoFactory.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

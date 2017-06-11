@@ -25,5 +25,7 @@ namespace Tetris.Utilities
         public const int StartLevel = 1;
         public const int StartScore = 0;
         public const int StartLinesCleared = 0;
+
+        public const int TetrominoRefillCount = 10;
     }
 }

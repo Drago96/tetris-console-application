@@ -8,7 +8,7 @@ namespace Tetris.Models.Tetrominoes
 {
     class Block : Tetromino
     {
-        public Block(char sprite)
+        public Block()
         {
             this.Blocks = new byte[,] { {1,1}, {1,1} };
         }

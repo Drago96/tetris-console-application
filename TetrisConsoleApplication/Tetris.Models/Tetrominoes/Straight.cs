@@ -8,7 +8,7 @@ namespace Tetris.Models.Tetrominoes
 {
     public class Straight : Tetromino
     {
-        public Straight(char sprite)
+        public Straight()
         {
             this.Blocks = new byte[,] {  { 1,1,1,1 }  };
         }
