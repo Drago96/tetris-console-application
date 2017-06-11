@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Tetris.Models.Contracts;
 using Tetris.Models.Tetrominoes;
 using Tetris.Utilities;
 
@@ -16,7 +17,7 @@ namespace Tetris.Services
 
         }
 
-        public Tetromino GetNextTetromino()
+        public ITetromino GetNextTetromino()
         {
             if (TetrominoFactory.Tetrominoes.Count < 2)
             {
@@ -25,7 +26,7 @@ namespace Tetris.Services
             return TetrominoFactory.Tetrominoes.Dequeue();
         }
 
-        public Tetromino PeekNextTetromino()
+        public ITetromino PeekNextTetromino()
         {
             if (TetrominoFactory.Tetrominoes.Count < 2)
             {
@@ -43,7 +44,7 @@ namespace Tetris.Services
                 int nextTetronimoTypeNumber = rnd.Next(0, TetrominoFactory.TetrominoTypes.Count - 1);
                 Type tetrominoType = TetrominoFactory.TetrominoTypes[nextTetronimoTypeNumber];
                 var nextTetromino = Activator.CreateInstance(tetrominoType);
-                TetrominoFactory.Tetrominoes.Enqueue((Tetromino)nextTetromino);
+                TetrominoFactory.Tetrominoes.Enqueue((ITetromino)nextTetromino);
 
             }
         }
