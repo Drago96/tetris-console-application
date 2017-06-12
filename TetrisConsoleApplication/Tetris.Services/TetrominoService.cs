@@ -7,6 +7,7 @@ using Tetris.Models.Contracts;
 using Tetris.Models.Tetrominoes;
 using Tetris.Utilities;
 using System.Reflection;
+using Tetris.Models.Enums;
 
 namespace Tetris.Services
 {
@@ -15,41 +16,56 @@ namespace Tetris.Services
         public TetrominoService()
         {
             this.TetrominoFactory = new TetrominoFactory();
+            this.TetrominoRepository = new TetrominoRepository();
 
         }
 
         public ITetromino GetNextTetromino()
         {
-            if (TetrominoFactory.Tetrominoes.Count < 2)
+            if (TetrominoRepository.Tetrominoes.Count < 2)
             {
                 this.RefillTetrominoes();
             }
-            return TetrominoFactory.Tetrominoes.Dequeue();
+            return TetrominoRepository.Tetrominoes.Dequeue();
         }
 
         public ITetromino PeekNextTetromino()
         {
-            if (TetrominoFactory.Tetrominoes.Count < 2)
+            if (TetrominoRepository.Tetrominoes.Count < 2)
             {
                 this.RefillTetrominoes();
             }
-            return TetrominoFactory.Tetrominoes.Peek();
+            return TetrominoRepository.Tetrominoes.Peek();
         }
 
         public void RefillTetrominoes()
         {
             Random rnd = new Random();
+
+            var tetriminoTypes = Enum.GetValues(typeof(TetrominoType)).Cast<TetrominoType>().ToArray();
+            
             for (int i = 0; i < Constants.TetrominoRefillCount; i++)
             {
 
-                int nextTetronimoTypeNumber = rnd.Next(0, TetrominoFactory.TetrominoTypes.Count - 1);
-                Type tetrominoType = TetrominoFactory.TetrominoTypes[nextTetronimoTypeNumber];
-                var nextTetromino = Activator.CreateInstance(tetrominoType);
-                TetrominoFactory.Tetrominoes.Enqueue((ITetromino)nextTetromino);
+                int nextTetronimoTypeNumber = rnd.Next(0, tetriminoTypes.Length);
+
+                TetrominoType type = tetriminoTypes[nextTetronimoTypeNumber];
+
+                ITetromino tetromino = TetrominoFactory.CreateTetromino(type);
+
+                TetrominoRepository.AddTetromino(tetromino);
+
+
+                //Type tetrominoType = TetrominoFactory.TetrominoTypes[nextTetronimoTypeNumber];
+
+                //var nextTetromino = Activator.CreateInstance(tetrominoType);
+                //TetrominoFactory.Tetrominoes.Enqueue((ITetromino)nextTetromino);
 
             }
         }
 
         public TetrominoFactory TetrominoFactory { get; set; }
+
+        private ITetrominoRepository TetrominoRepository { get;  set; }
     }
 }

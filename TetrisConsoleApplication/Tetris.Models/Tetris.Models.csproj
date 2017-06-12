@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="Board.cs" />
     <Compile Include="Contracts\ITetromino.cs" />
+    <Compile Include="Contracts\ITetrominoRepository.cs" />
     <Compile Include="Contracts\ITetrominoFactory.cs" />
     <Compile Include="Enums\TetrominoType.cs" />
     <Compile Include="Game.cs" />
@@ -55,6 +56,7 @@
     <Compile Include="Tetrominoes\Straight.cs" />
     <Compile Include="Tetrominoes\Tetromino.cs" />
     <Compile Include="Tetrominoes\TetrominoFactory.cs" />
+    <Compile Include="Tetrominoes\TetrominoRepository.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

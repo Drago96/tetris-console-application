@@ -7,7 +7,7 @@ namespace Tetris.Models.Tetrominoes
     {
         private byte[,] blocks;
 
-        public Tetromino(byte[,] blocks = null)
+        public Tetromino(byte[,] blocks)
         {
             this.Blocks = blocks;
         }
