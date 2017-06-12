@@ -7,5 +7,7 @@ namespace Tetris.Models.Contracts
         Queue<ITetromino> Tetrominoes { get; }
 
         void AddTetromino(ITetromino tetromino);
+
+        ITetromino GetFirstElement();
     }
 }

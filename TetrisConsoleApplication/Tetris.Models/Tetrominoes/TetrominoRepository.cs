@@ -20,5 +20,10 @@ namespace Tetris.Models.Tetrominoes
         {
             this.Tetrominoes.Enqueue(tetromino);
         }
+
+        public ITetromino GetFirstElement()
+        {
+            return this.Tetrominoes.Dequeue();
+        }
     }
 }

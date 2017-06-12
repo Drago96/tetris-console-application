@@ -26,10 +26,8 @@ namespace Tetris.Services
             BoardService.DrawBorder();
             this.StartGamePrompt();
             this.StartTimers();
-            
-            
-            
-          
+                        
+                     
             
         }
 
