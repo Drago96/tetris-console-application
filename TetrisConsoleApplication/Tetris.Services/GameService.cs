@@ -18,17 +18,22 @@ namespace Tetris.Services
             this.TetrominoService = new TetrominoService();
             
         }
-        
+
+        public Game Game { get; set; }
+        public BoardService BoardService { get; set; }
+        public TetrominoService TetrominoService { get; set; }
+
         public void InitializeGame()
         {
-            TetrominoService.GetNextTetromino();
+            
             Console.CursorVisible = false;
             BoardService.DrawBorder();
+            BoardService.DrawBoard();
+            BoardService.DisplayInfo();
+            BoardService.DisplayNextTetromino();
             this.StartGamePrompt();
             this.StartTimers();
-                        
-                     
-            
+                                
         }
 
         private void StartTimers()
@@ -44,8 +49,6 @@ namespace Tetris.Services
             Console.ReadKey(true);
         }
 
-        public Game Game { get; set; }
-        public BoardService BoardService { get; set; }
-        public TetrominoService TetrominoService { get; set; }
+        
     }
 }

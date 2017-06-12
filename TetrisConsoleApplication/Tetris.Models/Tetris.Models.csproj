@@ -58,6 +58,11 @@
     <Compile Include="Tetrominoes\TetrominoFactory.cs" />
     <Compile Include="Tetrominoes\TetrominoRepository.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Tetris.Utilities\Tetris.Utilities.csproj">
+      <Project>{52ecd929-4031-4022-9713-615413938311}</Project>
+      <Name>Tetris.Utilities</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

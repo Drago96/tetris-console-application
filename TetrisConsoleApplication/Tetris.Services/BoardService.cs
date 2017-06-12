@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Tetris.Models;
+using Tetris.Models.Contracts;
 using Tetris.Utilities;
 
 namespace Tetris.Services
@@ -13,8 +14,11 @@ namespace Tetris.Services
         public BoardService(Board board)
         {
             this.Board = board;
+            this.TetrominoService = new TetrominoService();
         }
 
+        public Board Board { get; set; }
+        public TetrominoService TetrominoService { get; set; }
 
         public void DrawBoard()
         {
@@ -45,12 +49,10 @@ namespace Tetris.Services
             {
                 Console.Write(Constants.BoardBottomSprite);
             }
-            this.DisplayInfo();
-            DrawBoard();
             
         }
 
-        private void DisplayInfo()
+        public void DisplayInfo()
         {
             Console.SetCursorPosition(Board.Height + 2, 0);
             Console.WriteLine(Constants.LevelLable + Board.Level);
@@ -60,8 +62,12 @@ namespace Tetris.Services
             Console.WriteLine(Constants.LinesClearedLable + Board.LinesCleared);
         }
 
-
-        public Board Board { get; set; }
+        public void DisplayNextTetromino()
+        {
+            ITetromino nextTetromino = TetrominoService.PeekNextTetromino();
+            Console.SetCursorPosition(Board.Height + 2, 4);
+            nextTetromino.DrawTetromino();
+        }
         
     }
 }

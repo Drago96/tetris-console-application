@@ -12,10 +12,6 @@ namespace Tetris.Models.Tetrominoes
 {
     public class TetrominoFactory : ITetrominoFactory
     {
-        public TetrominoFactory()   
-        {
-
-        }
 
         public ITetromino CreateTetromino(TetrominoType type)
         {
@@ -25,9 +21,6 @@ namespace Tetris.Models.Tetrominoes
 
             return tetromino;
         }
-
-
-        public bool IsTetrominoSpawned { get; set; } // ??
 
     }
 }

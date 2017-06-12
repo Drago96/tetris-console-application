@@ -30,7 +30,7 @@ namespace Tetris.Services
             {
                 this.RefillTetrominoes();
             }
-            return TetrominoRepository.Tetrominoes.Dequeue();
+            return TetrominoRepository.GetFirstElement();
         }
 
         public ITetromino PeekNextTetromino()
@@ -39,21 +39,21 @@ namespace Tetris.Services
             {
                 this.RefillTetrominoes();
             }
-            return TetrominoRepository.Tetrominoes.Peek();
+            return TetrominoRepository.PeekNextElement();
         }
 
         public void RefillTetrominoes()
         {
             Random rnd = new Random();
 
-            var tetriminoTypes = Enum.GetValues(typeof(TetrominoType)).Cast<TetrominoType>().ToArray();
+            var tetrominoTypes = Enum.GetValues(typeof(TetrominoType)).Cast<TetrominoType>().ToArray();
             
             for (int i = 0; i < Constants.TetrominoRefillCount; i++)
             {
 
-                int nextTetronimoTypeNumber = rnd.Next(0, tetriminoTypes.Length);
+                int nextTetronimoTypeNumber = rnd.Next(0, tetrominoTypes.Length);
 
-                TetrominoType type = tetriminoTypes[nextTetronimoTypeNumber];
+                TetrominoType type = tetrominoTypes[nextTetronimoTypeNumber];
 
                 ITetromino tetromino = TetrominoFactory.CreateTetromino(type);
 

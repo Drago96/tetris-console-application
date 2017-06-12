@@ -4,6 +4,7 @@
     {
         byte[,] Blocks { get; }
 
+        void DrawTetromino();
         void Rotate();
         void MoveLeft();
         void MoveRight(); //??
