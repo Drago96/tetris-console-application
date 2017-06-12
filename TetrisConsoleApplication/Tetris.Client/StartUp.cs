@@ -10,6 +10,8 @@ namespace Tetris.Client
             GameService gameService = new GameService();
             gameService.InitializeGame();
 
+            //MenuService menuService = new MenuService();
+            //menuService.InitializeMenu();
 
 
             // test to find the first user, he is seeded in db creation, 

@@ -55,6 +55,7 @@
     <Compile Include="Contracts\ITetrominoFactory.cs" />
     <Compile Include="Entities\HighScore.cs" />
     <Compile Include="Entities\User.cs" />
+    <Compile Include="Enums\MenuOptions.cs" />
     <Compile Include="Enums\TetrominoType.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -81,5 +82,6 @@
       <Name>Tetris.Utilities</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

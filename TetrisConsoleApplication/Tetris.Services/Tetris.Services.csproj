@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BoardService.cs" />
+    <Compile Include="MenuService.cs" />
     <Compile Include="OutputService.cs" />
     <Compile Include="Contracts\IBoardService.cs" />
     <Compile Include="Contracts\IGameService.cs" />
