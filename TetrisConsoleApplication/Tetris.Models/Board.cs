@@ -25,7 +25,7 @@ namespace Tetris.Models
 
         public int Height { get;  }
 
-        public CurrentTetrominoInfo CurrentTetromino {get; set; }
+        public CurrentTetromino CurrentTetromino {get; set; }
 
     }
 }

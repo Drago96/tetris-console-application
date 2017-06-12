@@ -10,15 +10,6 @@ namespace Tetris.Models.Tetrominoes
         {
         }
 
-        public override void RotateLeft()
-        {
-          
-
-        }
-
-        public override void RotateRight()
-        {
-
-        }
+   
     }
 }

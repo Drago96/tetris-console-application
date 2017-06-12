@@ -59,7 +59,7 @@
     <Compile Include="Game.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ScoreInfo.cs" />
-    <Compile Include="CurrentTetrominoInfo.cs" />
+    <Compile Include="CurrentTetromino.cs" />
     <Compile Include="Tetrominoes\Block.cs" />
     <Compile Include="Tetrominoes\LeftGun.cs" />
     <Compile Include="Tetrominoes\LeftSnake.cs" />

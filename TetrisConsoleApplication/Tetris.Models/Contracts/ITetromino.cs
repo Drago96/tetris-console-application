@@ -8,9 +8,5 @@
 
         void DrawTetromino();
 
-        void RotateLeft();
-
-        void RotateRight();
-
     }
 }

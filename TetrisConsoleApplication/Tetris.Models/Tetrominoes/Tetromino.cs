@@ -12,7 +12,7 @@ namespace Tetris.Models.Tetrominoes
             this.BlockSprite = blockSprite;
         }
 
-        public byte[,] Blocks { get; protected set; }
+        public byte[,] Blocks { get; }
         
         public char BlockSprite { get; }
 
@@ -28,8 +28,6 @@ namespace Tetris.Models.Tetrominoes
             }
         }
 
-        public abstract void RotateLeft();
-        public abstract void RotateRight();
 
 
     }
