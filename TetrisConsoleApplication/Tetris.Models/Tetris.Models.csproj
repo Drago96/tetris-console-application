@@ -30,7 +30,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0-beta1\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0-beta1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Build.Framework" />
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -44,6 +52,8 @@
     <Compile Include="Contracts\ITetromino.cs" />
     <Compile Include="Contracts\ITetrominoRepository.cs" />
     <Compile Include="Contracts\ITetrominoFactory.cs" />
+    <Compile Include="Entities\HighScore.cs" />
+    <Compile Include="Entities\User.cs" />
     <Compile Include="Enums\TetrominoType.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -59,10 +69,8 @@
     <Compile Include="Tetrominoes\TetrominoRepository.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Tetris.Utilities\Tetris.Utilities.csproj">
-      <Project>{52ecd929-4031-4022-9713-615413938311}</Project>
-      <Name>Tetris.Utilities</Name>
-    </ProjectReference>
+    <None Include="App.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
