@@ -2,9 +2,9 @@
 {
     public class Pyramid : Tetromino
     {
-        private static readonly byte[,] pyramidFigure = new byte[,] {{0,1,0},{1,1,1} };
+        private static readonly byte[,] PyramidFigure = new byte[,] {{0,1,0},{1,1,1} };
 
-        public Pyramid() : base(pyramidFigure)
+        public Pyramid() : base(PyramidFigure)
         {
         }
     }
