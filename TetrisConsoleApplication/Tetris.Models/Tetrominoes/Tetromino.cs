@@ -7,11 +7,7 @@ namespace Tetris.Models.Tetrominoes
     {
         private byte[,] blocks;
 
-<<<<<<< HEAD
         public Tetromino(byte[,] blocks)
-=======
-        protected Tetromino(byte[,] blocks = null)
->>>>>>> 7e0968f3cb09301af56450f2c5c739fc4e5cd0e5
         {
             this.Blocks = blocks;
         }
