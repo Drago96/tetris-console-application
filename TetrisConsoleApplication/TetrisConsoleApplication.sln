@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.12
+VisualStudioVersion = 15.0.26430.6
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tetris.Client", "Tetris.Client\Tetris.Client.csproj", "{78476A48-5C78-4AD7-8C57-56B46B989199}"
 EndProject
@@ -10,6 +10,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tetris.Models", "Tetris.Models\Tetris.Models.csproj", "{04970821-4450-419F-97EF-DAADF62191EF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tetris.Services", "Tetris.Services\Tetris.Services.csproj", "{99C68DCD-9FED-4D5A-B83F-0FC2EDE248CF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tetris.Data", "Tetris.Data\Tetris.Data.csproj", "{E210228A-DA02-413E-A6B4-BADF6A586736}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -87,6 +89,22 @@ Global
 		{99C68DCD-9FED-4D5A-B83F-0FC2EDE248CF}.Release|x64.Build.0 = Release|Any CPU
 		{99C68DCD-9FED-4D5A-B83F-0FC2EDE248CF}.Release|x86.ActiveCfg = Release|Any CPU
 		{99C68DCD-9FED-4D5A-B83F-0FC2EDE248CF}.Release|x86.Build.0 = Release|Any CPU
+		{E210228A-DA02-413E-A6B4-BADF6A586736}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E210228A-DA02-413E-A6B4-BADF6A586736}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E210228A-DA02-413E-A6B4-BADF6A586736}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{E210228A-DA02-413E-A6B4-BADF6A586736}.Debug|ARM.Build.0 = Debug|Any CPU
+		{E210228A-DA02-413E-A6B4-BADF6A586736}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{E210228A-DA02-413E-A6B4-BADF6A586736}.Debug|x64.Build.0 = Debug|Any CPU
+		{E210228A-DA02-413E-A6B4-BADF6A586736}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{E210228A-DA02-413E-A6B4-BADF6A586736}.Debug|x86.Build.0 = Debug|Any CPU
+		{E210228A-DA02-413E-A6B4-BADF6A586736}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E210228A-DA02-413E-A6B4-BADF6A586736}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E210228A-DA02-413E-A6B4-BADF6A586736}.Release|ARM.ActiveCfg = Release|Any CPU
+		{E210228A-DA02-413E-A6B4-BADF6A586736}.Release|ARM.Build.0 = Release|Any CPU
+		{E210228A-DA02-413E-A6B4-BADF6A586736}.Release|x64.ActiveCfg = Release|Any CPU
+		{E210228A-DA02-413E-A6B4-BADF6A586736}.Release|x64.Build.0 = Release|Any CPU
+		{E210228A-DA02-413E-A6B4-BADF6A586736}.Release|x86.ActiveCfg = Release|Any CPU
+		{E210228A-DA02-413E-A6B4-BADF6A586736}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
