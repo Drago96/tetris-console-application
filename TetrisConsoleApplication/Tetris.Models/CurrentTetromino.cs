@@ -7,16 +7,16 @@ using Tetris.Models.Contracts;
 
 namespace Tetris.Models
 {
-    public class CurrentTetromino
+    public class CurrentTetromino : IGrid
     {
         public CurrentTetromino(ITetromino tetromino, int tetrominoAxisX, int tetrominoAxisY)
         {
-            this.Grid = tetromino.Blocks;
+            this.Blocks = tetromino.Blocks;
             this.TetrominoAxisX = tetrominoAxisX;
             this.TetrominoAxisY = tetrominoAxisY;
         }
 
-        public byte[,] Grid { get; set; }
+        public byte[,] Blocks { get; private set; }
         public int TetrominoAxisX { get; set; }
         public int TetrominoAxisY { get; set; }
     }

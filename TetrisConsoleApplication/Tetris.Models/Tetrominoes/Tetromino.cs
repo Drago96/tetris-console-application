@@ -12,9 +12,9 @@ namespace Tetris.Models.Tetrominoes
             this.BlockSprite = blockSprite;
         }
 
-        public byte[,] Blocks { get; }
+        public byte[,] Blocks { get; private set; }
         
-        public char BlockSprite { get; }
+        public char BlockSprite { get; private set; }
 
         public void DrawTetromino()
         {

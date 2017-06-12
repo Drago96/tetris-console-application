@@ -1,12 +1,9 @@
 ﻿namespace Tetris.Models.Contracts
 {
-    public interface ITetromino
+    public interface ITetromino : IGrid
     {
-        byte[,] Blocks { get; }
-
         char BlockSprite { get; }
 
         void DrawTetromino();
-
     }
 }

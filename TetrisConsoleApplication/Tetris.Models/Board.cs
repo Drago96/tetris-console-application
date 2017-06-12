@@ -2,30 +2,29 @@
 
 namespace Tetris.Models
 {
-    public class Board
+    public class Board : IBoard
     {
         public Board(int width, int height,char boardSprite,string rearWallSprite, string bottomSprite)
         {
             this.BoardBorder = new BoardBorder(rearWallSprite,bottomSprite);
             this.Width = width;
             this.Height = height;
-            this.Grid = new byte[this.Height,this.Width];
+            this.Blocks = new byte[this.Height,this.Width];
             this.BoardSprite = boardSprite;
-
 
         }
 
-        public byte[,] Grid { get; set; }
+        public byte[,] Blocks { get; private set; }
 
-        public char BoardSprite { get; }
+        public char BoardSprite { get; private set; }
 
-        public BoardBorder BoardBorder { get; }
+        public BoardBorder BoardBorder { get; private set; }
 
-        public int Width { get; }
+        public int Width { get; private set; }
 
-        public int Height { get;  }
+        public int Height { get; private set; }
 
-        public CurrentTetromino CurrentTetromino {get; set; }
+        public CurrentTetromino CurrentTetromino { get;  set; }
 
     }
 }

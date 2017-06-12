@@ -50,6 +50,8 @@
   <ItemGroup>
     <Compile Include="Board.cs" />
     <Compile Include="BoardBorder.cs" />
+    <Compile Include="Contracts\IBoard.cs" />
+    <Compile Include="Contracts\IGrid.cs" />
     <Compile Include="Contracts\ITetromino.cs" />
     <Compile Include="Contracts\ITetrominoRepository.cs" />
     <Compile Include="Contracts\ITetrominoFactory.cs" />

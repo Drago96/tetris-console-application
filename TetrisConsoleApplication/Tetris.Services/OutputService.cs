@@ -37,7 +37,7 @@ namespace Tetris.Services
                 Console.SetCursorPosition(1, i);
                 for (int j = 0; j < Board.Width; j++)
                 {
-                    Console.Write(this.Board.Grid[i,j] == 0 ? " " : Board.BoardSprite.ToString());
+                    Console.Write(this.Board.Blocks[i,j] == 0 ? " " : Board.BoardSprite.ToString());
                     Console.Write(" ");
                 }
                 
