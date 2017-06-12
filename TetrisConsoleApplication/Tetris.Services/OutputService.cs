@@ -11,12 +11,14 @@ namespace Tetris.Services
 {
     public class OutputService
     {
-        public OutputService(Board board)
+        public OutputService(Board board,Game game)
         {
             this.Board = board;
+            this.Game = game;
             this.TetrominoService = new TetrominoService();
         }
 
+        public Game Game { get; set; }
         public Board Board { get; set; }
         public TetrominoService TetrominoService { get; set; }
 
@@ -63,11 +65,11 @@ namespace Tetris.Services
         public void DisplayInfo()
         {
             Console.SetCursorPosition(Board.Height + 2, 0);
-            Console.WriteLine(Constants.LevelLable + Board.ScoreInfo.Level);
+            Console.WriteLine(Constants.LevelLable + Game.ScoreInfo.Level);
             Console.SetCursorPosition(Board.Height + 2, 1);
-            Console.WriteLine(Constants.ScoreLable + Board.ScoreInfo.Score);
+            Console.WriteLine(Constants.ScoreLable + Game.ScoreInfo.Score);
             Console.SetCursorPosition(Board.Height + 2, 2);
-            Console.WriteLine(Constants.LinesClearedLable + Board.ScoreInfo.LinesCleared);
+            Console.WriteLine(Constants.LinesClearedLable + Game.ScoreInfo.LinesCleared);
         }
 
         public void DisplayNextTetromino()

@@ -12,9 +12,10 @@ namespace Tetris.Models
     {
         public Game(int boardWidth, int boardHeight,int level, int score, int linesCleared,char blockSprite, string boardRearWallSprite, string bottomSprite)
         {
-            this.Board = new Board(boardWidth,boardHeight,level,score,linesCleared,  blockSprite,  boardRearWallSprite,  bottomSprite);
+            this.Board = new Board(boardWidth,boardHeight,blockSprite,  boardRearWallSprite,  bottomSprite);
             this.Timer = new Stopwatch();
             this.DropTimer = new Stopwatch();
+            this.ScoreInfo = new ScoreInfo(level,score,linesCleared);
         }
 
         public Board Board { get; set; }
@@ -23,6 +24,6 @@ namespace Tetris.Models
 
         public Stopwatch DropTimer { get; set; }
 
-        
+        public ScoreInfo ScoreInfo { get; set; }
     }
 }
