@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Tetris.Utilities;
 
 namespace Tetris.Models.Tetrominoes
 {
@@ -10,7 +11,7 @@ namespace Tetris.Models.Tetrominoes
     {
         private static readonly byte[,] RightGunFigure = new byte[,] { { 0, 0, 1 }, { 1, 1, 1 } };
 
-        public RightGun() : base(RightGunFigure)
+        public RightGun() : base(RightGunFigure, Constants.BlockSprite)
         {
         }
     }

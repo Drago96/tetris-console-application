@@ -30,12 +30,12 @@ namespace Tetris.Services
 
         public void DrawBoard()
         {
-            for (int i = 0; i < Constants.BoardHeight; ++i)
+            for (int i = 0; i < Board.Height; ++i)
             {
                 Console.SetCursorPosition(1, i);
-                for (int j = 0; j < Constants.BoardWidth; j++)
+                for (int j = 0; j < Board.Width; j++)
                 {
-                    Console.Write(this.Board.Grid[i,j] == 0 ? " " : Constants.BlockSprite.ToString());
+                    Console.Write(this.Board.Grid[i,j] == 0 ? " " : Board.BoardSprite.ToString());
                     Console.Write(" ");
                 }
                 
@@ -48,14 +48,14 @@ namespace Tetris.Services
             for (int lengthCount = 0; lengthCount < Board.Height; ++lengthCount)
             {
                 Console.SetCursorPosition(0, lengthCount);
-                Console.Write(Constants.BoardRearWallSprite);
-                Console.SetCursorPosition(Constants.BoardHeight - 2, lengthCount);
-                Console.Write(Constants.BoardRearWallSprite);
+                Console.Write(Board.BoardBorder.RearWallSprite);
+                Console.SetCursorPosition(Board.Height - 2, lengthCount);
+                Console.Write(Board.BoardBorder.RearWallSprite);
             }
-            Console.SetCursorPosition(0, Constants.BoardHeight);
+            Console.SetCursorPosition(0, Board.Height);
             for (int widthCount = 0; widthCount <= Board.Width; widthCount++)
             {
-                Console.Write(Constants.BoardBottomSprite);
+                Console.Write(Board.BoardBorder.BottomSprite);
             }
             
         }
@@ -63,11 +63,11 @@ namespace Tetris.Services
         public void DisplayInfo()
         {
             Console.SetCursorPosition(Board.Height + 2, 0);
-            Console.WriteLine(Constants.LevelLable + Board.Level);
+            Console.WriteLine(Constants.LevelLable + Board.ScoreInfo.Level);
             Console.SetCursorPosition(Board.Height + 2, 1);
-            Console.WriteLine(Constants.ScoreLable + Board.Score);
+            Console.WriteLine(Constants.ScoreLable + Board.ScoreInfo.Score);
             Console.SetCursorPosition(Board.Height + 2, 2);
-            Console.WriteLine(Constants.LinesClearedLable + Board.LinesCleared);
+            Console.WriteLine(Constants.LinesClearedLable + Board.ScoreInfo.LinesCleared);
         }
 
         public void DisplayNextTetromino()

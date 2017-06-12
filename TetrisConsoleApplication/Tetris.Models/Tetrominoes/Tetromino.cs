@@ -6,24 +6,15 @@ namespace Tetris.Models.Tetrominoes
 {
     public abstract class Tetromino : ITetromino
     {
-        private byte[,] _blocks;
-
-        protected Tetromino(byte[,] blocks)
+        protected Tetromino(byte[,] blocks,char blockSprite)
         {
             this.Blocks = blocks;
+            this.BlockSprite = blockSprite;
         }
 
-        public byte[,] Blocks
-        {   
-            get
-            {
-                return _blocks;
-            }
-            private set
-            {
-                this._blocks = value;
-            }         
-        }
+        public byte[,] Blocks { get; }
+        
+        public char BlockSprite { get; }
 
         public void DrawTetromino()
         {
@@ -31,25 +22,12 @@ namespace Tetris.Models.Tetrominoes
             {
                 for (int j = 0; j < Blocks.GetLength(1); j++)
                 {
-                    Console.Write(Blocks[i,j] == 0 ? "  " : $"{Constants.BlockSprite} ");
+                    Console.Write(Blocks[i,j] == 0 ? "  " : $"{this.BlockSprite} ");
                 }
                 Console.SetCursorPosition(Console.CursorLeft - Blocks.GetLength(1)*2,Console.CursorTop+1);
             }
         }
 
-        public void MoveLeft()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void MoveRight()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Rotate()
-        {
-            throw new NotImplementedException();
-        }
+       
     }
 }

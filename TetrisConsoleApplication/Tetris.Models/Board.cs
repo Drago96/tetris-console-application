@@ -1,30 +1,34 @@
-﻿namespace Tetris.Models
+﻿using Tetris.Models.Contracts;
+
+namespace Tetris.Models
 {
     public class Board
     {
-        public Board(int width, int height,int level, int score, int linesCleared)
+        public Board(int width, int height,int level, int score, int linesCleared,char boardSprite,string rearWallSprite, string bottomSprite)
         {
+            this.BoardBorder = new BoardBorder(rearWallSprite,bottomSprite);
             this.Width = width;
             this.Height = height;
-            this.Level = level;
-            this.Score = score;
-            this.LinesCleared = linesCleared;
+            this.ScoreInfo = new ScoreInfo(level,score,linesCleared);
             this.Grid = new byte[this.Height,this.Width];
-            
+            this.BoardSprite = boardSprite;
+
 
         }
 
         public byte[,] Grid { get; set; }
 
-        public int Width { get; set; }
+        public char BoardSprite { get; }
 
-        public int Height { get; set; }
+        public BoardBorder BoardBorder { get; }
 
-        public int Level { get; set; }
+        public int Width { get; }
 
-        public int Score { get; set; }
+        public int Height { get;  }
 
-        public int LinesCleared { get; set; }
+        public ScoreInfo ScoreInfo { get; set; }
+
+        public ITetromino SpawnedTetromino { get; set; }
 
     }
 }

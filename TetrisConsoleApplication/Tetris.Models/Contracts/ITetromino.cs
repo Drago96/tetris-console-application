@@ -4,9 +4,9 @@
     {
         byte[,] Blocks { get; }
 
+        char BlockSprite { get; }
+
         void DrawTetromino();
-        void Rotate();
-        void MoveLeft();
-        void MoveRight(); //??
+        
     }
 }

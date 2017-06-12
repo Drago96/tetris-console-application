@@ -26,7 +26,7 @@ namespace Tetris.Services
 
         public ITetromino GetNextTetromino()
         {
-            if (TetrominoRepository.Tetrominoes.Count < 2)
+            if (TetrominoRepository.Tetrominoes.Count < 1)
             {
                 this.RefillTetrominoes();
             }
@@ -35,7 +35,7 @@ namespace Tetris.Services
 
         public ITetromino PeekNextTetromino()
         {
-            if (TetrominoRepository.Tetrominoes.Count < 2)
+            if (TetrominoRepository.Tetrominoes.Count < 1)
             {
                 this.RefillTetrominoes();
             }

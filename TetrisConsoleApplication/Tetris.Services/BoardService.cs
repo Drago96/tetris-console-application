@@ -17,6 +17,11 @@ namespace Tetris.Services
 
         public Board Board { get; set; }
 
+        public void MoveTetromino(ITetromino tetromino)
+        {
+            
+        }
+
         public void SpawnTetromino(ITetromino tetromino)
         {
             int tetrominoSpawnPoint =
