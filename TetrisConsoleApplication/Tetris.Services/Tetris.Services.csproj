@@ -48,6 +48,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BoardStateService.cs" />
+    <Compile Include="Contracts\IInputReader.cs" />
+    <Compile Include="Contracts\IOutputWriter.cs" />
+    <Compile Include="IO\ConsoleReader.cs" />
+    <Compile Include="IO\ConsoleWriter.cs" />
     <Compile Include="MenuService.cs" />
     <Compile Include="OutputService.cs" />
     <Compile Include="Contracts\IBoardService.cs" />
