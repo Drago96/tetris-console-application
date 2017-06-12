@@ -14,12 +14,14 @@ namespace Tetris.Services
         public GameService()
         {
             this.Game = new Game(Constants.BoardWidth,Constants.BoardHeight,Constants.StartLevel,Constants.StartScore,Constants.StartLinesCleared);
-            this.BoardService = new BoardService(this.Game.Board);
+            this.OutputService = new OutputService(this.Game.Board);
             this.TetrominoService = new TetrominoService();
+            this.BoardService = new BoardService(this.Game.Board);
             
         }
 
         public Game Game { get; set; }
+        public OutputService OutputService { get; set; }
         public BoardService BoardService { get; set; }
         public TetrominoService TetrominoService { get; set; }
 
@@ -27,10 +29,8 @@ namespace Tetris.Services
         {
             
             Console.CursorVisible = false;
-            BoardService.DrawBorder();
-            BoardService.DrawBoard();
-            BoardService.DisplayInfo();
-            BoardService.DisplayNextTetromino();
+            BoardService.SpawnTetromino(TetrominoService.GetNextTetromino());
+            OutputService.InitializeBoard();
             this.StartGamePrompt();
             this.StartTimers();
                                 

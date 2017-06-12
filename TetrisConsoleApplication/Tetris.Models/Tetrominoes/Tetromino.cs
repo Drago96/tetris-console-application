@@ -6,7 +6,7 @@ namespace Tetris.Models.Tetrominoes
 {
     public abstract class Tetromino : ITetromino
     {
-        private byte[,] blocks;
+        private byte[,] _blocks;
 
         protected Tetromino(byte[,] blocks)
         {
@@ -17,11 +17,11 @@ namespace Tetris.Models.Tetrominoes
         {   
             get
             {
-                return blocks;
+                return _blocks;
             }
             private set
             {
-                this.blocks = value;
+                this._blocks = value;
             }         
         }
 

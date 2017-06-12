@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using Tetris.Models;
 using Tetris.Models.Contracts;
-using Tetris.Utilities;
 
 namespace Tetris.Services
 {
@@ -14,60 +13,43 @@ namespace Tetris.Services
         public BoardService(Board board)
         {
             this.Board = board;
-            this.TetrominoService = new TetrominoService();
         }
 
         public Board Board { get; set; }
-        public TetrominoService TetrominoService { get; set; }
 
-        public void DrawBoard()
+        public void SpawnTetromino(ITetromino tetromino)
         {
-            for (int i = 0; i < Constants.BoardHeight; ++i)
+            int tetrominoSpawnPoint =
+                (int)(Board.Width / 2 - Math.Ceiling((double)tetromino.Blocks.GetLength(1) / 2));
+            if (this.IsSpawnPossible(this.Board, tetromino, tetrominoSpawnPoint))
             {
-                Console.SetCursorPosition(1, i);
-                for (int j = 0; j < Constants.BoardWidth; j++)
+                for (int i = 0; i < tetromino.Blocks.GetLength(0); i++)
                 {
-                    Console.Write(this.Board.Grid[i,j] == 0 ? " " : Constants.BlockSprite.ToString());
-                    Console.Write(" ");
+                    for (int j = tetrominoSpawnPoint; j < tetrominoSpawnPoint + tetromino.Blocks.GetLength(1); j++)
+                    {
+                        if (tetromino.Blocks[i, j - tetrominoSpawnPoint] == 1)
+                        {
+                            Board.Grid[i, j] = 1;
+                        }
+                    }
                 }
-                
-                Console.WriteLine();
             }
         }
 
-        public void DrawBorder()
+        private bool IsSpawnPossible(Board board, ITetromino tetromino, int tetrominoSpawnPoint)
         {
-            for (int lengthCount = 0; lengthCount < Board.Height; ++lengthCount)
-            {
-                Console.SetCursorPosition(0, lengthCount);
-                Console.Write(Constants.BoardRearWallSprite);
-                Console.SetCursorPosition(Constants.BoardHeight - 2, lengthCount);
-                Console.Write(Constants.BoardRearWallSprite);
-            }
-            Console.SetCursorPosition(0, Constants.BoardHeight);
-            for (int widthCount = 0; widthCount <= Board.Width; widthCount++)
-            {
-                Console.Write(Constants.BoardBottomSprite);
-            }
             
+            for (int i = 0; i < tetromino.Blocks.GetLength(0); i++)
+            {
+                for (int j = tetrominoSpawnPoint; j < tetrominoSpawnPoint + tetromino.Blocks.GetLength(1); j++)
+                {
+                    if (board.Grid[i, j] == 1 && tetromino.Blocks[i, j - tetrominoSpawnPoint] == 1)
+                    {
+                        return false;
+                    }
+                }
+            }
+            return true;
         }
-
-        public void DisplayInfo()
-        {
-            Console.SetCursorPosition(Board.Height + 2, 0);
-            Console.WriteLine(Constants.LevelLable + Board.Level);
-            Console.SetCursorPosition(Board.Height + 2, 1);
-            Console.WriteLine(Constants.ScoreLable + Board.Score);
-            Console.SetCursorPosition(Board.Height + 2, 2);
-            Console.WriteLine(Constants.LinesClearedLable + Board.LinesCleared);
-        }
-
-        public void DisplayNextTetromino()
-        {
-            ITetromino nextTetromino = TetrominoService.PeekNextTetromino();
-            Console.SetCursorPosition(Board.Height + 2, 4);
-            nextTetromino.DrawTetromino();
-        }
-        
     }
 }
