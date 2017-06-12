@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TetrisDbContext.cs" />
   </ItemGroup>
@@ -60,10 +61,6 @@
     <ProjectReference Include="..\Tetris.Models\Tetris.Models.csproj">
       <Project>{04970821-4450-419f-97ef-daadf62191ef}</Project>
       <Name>Tetris.Models</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Tetris.Services\Tetris.Services.csproj">
-      <Project>{99c68dcd-9fed-4d5a-b83f-0fc2ede248cf}</Project>
-      <Name>Tetris.Services</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

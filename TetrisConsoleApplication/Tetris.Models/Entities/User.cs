@@ -3,7 +3,6 @@
     using System.Collections.Generic;
     using Microsoft.Build.Framework;
 
-
     public class User
     {
         private ICollection<HighScore> _highscores;
@@ -11,6 +10,13 @@
         public User()
         {
             this._highscores = new HashSet<HighScore>();
+        }
+
+        public User(string name)
+            : this()
+        {
+            this._highscores = new HashSet<HighScore>();
+            this.Name = name;
         }
 
         public int Id { get; set; }
