@@ -7,9 +7,9 @@ using Tetris.Models.Contracts;
 
 namespace Tetris.Models
 {
-    public class SpawnedTetrominoInfo
+    public class CurrentTetrominoInfo
     {
-        public SpawnedTetrominoInfo(ITetromino tetromino, int tetrominoAxisX, int tetrominoAxisY)
+        public CurrentTetrominoInfo(ITetromino tetromino, int tetrominoAxisX, int tetrominoAxisY)
         {
             this.Tetromino = tetromino;
             this.TetrominoAxisX = tetrominoAxisX;
