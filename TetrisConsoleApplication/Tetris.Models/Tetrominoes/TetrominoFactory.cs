@@ -15,12 +15,6 @@ namespace Tetris.Models.Tetrominoes
         public TetrominoFactory()   
         {
 
-           // var type = typeof(Tetromino);
-           //
-           // this.TetrominoTypes = Assembly.GetExecutingAssembly().GetTypes()
-           //     .Where(v => v != type && v.IsSubclassOf(type)).ToList();
-           //
-           // this.IsTetrominoSpawned = false;
         }
 
         public ITetromino CreateTetromino(TetrominoType type)
@@ -33,9 +27,7 @@ namespace Tetris.Models.Tetrominoes
         }
 
 
-        public List<Type> TetrominoTypes { get; set; }
-
-        public bool IsTetrominoSpawned { get; set; }
+        public bool IsTetrominoSpawned { get; set; } // ??
 
     }
 }

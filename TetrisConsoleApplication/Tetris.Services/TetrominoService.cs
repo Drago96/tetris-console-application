@@ -8,17 +8,21 @@ using Tetris.Models.Tetrominoes;
 using Tetris.Utilities;
 using System.Reflection;
 using Tetris.Models.Enums;
+using Tetris.Services.Contracts;
 
 namespace Tetris.Services
 {
-    public class TetrominoService
+    public class TetrominoService : ITetrominoService
     {
         public TetrominoService()
         {
             this.TetrominoFactory = new TetrominoFactory();
             this.TetrominoRepository = new TetrominoRepository();
-
         }
+
+        public ITetrominoFactory TetrominoFactory { get; private set; }
+
+        public ITetrominoRepository TetrominoRepository { get; private set; }
 
         public ITetromino GetNextTetromino()
         {
@@ -57,9 +61,5 @@ namespace Tetris.Services
 
             }
         }
-
-        public TetrominoFactory TetrominoFactory { get; set; }
-
-        private ITetrominoRepository TetrominoRepository { get;  set; }
     }
 }
