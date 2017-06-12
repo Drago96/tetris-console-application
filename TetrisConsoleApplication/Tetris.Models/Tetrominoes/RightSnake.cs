@@ -9,5 +9,7 @@ namespace Tetris.Models.Tetrominoes
         public RightSnake() : base(RightSnakeFigure, Constants.BlockSprite)
         {
         }
+
+       
     }
 }

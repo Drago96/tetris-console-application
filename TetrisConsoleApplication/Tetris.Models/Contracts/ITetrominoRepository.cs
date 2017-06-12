@@ -6,8 +6,6 @@ namespace Tetris.Models.Contracts
     {
         Queue<ITetromino> Tetrominoes { get; }
 
-        bool IsTetrominoSpawned { get; set; }
-
         void AddTetromino(ITetromino tetromino);
 
         ITetromino GetFirstElement();

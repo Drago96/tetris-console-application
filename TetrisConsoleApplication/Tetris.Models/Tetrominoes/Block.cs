@@ -8,7 +8,9 @@ namespace Tetris.Models.Tetrominoes
 
         public Block() : base(BlockFigure,Constants.BlockSprite)
         {
-        }        
+        }
+
+      
 
     }
 }

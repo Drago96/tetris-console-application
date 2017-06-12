@@ -9,5 +9,7 @@ namespace Tetris.Models.Tetrominoes
         public Straight() : base(StraightFigure, Constants.BlockSprite)
         {
         }
+
+   
     }
 }

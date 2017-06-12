@@ -9,5 +9,7 @@ namespace Tetris.Models.Tetrominoes
         public Pyramid() : base(PyramidFigure, Constants.BlockSprite)
         {
         }
+
+     
     }
 }

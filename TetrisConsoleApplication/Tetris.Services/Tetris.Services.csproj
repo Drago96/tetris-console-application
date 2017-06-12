@@ -47,7 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BoardService.cs" />
+    <Compile Include="BoardStateService.cs" />
     <Compile Include="MenuService.cs" />
     <Compile Include="OutputService.cs" />
     <Compile Include="Contracts\IBoardService.cs" />

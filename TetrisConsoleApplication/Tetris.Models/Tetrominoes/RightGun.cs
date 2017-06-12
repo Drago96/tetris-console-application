@@ -14,5 +14,7 @@ namespace Tetris.Models.Tetrominoes
         public RightGun() : base(RightGunFigure, Constants.BlockSprite)
         {
         }
+
+     
     }
 }
