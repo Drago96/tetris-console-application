@@ -17,11 +17,19 @@
             }
         }
 
-        public IEnumerable<HighScore> GetUserHighScores(int userId)
+        public IEnumerable<HighScore> GetUserHighScoresById(int userId)
         {
             using (var context = new TetrisDbContext())
             {
                 return context.Users.FirstOrDefault(u => u.Id == userId).HighScores;
+            }
+        }
+
+        public IEnumerable<HighScore> GetUserHighScoresByName(string username)
+        {
+            using (var context = new TetrisDbContext())
+            {
+                return context.Users.FirstOrDefault(u => u.Name == username).HighScores;
             }
         }
     }
