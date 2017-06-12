@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Tetris.Models;
 using Tetris.Utilities;
@@ -29,10 +30,16 @@ namespace Tetris.Services
         {
             
             Console.CursorVisible = false;
-            BoardService.SpawnTetromino(TetrominoService.GetNextTetromino());
-            BoardService.MoveTetrominoDown();
-            BoardService.MoveTetrominoDown();
-            OutputService.InitializeBoard();
+           
+            while (true)
+            {
+                BoardService.SpawnTetromino(TetrominoService.GetNextTetromino());
+                BoardService.MoveTetrominoDown();
+                OutputService.InitializeBoard();
+                Thread.Sleep(100);
+            }
+            
+            
             this.StartGamePrompt();
             this.StartTimers();
                                 

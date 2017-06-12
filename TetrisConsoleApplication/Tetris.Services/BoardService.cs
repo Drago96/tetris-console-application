@@ -19,20 +19,61 @@ namespace Tetris.Services
 
         public void MoveTetrominoDown()
         {
-            for (int i = Board.SpawnedTetromino.TetrominoAxisY; i < Board.SpawnedTetromino.TetrominoAxisY + Board.SpawnedTetromino.Tetromino.Blocks.GetLength(1); i++)
+            if (IsTetrominoMoveDownPossible())
             {
-                Board.Grid[Board.SpawnedTetromino.TetrominoAxisX, i] = 0;
-            }
-            Board.SpawnedTetromino.TetrominoAxisX++;
-            for (int i = Board.SpawnedTetromino.TetrominoAxisX; i < Board.SpawnedTetromino.TetrominoAxisX + Board.SpawnedTetromino.Tetromino.Blocks.GetLength(0); i++)
-            {
-                for (int j = Board.SpawnedTetromino.TetrominoAxisY; j < Board.SpawnedTetromino.TetrominoAxisY + Board.SpawnedTetromino.Tetromino.Blocks.GetLength(1); j++)
+                for (int i = Board.SpawnedTetromino.TetrominoAxisY;
+                    i < Board.SpawnedTetromino.TetrominoAxisY + Board.SpawnedTetromino.Tetromino.Blocks.GetLength(1);
+                    i++)
                 {
-                    Board.Grid[i, j] =
-                        Board.SpawnedTetromino.Tetromino.Blocks[i - Board.SpawnedTetromino.TetrominoAxisX,
-                            j - Board.SpawnedTetromino.TetrominoAxisY];
+                    Board.Grid[Board.SpawnedTetromino.TetrominoAxisX, i] = 0;
+                }
+                Board.SpawnedTetromino.TetrominoAxisX++;
+                for (int i = Board.SpawnedTetromino.TetrominoAxisX;
+                    i < Board.SpawnedTetromino.TetrominoAxisX + Board.SpawnedTetromino.Tetromino.Blocks.GetLength(0) ;
+                    i++)
+                {
+                    for (int j = Board.SpawnedTetromino.TetrominoAxisY;
+                        j < Board.SpawnedTetromino.TetrominoAxisY +
+                        Board.SpawnedTetromino.Tetromino.Blocks.GetLength(1);
+                        j++)
+                    {
+
+                            Board.Grid[i, j] =
+                                Board.SpawnedTetromino.Tetromino.Blocks[i - Board.SpawnedTetromino.TetrominoAxisX,
+                                    j - Board.SpawnedTetromino.TetrominoAxisY];
+                        
+                    }
+                }
+                
+            }
+            else
+            {
+                Board.SpawnedTetromino = null;
+            }
+        }
+
+        public bool IsTetrominoMoveDownPossible()
+        {
+
+            int spawnedTetrominoAxisY = Board.SpawnedTetromino.TetrominoAxisY;
+            int spawnedTetrominoAxisX = Board.SpawnedTetromino.TetrominoAxisX;
+            if (spawnedTetrominoAxisX + Board.SpawnedTetromino.Tetromino.Blocks.GetLength(0) >= Board.Grid.GetLength(0) )
+            {
+                return false;
+            }
+            
+            for (int i = spawnedTetrominoAxisY;
+                i < spawnedTetrominoAxisY + Board.SpawnedTetromino.Tetromino.Blocks.GetLength(1);
+                i++)
+            {
+                if (Board.SpawnedTetromino.Tetromino.Blocks[
+                        Board.SpawnedTetromino.Tetromino.Blocks.GetLength(0) - 1, i - spawnedTetrominoAxisY] == 1 &&
+                    Board.Grid[spawnedTetrominoAxisX + Board.SpawnedTetromino.Tetromino.Blocks.GetLength(0), i] == 1)
+                {
+                    return false;
                 }
             }
+            return true;
         }
 
         public void SpawnTetromino(ITetromino tetromino)
@@ -52,6 +93,10 @@ namespace Tetris.Services
                     }
                 }
                 this.Board.SpawnedTetromino = new SpawnedTetrominoInfo(tetromino,0,tetrominoSpawnPoint);
+            }
+            else
+            {
+                this.EndGame();
             }
             
         }
@@ -73,6 +118,11 @@ namespace Tetris.Services
                 }
             }
             return true;
+        }
+
+        private void EndGame()
+        {
+            
         }
     }
 }
