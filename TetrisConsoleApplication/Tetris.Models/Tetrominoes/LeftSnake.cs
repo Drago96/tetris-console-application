@@ -9,5 +9,15 @@ namespace Tetris.Models.Tetrominoes
         public LeftSnake() : base(LeftSnakeFigure, Constants.BlockSprite)
         {
         }
+
+        public override void RotateLeft()
+        {
+
+        }
+
+        public override void RotateRight()
+        {
+
+        }
     }
 }

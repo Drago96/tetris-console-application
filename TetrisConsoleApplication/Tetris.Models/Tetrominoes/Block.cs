@@ -8,7 +8,17 @@ namespace Tetris.Models.Tetrominoes
 
         public Block() : base(BlockFigure,Constants.BlockSprite)
         {
-        }        
+        }
+
+        public override void RotateLeft()
+        {
+            
+        }
+
+        public override void RotateRight()
+        {
+            
+        }
 
     }
 }

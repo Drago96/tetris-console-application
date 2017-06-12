@@ -9,5 +9,15 @@ namespace Tetris.Models.Tetrominoes
         public Pyramid() : base(PyramidFigure, Constants.BlockSprite)
         {
         }
+
+        public override void RotateLeft()
+        {
+
+        }
+
+        public override void RotateRight()
+        {
+
+        }
     }
 }

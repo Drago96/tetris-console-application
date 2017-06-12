@@ -8,9 +8,9 @@ using Tetris.Models.Contracts;
 
 namespace Tetris.Services
 {
-    public class BoardService
+    public class BoardStateService
     {
-        public BoardService(Board board)
+        public BoardStateService(Board board)
         {
             this.Board = board;
         }
@@ -46,6 +46,7 @@ namespace Tetris.Services
             {
                 Board.CurrentTetromino = null;
             }
+            
         }
 
         public bool IsTetrominoMoveDownPossible()

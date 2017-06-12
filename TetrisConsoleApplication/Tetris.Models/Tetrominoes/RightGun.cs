@@ -14,5 +14,15 @@ namespace Tetris.Models.Tetrominoes
         public RightGun() : base(RightGunFigure, Constants.BlockSprite)
         {
         }
+
+        public override void RotateLeft()
+        {
+
+        }
+
+        public override void RotateRight()
+        {
+
+        }
     }
 }
