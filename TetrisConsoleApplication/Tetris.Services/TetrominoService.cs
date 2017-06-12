@@ -47,7 +47,6 @@ namespace Tetris.Services
             for (int i = 0; i < Constants.TetrominoRefillCount; i++)
             {
 
-<<<<<<< HEAD
                 int nextTetronimoTypeNumber = rnd.Next(0, tetriminoTypes.Length);
 
                 TetrominoType type = tetriminoTypes[nextTetronimoTypeNumber];
@@ -55,18 +54,6 @@ namespace Tetris.Services
                 ITetromino tetromino = TetrominoFactory.CreateTetromino(type);
 
                 TetrominoRepository.AddTetromino(tetromino);
-
-
-                //Type tetrominoType = TetrominoFactory.TetrominoTypes[nextTetronimoTypeNumber];
-
-                //var nextTetromino = Activator.CreateInstance(tetrominoType);
-                //TetrominoFactory.Tetrominoes.Enqueue((ITetromino)nextTetromino);
-=======
-                int nextTetronimoTypeNumber = rnd.Next(0, TetrominoFactory.TetrominoTypes.Count);
-                Type tetrominoType = TetrominoFactory.TetrominoTypes[nextTetronimoTypeNumber];
-                var nextTetromino = Activator.CreateInstance(tetrominoType);
-                TetrominoFactory.Tetrominoes.Enqueue((ITetromino)nextTetromino);
->>>>>>> 7e0968f3cb09301af56450f2c5c739fc4e5cd0e5
 
             }
         }
