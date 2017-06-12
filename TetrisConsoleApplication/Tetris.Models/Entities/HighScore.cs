@@ -11,5 +11,7 @@
 
         [Required]
         public long Points { get; set; }
+
+        public virtual User User { get; set; }
     }
 }
