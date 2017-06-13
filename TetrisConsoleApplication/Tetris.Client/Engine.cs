@@ -14,12 +14,12 @@ namespace Tetris.Client
 {
     public class Engine
     {
-        public GameService GameService { get; set; }
-        public BoardStateService BoardStateService { get; set; }
-        public MenuService MenuService { get; set; }
-        public OutputService OutputService { get; set; }
-        public TetrominoService TetrominoService { get; set; }
-        public UserService UserService { get; set; }
+        private GameService GameService { get; set; }
+        private BoardStateService BoardStateService { get; set; }
+        private MenuService MenuService { get; set; }
+        private OutputService OutputService { get; set; }
+        private TetrominoService TetrominoService { get; set; }
+        private UserService UserService { get; set; }
 
         public void Run()
         {
@@ -30,26 +30,26 @@ namespace Tetris.Client
             this.TetrominoService = new TetrominoService();
             this.UserService = new UserService();
 
-            Game Game = new Game(Constants.BoardWidth, Constants.BoardHeight, Constants.StartLevel,
+            Game game = new Game(Constants.BoardWidth, Constants.BoardHeight, Constants.StartLevel,
                 Constants.StartScore, Constants.StartLinesCleared, Constants.BlockSprite, Constants.BoardRearWallSprite,
                 Constants.BoardBottomSprite);
-            ITetrominoFactory tetrominoFactory = new TetrominoFactory();
-            ITetrominoRepository tetrominoRepository = new TetrominoRepository();
-            CurrentTetromino currentTetromino = null;
+           
+            
 
             Console.CursorVisible = false;
+            OutputService.StartGamePrompt(game);
 
             while (true)
             {
-                if (currentTetromino == null)
+                if (game.CurrentTetromino == null)
                 {
-                    currentTetromino = BoardStateService.SpawnTetromino(
-                        TetrominoService.GetNextTetromino(tetrominoRepository, tetrominoFactory), Game.Board,
-                        currentTetromino);
+                    game.CurrentTetromino = BoardStateService.SpawnTetromino(
+                        TetrominoService.GetNextTetromino(game.TetrominoRepository, game.TetrominoFactory), game.Board,
+                        game.CurrentTetromino);
                 }
-                currentTetromino = BoardStateService.MoveTetrominoDown(Game.Board, currentTetromino);
-                OutputService.InitializeBoard(Game.Board, Game.ScoreInfo,
-                    TetrominoService.PeekNextTetromino(tetrominoRepository, tetrominoFactory));
+                game.CurrentTetromino = BoardStateService.MoveTetrominoDown(game.Board, game.CurrentTetromino);
+                OutputService.InitializeBoard(game.Board, game.ScoreInfo,
+                    TetrominoService.PeekNextTetromino(game.TetrominoRepository, game.TetrominoFactory));
                 Thread.Sleep(100);
             }
 

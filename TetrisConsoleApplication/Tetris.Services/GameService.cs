@@ -19,13 +19,6 @@ namespace Tetris.Services
             game.DropTimer.Start();
         }
 
-        public void StartGamePrompt(Game game)
-        {
-            Console.SetCursorPosition(game.Board.Height/6, game.Board.Width/2);
-            Console.WriteLine(Constants.StartGamePromptMessage);
-            Console.ReadKey(true);
-        }
-
         
     }
 }

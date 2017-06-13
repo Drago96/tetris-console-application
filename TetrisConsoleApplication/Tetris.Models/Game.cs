@@ -4,6 +4,8 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Tetris.Models.Contracts;
+using Tetris.Models.Tetrominoes;
 using Tetris.Utilities;
 
 namespace Tetris.Models
@@ -16,6 +18,9 @@ namespace Tetris.Models
             this.Timer = new Stopwatch();
             this.DropTimer = new Stopwatch();
             this.ScoreInfo = new ScoreInfo(level,score,linesCleared);
+            this.TetrominoFactory = new TetrominoFactory();
+            this.TetrominoRepository = new TetrominoRepository();
+
         }
 
         public Board Board { get; set; }
@@ -25,5 +30,11 @@ namespace Tetris.Models
         public Stopwatch DropTimer { get; set; }
 
         public ScoreInfo ScoreInfo { get; set; }
+
+        public CurrentTetromino CurrentTetromino { get; set; }
+
+        public ITetrominoFactory TetrominoFactory { get; set; }
+
+        public ITetrominoRepository TetrominoRepository { get; set; }
     }
 }

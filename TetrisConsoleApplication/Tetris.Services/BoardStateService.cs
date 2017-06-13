@@ -67,7 +67,7 @@ namespace Tetris.Services
         {
 
             int tetrominoSpawnPoint = (int)(board.Width / 2 - Math.Ceiling((double)tetromino.Blocks.GetLength(1) / 2));
-            if (this.IsSpawnPossible(board, tetromino, tetrominoSpawnPoint,currentTetromino))
+            if (this.IsSpawnPossible(tetromino,board, tetrominoSpawnPoint,currentTetromino))
             {
                 for (int i = 0; i < tetromino.Blocks.GetLength(0); i++)
                 {
@@ -85,7 +85,7 @@ namespace Tetris.Services
             return currentTetromino;
         }
 
-        private bool IsSpawnPossible(Board board, ITetromino tetromino, int tetrominoSpawnPoint, CurrentTetromino currentTetromino)
+        private bool IsSpawnPossible(ITetromino tetromino, Board board,  int tetrominoSpawnPoint, CurrentTetromino currentTetromino)
         {
             if (currentTetromino != null)
             {

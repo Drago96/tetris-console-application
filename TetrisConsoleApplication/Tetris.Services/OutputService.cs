@@ -86,5 +86,12 @@ namespace Tetris.Services
                 Console.SetCursorPosition(Console.CursorLeft - Constants.ColumnsToClear, Console.CursorTop + 1);
             }
         }
+
+        public void StartGamePrompt(Game game)
+        {
+            Console.SetCursorPosition(game.Board.Height / 6, game.Board.Width / 2);
+            ConsoleWriter.PrintLine(Constants.StartGamePromptMessage);
+            Console.ReadKey(true);
+        }
     }
 }

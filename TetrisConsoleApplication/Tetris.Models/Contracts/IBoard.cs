@@ -10,6 +10,5 @@
 
         int Height { get; }
 
-        CurrentTetromino CurrentTetromino { get; }
     }
 }
