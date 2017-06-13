@@ -23,6 +23,12 @@ namespace Tetris.Services.IO
         public void PrintOnPosition(int row, int col, string message)
         {
             Console.SetCursorPosition(row, col);
+            Console.Write(message);
+        }
+
+        public void PrintLineOnPosition(int row, int col, string message)
+        {
+            Console.SetCursorPosition(row, col);
             Console.WriteLine(message);
         }
     }

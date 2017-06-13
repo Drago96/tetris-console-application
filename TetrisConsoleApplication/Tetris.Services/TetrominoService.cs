@@ -14,10 +14,15 @@ namespace Tetris.Services
 {
     public class TetrominoService : ITetrominoService
     {
+        private TetrominoType[] tetrominoTypes;
+        private Random randomNumberGenerator;
+
         public TetrominoService()
         {
             this.TetrominoFactory = new TetrominoFactory();
             this.TetrominoRepository = new TetrominoRepository();
+            this.tetrominoTypes = Enum.GetValues(typeof(TetrominoType)).Cast<TetrominoType>().ToArray();
+            this.randomNumberGenerator = new Random();
         }
 
         public ITetrominoFactory TetrominoFactory { get; private set; }
@@ -43,15 +48,11 @@ namespace Tetris.Services
         }
 
         public void RefillTetrominoes()
-        {
-            Random rnd = new Random();
-
-            var tetrominoTypes = Enum.GetValues(typeof(TetrominoType)).Cast<TetrominoType>().ToArray();
-            
+        {                       
             for (int i = 0; i < Constants.TetrominoRefillCount; i++)
             {
 
-                int nextTetronimoTypeNumber = rnd.Next(0, tetrominoTypes.Length);
+                int nextTetronimoTypeNumber = randomNumberGenerator.Next(0, tetrominoTypes.Length);
 
                 TetrominoType type = tetrominoTypes[nextTetronimoTypeNumber];
 
