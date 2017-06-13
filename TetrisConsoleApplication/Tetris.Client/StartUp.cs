@@ -7,8 +7,8 @@ namespace Tetris.Client
         static void Main(string[] args)
         {    
 
-            GameService gameService = new GameService();
-            gameService.InitializeGame();
+            Engine engine = new Engine();
+            engine.Run();
 
             //MenuService menuService = new MenuService();
             //menuService.InitializeMenu();

@@ -27,5 +27,8 @@ namespace Tetris.Utilities
         public const int StartLinesCleared = 0;
 
         public const int TetrominoRefillCount = 10;
+
+        public const int LinesToClear = 4;
+        public const int ColumnsToClear = 10;
     }
 }

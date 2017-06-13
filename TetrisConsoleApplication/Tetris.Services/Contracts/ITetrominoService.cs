@@ -4,15 +4,13 @@ namespace Tetris.Services.Contracts
 {
     public interface ITetrominoService
     {
-        ITetrominoFactory TetrominoFactory { get; }
+    
 
-        ITetrominoRepository TetrominoRepository { get; }
+        ITetromino GetNextTetromino(ITetrominoRepository tetrominoRepository, ITetrominoFactory tetrominoFactory);
 
-        ITetromino GetNextTetromino();
+        ITetromino PeekNextTetromino(ITetrominoRepository tetrominoRepository, ITetrominoFactory tetrominoFactory);
 
-        ITetromino PeekNextTetromino();
-
-        void RefillTetrominoes();
+        void RefillTetrominoes(ITetrominoRepository tetrominoRepository, ITetrominoFactory tetrominoFactory);
 
     }
 }

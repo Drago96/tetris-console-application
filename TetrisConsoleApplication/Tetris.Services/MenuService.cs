@@ -46,7 +46,7 @@
             {
                 case MenuOptions.NewGameAnonymous:
                     GameService gameService = new GameService();
-                    gameService.InitializeGame();
+                    //gameService.InitializeGame();
                     break;
 
                 case MenuOptions.NewGameRegistered:

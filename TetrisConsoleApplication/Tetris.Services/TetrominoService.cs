@@ -14,51 +14,41 @@ namespace Tetris.Services
 {
     public class TetrominoService : ITetrominoService
     {
-        private TetrominoType[] tetrominoTypes;
-        private Random randomNumberGenerator;
+           
 
-        public TetrominoService()
+        public ITetromino GetNextTetromino(ITetrominoRepository tetrominoRepository, ITetrominoFactory tetrominoFactory)
         {
-            this.TetrominoFactory = new TetrominoFactory();
-            this.TetrominoRepository = new TetrominoRepository();
-            this.tetrominoTypes = Enum.GetValues(typeof(TetrominoType)).Cast<TetrominoType>().ToArray();
-            this.randomNumberGenerator = new Random();
-        }
-
-        public ITetrominoFactory TetrominoFactory { get; private set; }
-
-        public ITetrominoRepository TetrominoRepository { get; private set; }
-
-        public ITetromino GetNextTetromino()
-        {
-            if (TetrominoRepository.Tetrominoes.Count < 1)
+            if (tetrominoRepository.Tetrominoes.Count < 1)
             {
-                this.RefillTetrominoes();
+                this.RefillTetrominoes(tetrominoRepository,tetrominoFactory);
             }
-            return TetrominoRepository.GetFirstElement();
+            return tetrominoRepository.GetFirstElement();
         }
 
-        public ITetromino PeekNextTetromino()
+        public ITetromino PeekNextTetromino(ITetrominoRepository tetrominoRepository, ITetrominoFactory tetrominoFactory)
         {
-            if (TetrominoRepository.Tetrominoes.Count < 1)
+
+            if (tetrominoRepository.Tetrominoes.Count < 1)
             {
-                this.RefillTetrominoes();
+                this.RefillTetrominoes(tetrominoRepository, tetrominoFactory);
             }
-            return TetrominoRepository.PeekNextElement();
+            return tetrominoRepository.PeekNextElement();
         }
 
-        public void RefillTetrominoes()
-        {                       
+        public void RefillTetrominoes(ITetrominoRepository tetrominoRepository, ITetrominoFactory tetrominoFactory)
+        {
+            Random randomNumberGenerator = new Random();
+            TetrominoType[] tetrominoTypes = Enum.GetValues(typeof(TetrominoType)).Cast<TetrominoType>().ToArray();
             for (int i = 0; i < Constants.TetrominoRefillCount; i++)
             {
-
+               
                 int nextTetronimoTypeNumber = randomNumberGenerator.Next(0, tetrominoTypes.Length);
 
                 TetrominoType type = tetrominoTypes[nextTetronimoTypeNumber];
 
-                ITetromino tetromino = TetrominoFactory.CreateTetromino(type);
+                ITetromino tetromino = tetrominoFactory.CreateTetromino(type);
 
-                TetrominoRepository.AddTetromino(tetromino);
+                tetrominoRepository.AddTetromino(tetromino);
 
             }
         }

@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Engine.cs" />
     <Compile Include="StartUp.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -64,6 +65,10 @@
     <ProjectReference Include="..\Tetris.Services\Tetris.Services.csproj">
       <Project>{99c68dcd-9fed-4d5a-b83f-0fc2ede248cf}</Project>
       <Name>Tetris.Services</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Tetris.Utilities\Tetris.Utilities.csproj">
+      <Project>{52ECD929-4031-4022-9713-615413938311}</Project>
+      <Name>Tetris.Utilities</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
