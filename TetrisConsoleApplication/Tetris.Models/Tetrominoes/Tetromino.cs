@@ -6,8 +6,8 @@ namespace Tetris.Models.Tetrominoes
 {
     public abstract class Tetromino : ITetromino
     {
-        protected Tetromino(byte[,] blocks,char blockSprite)
-        {
+        protected Tetromino(byte[,] blocks, char blockSprite = ' ')
+        {           
             this.Blocks = blocks;
             this.BlockSprite = blockSprite;
         }

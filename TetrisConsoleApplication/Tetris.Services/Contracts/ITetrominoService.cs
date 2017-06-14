@@ -4,7 +4,6 @@ namespace Tetris.Services.Contracts
 {
     public interface ITetrominoService
     {
-    
 
         ITetromino GetNextTetromino(ITetrominoRepository tetrominoRepository, ITetrominoFactory tetrominoFactory);
 

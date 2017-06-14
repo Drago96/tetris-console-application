@@ -1,4 +1,5 @@
-﻿using Tetris.Services;
+﻿using Tetris.Client.Contracts;
+using Tetris.Services;
 
 namespace Tetris.Client
 {
@@ -7,7 +8,7 @@ namespace Tetris.Client
         static void Main(string[] args)
         {    
 
-            Engine engine = new Engine();
+            IEngine engine = new Engine();
             engine.Run();
 
             //MenuService menuService = new MenuService();

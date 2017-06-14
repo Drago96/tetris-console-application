@@ -4,21 +4,23 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Tetris.Client.Contracts;
 using Tetris.Models;
 using Tetris.Models.Contracts;
 using Tetris.Models.Tetrominoes;
 using Tetris.Services;
+using Tetris.Services.Contracts;
 using Tetris.Utilities;
 
 namespace Tetris.Client
 {
-    public class Engine
+    public class Engine : IEngine
     {
-        private GameService GameService { get; set; }
-        private BoardStateService BoardStateService { get; set; }
+        private IGameService GameService { get; set; }
+        private IBoardStateService BoardStateService { get; set; }
         private MenuService MenuService { get; set; }
-        private OutputService OutputService { get; set; }
-        private TetrominoService TetrominoService { get; set; }
+        private IOutputService OutputService { get; set; }
+        private ITetrominoService TetrominoService { get; set; }
         private UserService UserService { get; set; }
 
         public void Run()
@@ -30,7 +32,7 @@ namespace Tetris.Client
             this.TetrominoService = new TetrominoService();
             this.UserService = new UserService();
 
-            Game game = new Game(Constants.BoardWidth, Constants.BoardHeight, Constants.StartLevel,
+            IGame game = new Game(Constants.BoardWidth, Constants.BoardHeight, Constants.StartLevel,
                 Constants.StartScore, Constants.StartLinesCleared, Constants.BlockSprite, Constants.BoardRearWallSprite,
                 Constants.BoardBottomSprite);
            

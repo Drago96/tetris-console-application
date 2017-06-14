@@ -4,20 +4,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Tetris.Models.Contracts;
+using Tetris.Models.Tetrominoes;
 
 namespace Tetris.Models
 {
-    public class CurrentTetromino : IGrid
+    public class CurrentTetromino : Tetromino, ICurrentTetromino
     {
-        public CurrentTetromino(ITetromino tetromino, int tetrominoAxisX, int tetrominoAxisY)
+        public CurrentTetromino(byte[,] blocks, int tetrominoAxisX, int tetrominoAxisY ) : base(blocks)
         {
-            this.Blocks = tetromino.Blocks;
             this.TetrominoAxisX = tetrominoAxisX;
             this.TetrominoAxisY = tetrominoAxisY;
         }
 
-        public byte[,] Blocks { get; private set; }
         public int TetrominoAxisX { get; set; }
+
         public int TetrominoAxisY { get; set; }
+
     }
 }

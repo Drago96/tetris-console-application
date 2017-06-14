@@ -5,14 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 using Tetris.Models;
 using Tetris.Models.Contracts;
+using Tetris.Services.Contracts;
 
 namespace Tetris.Services
 {
-    public class BoardStateService
+    public class BoardStateService : IBoardStateService
     {
-      
-       
-        public CurrentTetromino MoveTetrominoDown(Board board,CurrentTetromino currentTetromino)
+           
+        public ICurrentTetromino MoveTetrominoDown(IBoard board,ICurrentTetromino currentTetromino)
         {
             if (IsTetrominoMoveDownPossible(board,currentTetromino))
             {
@@ -44,7 +44,7 @@ namespace Tetris.Services
             
         }
 
-        public bool IsTetrominoMoveDownPossible(Board board, CurrentTetromino currentTetromino)
+        public bool IsTetrominoMoveDownPossible(IBoard board, ICurrentTetromino currentTetromino)
         {
 
             if (currentTetromino.TetrominoAxisX + currentTetromino.Blocks.GetLength(0) >= board.Blocks.GetLength(0) )
@@ -63,7 +63,7 @@ namespace Tetris.Services
             return true;
         }
 
-        public CurrentTetromino SpawnTetromino(ITetromino tetromino, Board board,CurrentTetromino currentTetromino)
+        public ICurrentTetromino SpawnTetromino(ITetromino tetromino, IBoard board,ICurrentTetromino currentTetromino)
         {
 
             int tetrominoSpawnPoint = (int)(board.Width / 2 - Math.Ceiling((double)tetromino.Blocks.GetLength(1) / 2));
@@ -79,13 +79,13 @@ namespace Tetris.Services
                         }
                     }
                 }
-                return new CurrentTetromino(tetromino,0,tetrominoSpawnPoint);
+                return new CurrentTetromino(tetromino.Blocks,0,tetrominoSpawnPoint);
             }
 
             return currentTetromino;
         }
 
-        private bool IsSpawnPossible(ITetromino tetromino, Board board,  int tetrominoSpawnPoint, CurrentTetromino currentTetromino)
+        private bool IsSpawnPossible(ITetromino tetromino, IBoard board,  int tetrominoSpawnPoint, ICurrentTetromino currentTetromino)
         {
             if (currentTetromino != null)
             {

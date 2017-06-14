@@ -10,9 +10,10 @@ using Tetris.Utilities;
 
 namespace Tetris.Models
 {
-    public class Game
+    public class Game : IGame
     {
-        public Game(int boardWidth, int boardHeight,int level, int score, int linesCleared,char blockSprite, string boardRearWallSprite, string bottomSprite)
+        public Game(int boardWidth, int boardHeight,int level, int score, int linesCleared,
+            char blockSprite, string boardRearWallSprite, string bottomSprite)
         {
             this.Board = new Board(boardWidth,boardHeight,blockSprite,  boardRearWallSprite,  bottomSprite);
             this.Timer = new Stopwatch();
@@ -23,7 +24,13 @@ namespace Tetris.Models
 
         }
 
-        public Board Board { get; set; }
+        public IBoard Board { get; set; }
+
+        public ICurrentTetromino CurrentTetromino { get; set; }
+
+        public ITetrominoFactory TetrominoFactory { get; set; }
+
+        public ITetrominoRepository TetrominoRepository { get; set; }
 
         public Stopwatch Timer { get; set; }
 
@@ -31,10 +38,5 @@ namespace Tetris.Models
 
         public ScoreInfo ScoreInfo { get; set; }
 
-        public CurrentTetromino CurrentTetromino { get; set; }
-
-        public ITetrominoFactory TetrominoFactory { get; set; }
-
-        public ITetrominoRepository TetrominoRepository { get; set; }
     }
 }

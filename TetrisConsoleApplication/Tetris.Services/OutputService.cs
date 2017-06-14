@@ -11,7 +11,7 @@ using Tetris.Utilities;
 
 namespace Tetris.Services
 {
-    public class OutputService
+    public class OutputService : IOutputService
     {
         public OutputService()
         {
@@ -20,7 +20,7 @@ namespace Tetris.Services
 
         public IOutputWriter ConsoleWriter { get; private set; }
 
-        public void InitializeBoard(Board board, ScoreInfo scoreInfo,ITetromino tetromino)
+        public void InitializeBoard(IBoard board, ScoreInfo scoreInfo,ITetromino tetromino)
         {
             this.DrawBorder(board);
             this.DrawBoard(board);
@@ -28,7 +28,7 @@ namespace Tetris.Services
             this.DisplayNextTetromino(board,tetromino);
         }
 
-        public void DrawBoard(Board board)
+        public void DrawBoard(IBoard board)
         {
             for (int i = 0; i < board.Height; ++i)
             {
@@ -43,7 +43,7 @@ namespace Tetris.Services
             }
         }
 
-        public void DrawBorder(Board board)
+        public void DrawBorder(IBoard board)
         {
             for (int lengthCount = 0; lengthCount < board.Height; ++lengthCount)
             {
@@ -60,14 +60,14 @@ namespace Tetris.Services
             }
         }
 
-        public void DisplayInfo(Board board, ScoreInfo scoreInfo)
+        public void DisplayInfo(IBoard board, ScoreInfo scoreInfo)
         {
             this.ConsoleWriter.PrintLineOnPosition(board.Height + 2, 0, Constants.LevelLable + scoreInfo.Level);
             this.ConsoleWriter.PrintLineOnPosition(board.Height + 2, 1, Constants.ScoreLable + scoreInfo.Score);
             this.ConsoleWriter.PrintLineOnPosition(board.Height + 2, 2, Constants.LinesClearedLable + scoreInfo.LinesCleared);
         }
 
-        public void DisplayNextTetromino(Board board,ITetromino tetromino)
+        public void DisplayNextTetromino(IBoard board,ITetromino tetromino)
         {
             Console.SetCursorPosition(board.Height + 2, 4);
             ClearArea();
@@ -87,7 +87,7 @@ namespace Tetris.Services
             }
         }
 
-        public void StartGamePrompt(Game game)
+        public void StartGamePrompt(IGame game)
         {
             Console.SetCursorPosition(game.Board.Height / 6, game.Board.Width / 2);
             ConsoleWriter.PrintLine(Constants.StartGamePromptMessage);
