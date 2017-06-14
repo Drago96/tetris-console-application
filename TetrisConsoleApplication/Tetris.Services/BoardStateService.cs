@@ -33,7 +33,7 @@ namespace Tetris.Services
             for (int i = currentTetromino.TetrominoAxisX; i < currentTetromino.TetrominoAxisX + currentTetromino.Blocks.GetLength(0); i++)
             {
                 if (board.Blocks[i, currentTetromino.TetrominoAxisY  + currentTetromino.Blocks.GetLength(1)] == 1 &&
-                    currentTetromino.Blocks[i, currentTetromino.TetrominoAxisY + currentTetromino.Blocks.GetLength(1) - 1] == 1)
+                    currentTetromino.Blocks[i - currentTetromino.TetrominoAxisX, currentTetromino.Blocks.GetLength(1) - 1] == 1)
                 {
                     return false;
                 }
@@ -62,7 +62,7 @@ namespace Tetris.Services
             for (int i = currentTetromino.TetrominoAxisX; i < currentTetromino.TetrominoAxisX + currentTetromino.Blocks.GetLength(0); i++)
             {
                 if (board.Blocks[i, currentTetromino.TetrominoAxisY - 1] == 1 &&
-                    currentTetromino.Blocks[i, currentTetromino.TetrominoAxisY] == 1)
+                    currentTetromino.Blocks[i - currentTetromino.TetrominoAxisX, 0] == 1)
                 {
                     return false;
                 }
@@ -129,10 +129,7 @@ namespace Tetris.Services
 
         private bool IsSpawnPossible(ITetromino tetromino, IBoard board,  int tetrominoSpawnPoint, ICurrentTetromino currentTetromino)
         {
-            if (currentTetromino != null)
-            {
-                return false;
-            }
+            
             for (int i = 0; i < tetromino.Blocks.GetLength(0); i++)
             {
                 for (int j = tetrominoSpawnPoint; j < tetrominoSpawnPoint + tetromino.Blocks.GetLength(1); j++)
