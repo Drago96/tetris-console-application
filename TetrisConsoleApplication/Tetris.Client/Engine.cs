@@ -50,7 +50,7 @@ namespace Tetris.Client
                         game.CurrentTetromino);
                 }
                 game.CurrentTetromino = BoardStateService.MoveTetrominoDown(game.Board, game.CurrentTetromino);
-                game.CurrentTetromino = BoardStateService.MoveTetrominoLeft(game.Board, game.CurrentTetromino);
+                game.CurrentTetromino = BoardStateService.MoveTetrominoRight(game.Board, game.CurrentTetromino);
                 OutputService.InitializeBoard(game.Board, game.ScoreInfo,
                     TetrominoService.PeekNextTetromino(game.TetrominoRepository, game.TetrominoFactory));
                 Thread.Sleep(100);

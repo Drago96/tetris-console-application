@@ -4,6 +4,8 @@ namespace Tetris.Services.Contracts
 {
     public interface IBoardStateService
     {
+        ICurrentTetromino MoveTetrominoRight(IBoard board, ICurrentTetromino currentTetromino);
+
         ICurrentTetromino MoveTetrominoLeft(IBoard board, ICurrentTetromino currentTetromino);
 
         ICurrentTetromino MoveTetrominoDown(IBoard board, ICurrentTetromino currentTetromino);

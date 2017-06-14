@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Core.Objects;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,6 +12,35 @@ namespace Tetris.Services
 {
     public class BoardStateService : IBoardStateService
     {
+        public ICurrentTetromino MoveTetrominoRight(IBoard board, ICurrentTetromino currentTetromino)
+        {
+            if (IsTetrominoMoveRightPossible(board, currentTetromino))
+            {
+                ClearTetromino(currentTetromino,board);
+                currentTetromino.TetrominoAxisY++;
+                RespawnTetromino(currentTetromino,board);
+            }
+
+            return currentTetromino;
+        }
+
+        private bool IsTetrominoMoveRightPossible(IBoard board, ICurrentTetromino currentTetromino)
+        {
+            if (currentTetromino == null || currentTetromino.TetrominoAxisY + currentTetromino.Blocks.GetLength(1) == board.Blocks.GetLength(1))
+            {
+                return false;
+            }
+            for (int i = currentTetromino.TetrominoAxisX; i < currentTetromino.TetrominoAxisX + currentTetromino.Blocks.GetLength(0); i++)
+            {
+                if (board.Blocks[i, currentTetromino.TetrominoAxisY  + currentTetromino.Blocks.GetLength(1)] == 1 &&
+                    currentTetromino.Blocks[i, currentTetromino.TetrominoAxisY + currentTetromino.Blocks.GetLength(1) - 1] == 1)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
         public ICurrentTetromino MoveTetrominoLeft(IBoard board, ICurrentTetromino currentTetromino)
         {
             if (IsTetrominoMoveLeftPossible(board, currentTetromino))
