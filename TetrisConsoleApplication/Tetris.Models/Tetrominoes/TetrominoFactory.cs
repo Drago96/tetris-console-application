@@ -8,14 +8,29 @@ namespace Tetris.Models.Tetrominoes
 {
     public class TetrominoFactory : ITetrominoFactory
     {
+        private Random randomNumberGenerator;
+        private TetrominoType[] tetrominoTypes;
 
-        public ITetromino CreateTetromino(TetrominoType type)
+        public TetrominoFactory()
         {
+            randomNumberGenerator = new Random();
+            tetrominoTypes = Enum.GetValues(typeof(TetrominoType)).Cast<TetrominoType>().ToArray();
+        }
+
+        public ITetromino CreateTetromino()
+        {
+            TetrominoType type = GenerateRandomTetrominoType();
+
             var typeOfTetromino = Assembly.GetExecutingAssembly().GetTypes().FirstOrDefault(v => v.Name == type.ToString());
 
             ITetromino tetromino = (ITetromino)Activator.CreateInstance(typeOfTetromino);
 
             return tetromino;
+        }
+
+        private TetrominoType GenerateRandomTetrominoType()
+        {
+            return tetrominoTypes[randomNumberGenerator.Next(0, tetrominoTypes.Length)];
         }
 
     }

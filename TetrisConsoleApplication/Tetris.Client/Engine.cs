@@ -16,6 +16,16 @@ namespace Tetris.Client
 {
     public class Engine : IEngine
     {
+        public Engine()
+        {
+            this.GameService = new GameService();
+            this.BoardStateService = new BoardStateService();
+            this.MenuService = new MenuService();
+            this.OutputService = new OutputService();
+            this.TetrominoService = new TetrominoService();
+            this.UserService = new UserService();
+        }
+
         private IGameService GameService { get; set; }
         private IBoardStateService BoardStateService { get; set; }
         private MenuService MenuService { get; set; }
@@ -25,13 +35,6 @@ namespace Tetris.Client
 
         public void Run()
         {
-            this.GameService = new GameService();
-            this.BoardStateService = new BoardStateService();
-            this.MenuService = new MenuService();
-            this.OutputService = new OutputService();
-            this.TetrominoService = new TetrominoService();
-            this.UserService = new UserService();
-
             ConsoleKeyInfo key = new ConsoleKeyInfo();
             bool isKeyPressed = false;
 

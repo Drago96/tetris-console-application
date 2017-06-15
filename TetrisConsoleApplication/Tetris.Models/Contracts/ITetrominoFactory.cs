@@ -4,6 +4,6 @@ namespace Tetris.Models.Contracts
 {
     public interface ITetrominoFactory
     {
-        ITetromino CreateTetromino(TetrominoType type);
+        ITetromino CreateTetromino();
     }
 }
