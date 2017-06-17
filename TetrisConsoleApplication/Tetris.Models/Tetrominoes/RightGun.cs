@@ -9,7 +9,7 @@ namespace Tetris.Models.Tetrominoes
 {
     public class RightGun : Tetromino
     {
-        private static readonly byte[,] RightGunFigure = new byte[,] { { 0, 0, 1 }, { 1, 1, 1 } };
+        private static readonly byte[,] RightGunFigure = new byte[,] { { 0, 0, 1 }, { 1, 1, 1 }, {0,0,0} };
 
         public RightGun() : base(RightGunFigure, Constants.BlockSprite)
         {
