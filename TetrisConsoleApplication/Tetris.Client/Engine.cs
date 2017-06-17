@@ -36,7 +36,7 @@ namespace Tetris.Client
         public void Run()
         {
             ConsoleKeyInfo key = new ConsoleKeyInfo();
-            bool isKeyPressed = false;
+         
 
             IGame game = new Game(Constants.BoardWidth, Constants.BoardHeight, Constants.StartLevel,
                 Constants.StartScore, Constants.StartLinesCleared, Constants.BlockSprite, Constants.BoardRearWallSprite,
@@ -58,24 +58,21 @@ namespace Tetris.Client
                             TetrominoService.GetNextTetromino(game.TetrominoRepository, game.TetrominoFactory), game.Board,
                             game.CurrentTetromino);
                     }
-                    if (Console.KeyAvailable)
+                    while (Console.KeyAvailable)
                     {
                         key = Console.ReadKey();
-                        isKeyPressed = true;
-                        if (key.Key == ConsoleKey.RightArrow && isKeyPressed)
+                        
+                        if (key.Key == ConsoleKey.RightArrow )
                         {
                             game.CurrentTetromino =
                                 BoardStateService.MoveTetrominoRight(game.Board, game.CurrentTetromino);
                         }
-                        else if (key.Key == ConsoleKey.LeftArrow && isKeyPressed)
+                        else if (key.Key == ConsoleKey.LeftArrow )
                         {
                             game.CurrentTetromino =
                                 BoardStateService.MoveTetrominoLeft(game.Board, game.CurrentTetromino);
                         }
-                        else
-                        {
-                            isKeyPressed = false;
-                        }
+                       
                     }
                     game.CurrentTetromino = BoardStateService.MoveTetrominoDown(game.Board, game.CurrentTetromino);
                     OutputService.InitializeBoard(game.Board, game.ScoreInfo,

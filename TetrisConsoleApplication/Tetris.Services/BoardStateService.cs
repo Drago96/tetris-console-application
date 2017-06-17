@@ -93,11 +93,24 @@ namespace Tetris.Services
             {
                 return false;
             }
-            
-            for (int i = currentTetromino.TetrominoAxisY;i < currentTetromino.TetrominoAxisY + currentTetromino.Blocks.GetLength(1);i++)
+
+            for (int i = currentTetromino.TetrominoAxisX; i < currentTetromino.TetrominoAxisX + currentTetromino.Blocks.GetLength(0) - 1; i++)
             {
-                if (currentTetromino.Blocks[currentTetromino.Blocks.GetLength(0) - 1, i - currentTetromino.TetrominoAxisY] == 1 &&
-                    board.Blocks[currentTetromino.TetrominoAxisX + currentTetromino.Blocks.GetLength(0), i] == 1)
+                for (int j = currentTetromino.TetrominoAxisY; j < currentTetromino.TetrominoAxisY + currentTetromino.Blocks.GetLength(1); j++)
+                {
+                    if (currentTetromino.Blocks[i - currentTetromino.TetrominoAxisX, j - currentTetromino.TetrominoAxisY] == 1 &&
+                       currentTetromino.Blocks[i - currentTetromino.TetrominoAxisX + 1, j - currentTetromino.TetrominoAxisY] == 0 &&
+                       board.Blocks[currentTetromino.TetrominoAxisX + (i - currentTetromino.TetrominoAxisX) + 1, j] == 1)
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            for (int j = currentTetromino.TetrominoAxisY;j < currentTetromino.TetrominoAxisY + currentTetromino.Blocks.GetLength(1);j++)
+            {
+                if (currentTetromino.Blocks[currentTetromino.Blocks.GetLength(0) - 1, j - currentTetromino.TetrominoAxisY] == 1 &&
+                    board.Blocks[currentTetromino.TetrominoAxisX + currentTetromino.Blocks.GetLength(0), j] == 1)
                 {
                     return false;
                 }
