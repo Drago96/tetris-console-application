@@ -43,6 +43,9 @@ namespace Tetris.Client
                 Constants.BoardBottomSprite);       
 
             Console.CursorVisible = false;
+            game.CurrentTetromino = BoardStateService.SpawnTetromino(
+                TetrominoService.GetNextTetromino(game.TetrominoRepository, game.TetrominoFactory), game.Board,
+                game.CurrentTetromino);
             OutputService.InitializeBoard(game.Board, game.ScoreInfo,
                 TetrominoService.PeekNextTetromino(game.TetrominoRepository, game.TetrominoFactory));
             OutputService.StartGamePrompt(game);
@@ -52,12 +55,7 @@ namespace Tetris.Client
             {
                 if (game.DropTimer.ElapsedMilliseconds > 150)
                 {
-                    if (game.CurrentTetromino == null)
-                    {
-                        game.CurrentTetromino = BoardStateService.SpawnTetromino(
-                            TetrominoService.GetNextTetromino(game.TetrominoRepository, game.TetrominoFactory), game.Board,
-                            game.CurrentTetromino);
-                    }
+                   
                     while (Console.KeyAvailable)
                     {
                         key = Console.ReadKey();
@@ -72,11 +70,24 @@ namespace Tetris.Client
                             game.CurrentTetromino =
                                 BoardStateService.MoveTetrominoLeft(game.Board, game.CurrentTetromino);
                         }
+                        else if (key.Key == ConsoleKey.Spacebar)
+                        {
+                            game.CurrentTetromino =
+                                BoardStateService.RotateTetromino(game.Board, game.CurrentTetromino);
+
+                        }
                        
                     }
                     game.CurrentTetromino = BoardStateService.MoveTetrominoDown(game.Board, game.CurrentTetromino);
+                    if (game.CurrentTetromino == null)
+                    {
+                        game.CurrentTetromino = BoardStateService.SpawnTetromino(
+                            TetrominoService.GetNextTetromino(game.TetrominoRepository, game.TetrominoFactory), game.Board,
+                            game.CurrentTetromino);
+                    }
                     OutputService.InitializeBoard(game.Board, game.ScoreInfo,
                         TetrominoService.PeekNextTetromino(game.TetrominoRepository, game.TetrominoFactory));
+                    
                     game.DropTimer.Restart();
                 }
                 

@@ -12,7 +12,7 @@ namespace Tetris.Models.Tetrominoes
             this.BlockSprite = blockSprite;
         }
 
-        public byte[,] Blocks { get; private set; }
+        public byte[,] Blocks { get; protected set; }
         
         public char BlockSprite { get; private set; }
 
@@ -27,6 +27,8 @@ namespace Tetris.Models.Tetrominoes
                 Console.SetCursorPosition(Console.CursorLeft - Blocks.GetLength(1)*2,Console.CursorTop+1);
             }
         }
+
+        public abstract void Rotate();
 
 
 

@@ -12,5 +12,6 @@ namespace Tetris.Services.Contracts
 
         ICurrentTetromino SpawnTetromino(ITetromino tetromino, IBoard board, ICurrentTetromino currentTetromino);
 
+        ICurrentTetromino RotateTetromino(IBoard board, ICurrentTetromino currentTetromino);
     }
 }

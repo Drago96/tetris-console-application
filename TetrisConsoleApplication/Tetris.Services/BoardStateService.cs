@@ -12,6 +12,15 @@ namespace Tetris.Services
 {
     public class BoardStateService : IBoardStateService
     {
+        public ICurrentTetromino RotateTetromino(IBoard board, ICurrentTetromino currentTetromino)
+        {
+            ClearTetromino(currentTetromino,board);
+            currentTetromino.Tetromino.Rotate();
+            RespawnTetromino(currentTetromino,board);
+
+            return currentTetromino;
+        }
+            
         public ICurrentTetromino MoveTetrominoRight(IBoard board, ICurrentTetromino currentTetromino)
         {
             if (IsTetrominoMoveRightPossible(board, currentTetromino))
@@ -204,7 +213,7 @@ namespace Tetris.Services
                         }
                     }
                 }
-                return new CurrentTetromino(tetromino.Blocks,0,tetrominoSpawnPoint);
+                return new CurrentTetromino(tetromino,0,tetrominoSpawnPoint);
             }
 
             return currentTetromino;

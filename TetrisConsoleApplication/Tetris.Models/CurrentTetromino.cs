@@ -8,12 +8,21 @@ using Tetris.Models.Tetrominoes;
 
 namespace Tetris.Models
 {
-    public class CurrentTetromino : Tetromino, ICurrentTetromino
+    public class CurrentTetromino :  ICurrentTetromino
     {
-        public CurrentTetromino(byte[,] blocks, int tetrominoAxisX, int tetrominoAxisY ) : base(blocks)
+        public CurrentTetromino(ITetromino tetromino, int tetrominoAxisX, int tetrominoAxisY )
         {
+            this.Tetromino = tetromino;
             this.TetrominoAxisX = tetrominoAxisX;
             this.TetrominoAxisY = tetrominoAxisY;
+        }
+
+        public ITetromino Tetromino { get; set; }
+
+        public byte[,] Blocks
+        {
+            get { return this.Tetromino.Blocks; }
+            private set { this.Blocks = value; }
         }
 
         public int TetrominoAxisX { get; set; }

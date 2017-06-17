@@ -5,5 +5,7 @@
         char BlockSprite { get; }
 
         void DrawTetromino();
+
+        void Rotate();
     }
 }
