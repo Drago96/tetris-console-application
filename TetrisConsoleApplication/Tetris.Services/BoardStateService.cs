@@ -61,6 +61,7 @@ namespace Tetris.Services
             }
             for (int i = currentTetromino.TetrominoAxisX; i < currentTetromino.TetrominoAxisX + currentTetromino.Blocks.GetLength(0); i++)
             {
+                
                 if (board.Blocks[i, currentTetromino.TetrominoAxisY - 1] == 1 &&
                     currentTetromino.Blocks[i - currentTetromino.TetrominoAxisX, 0] == 1)
                 {
@@ -162,9 +163,13 @@ namespace Tetris.Services
             {
                 for (int i = currentTetromino.TetrominoAxisY; i < currentTetromino.TetrominoAxisY + currentTetromino.Blocks.GetLength(1); i++)
                 {
-                    if (currentTetromino.Blocks[j - currentTetromino.TetrominoAxisX, i - currentTetromino.TetrominoAxisY] == 1)
+                    if (IsPointInBoardRange(board, j, i))
                     {
-                        board.Blocks[j, i] = 0;
+                        if (currentTetromino.Blocks[j - currentTetromino.TetrominoAxisX,
+                                i - currentTetromino.TetrominoAxisY] == 1)
+                        {
+                            board.Blocks[j, i] = 0;
+                        }
                     }
                 }
             }
@@ -176,13 +181,26 @@ namespace Tetris.Services
             {
                 for (int j = currentTetromino.TetrominoAxisY; j < currentTetromino.TetrominoAxisY + currentTetromino.Blocks.GetLength(1); j++)
                 {
-                    if (i < board.Blocks.GetLength(0) && j < board.Blocks.GetLength(1) && board.Blocks[i, j] == 0 && currentTetromino.Blocks[i - currentTetromino.TetrominoAxisX, j - currentTetromino.TetrominoAxisY] == 1)
+                    if (IsPointInBoardRange(board,i,j) && board.Blocks[i, j] == 0 && currentTetromino.Blocks[i - currentTetromino.TetrominoAxisX, j - currentTetromino.TetrominoAxisY] == 1)
                     {
                         board.Blocks[i, j] = currentTetromino.Blocks[i - currentTetromino.TetrominoAxisX, j - currentTetromino.TetrominoAxisY];
                     }
 
                 }
             }
+        }
+
+        private bool IsPointInBoardRange(IBoard board, int i, int j)
+        {
+            if (i < 0 || j < 0)
+            {
+                return false;
+            }
+            if (i >= board.Blocks.GetLength(0) || j >= board.Blocks.GetLength(1))
+            {
+                return false;
+            }
+            return true;
         }
 
         
