@@ -162,7 +162,10 @@ namespace Tetris.Services
             {
                 for (int i = currentTetromino.TetrominoAxisY; i < currentTetromino.TetrominoAxisY + currentTetromino.Blocks.GetLength(1); i++)
                 {
-                    board.Blocks[j, i] = 0;
+                    if (currentTetromino.Blocks[j - currentTetromino.TetrominoAxisX, i - currentTetromino.TetrominoAxisY] == 1)
+                    {
+                        board.Blocks[j, i] = 0;
+                    }
                 }
             }
         }
@@ -173,7 +176,7 @@ namespace Tetris.Services
             {
                 for (int j = currentTetromino.TetrominoAxisY; j < currentTetromino.TetrominoAxisY + currentTetromino.Blocks.GetLength(1); j++)
                 {
-                    if (board.Blocks[i, j] == 0)
+                    if (i < board.Blocks.GetLength(0) && j < board.Blocks.GetLength(1) && board.Blocks[i, j] == 0 && currentTetromino.Blocks[i - currentTetromino.TetrominoAxisX, j - currentTetromino.TetrominoAxisY] == 1)
                     {
                         board.Blocks[i, j] = currentTetromino.Blocks[i - currentTetromino.TetrominoAxisX, j - currentTetromino.TetrominoAxisY];
                     }
