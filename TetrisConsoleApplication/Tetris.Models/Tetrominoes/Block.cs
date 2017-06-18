@@ -1,4 +1,5 @@
-﻿using Tetris.Utilities;
+﻿using System.Collections.Generic;
+using Tetris.Utilities;
 
 namespace Tetris.Models.Tetrominoes
 {
@@ -8,13 +9,11 @@ namespace Tetris.Models.Tetrominoes
 
         public Block() : base(BlockFigure,Constants.BlockSprite)
         {
+            this.ShapeRotations = new Queue<byte[,]>();
+            ShapeRotations.Enqueue(new byte[,] { {1,1},{1,1} });
+            ShapeRotations.Enqueue(new byte[,] { { 1, 1 }, { 1, 1 } });
         }
 
-        public override void Rotate()
-        {
-            
-        }
-      
 
     }
 }

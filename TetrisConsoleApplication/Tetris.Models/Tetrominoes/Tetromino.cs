@@ -11,10 +11,9 @@ namespace Tetris.Models.Tetrominoes
         {           
             this.Blocks = blocks;
             this.BlockSprite = blockSprite;
-            this.RotateState = 0;
         }
 
-        protected int RotateState;
+        protected Queue<byte[,]> ShapeRotations;
 
         public byte[,] Blocks { get; protected set; }
         
@@ -32,7 +31,16 @@ namespace Tetris.Models.Tetrominoes
             }
         }
 
-        public abstract void Rotate();
+        public void Rotate()
+        {
+            ShapeRotations.Enqueue(this.Blocks);
+            this.Blocks = ShapeRotations.Dequeue();
+        }
+
+        public byte[,] GetNextRotation()
+        {
+            return ShapeRotations.Peek();
+        }
 
 
 
