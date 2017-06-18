@@ -11,16 +11,44 @@
     {
         public void InitializeMenu()
         {
-            ShowMenuOptions();
+            ShowMenu();
         }
 
-        public void ShowMenuOptions()
+        public void ShowMenu()
         {
-            foreach (var menuOption in Enum.GetValues(typeof(MenuOptions)))
+            Console.CursorVisible = false;
+            var startCursorPos = 1;
+            var currentCursorPos = startCursorPos;
+            var menuElementsCount = Enum.GetNames(typeof(MenuOptions)).Length;
+            Console.SetCursorPosition(0, currentCursorPos);
+            var pressedKey = new ConsoleKeyInfo();
+            while (true)
             {
-                Console.WriteLine($"{(int)menuOption}. {GetMenuItemDescription(menuOption)}");
+                Console.Clear();
+                Console.WriteLine("Please choose an action...");
+
+                if (pressedKey.Key == ConsoleKey.DownArrow)
+                {
+                    if (currentCursorPos < menuElementsCount)
+                    {
+                        currentCursorPos++;
+                    }
+                }
+                else if (pressedKey.Key == ConsoleKey.UpArrow)
+                {
+                    if (currentCursorPos > startCursorPos)
+                    {
+                        currentCursorPos--;
+                    }
+                }
+                else if (pressedKey.Key == ConsoleKey.Enter)
+                {
+                    
+                }
+
+                PrintMenuOptions(currentCursorPos);
+                pressedKey = Console.ReadKey();
             }
-            ChooseAction();
         }
 
         public static string GetMenuItemDescription(object enumValue)
@@ -36,36 +64,6 @@
                 }
             }
             return enumValue.ToString();
-        }
-
-        public void ChooseAction()
-        {
-            Console.WriteLine("Please choose an action...");
-            var input = (MenuOptions) Enum.Parse(typeof(MenuOptions), Console.ReadLine());           
-            switch (input)
-            {
-                case MenuOptions.NewGameAnonymous:
-                    break;
-
-                case MenuOptions.Credits:
-                    break;
-
-                case MenuOptions.HighscoresPerUser:
-                    ShowHighscoresForUser();
-                    break;
-
-                case MenuOptions.Top10:
-                    ShowTop10();
-                    break;
-
-                case MenuOptions.Quit:
-                    Environment.Exit(0);
-                    break;
-
-                default:
-                    ChooseAction();
-                    break;
-            }
         }
 
         public void ShowTop10()
@@ -93,6 +91,31 @@
                     Console.WriteLine($"{score.Points} - {score.Date}");
                 }
             }
+            
+        }
+
+        public void PrintMenuOptions(int currentCursorPos)
+        {
+            var counter = 1;
+            foreach (var menuOption in Enum.GetValues(typeof(MenuOptions)))
+            {
+                if (currentCursorPos == counter)
+                {
+                    Console.BackgroundColor = ConsoleColor.DarkGray;
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine($"{GetMenuItemDescription(menuOption)}");
+                    Console.ResetColor();
+                }
+                else
+                {
+                    Console.WriteLine($"{GetMenuItemDescription(menuOption)}");
+                }
+                counter++;
+            }
+        }
+
+        public void ChooseAction()
+        {
             
         }
     }
