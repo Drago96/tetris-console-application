@@ -47,7 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BoardStateService.cs" />
+    <Compile Include="CurrentTetrominoService.cs" />
     <Compile Include="Contracts\IInputReader.cs" />
     <Compile Include="Contracts\IOutputService.cs" />
     <Compile Include="Contracts\IOutputWriter.cs" />
@@ -55,7 +55,7 @@
     <Compile Include="IO\ConsoleWriter.cs" />
     <Compile Include="MenuService.cs" />
     <Compile Include="OutputService.cs" />
-    <Compile Include="Contracts\IBoardStateService.cs" />
+    <Compile Include="Contracts\ICurrentTetrominoService.cs" />
     <Compile Include="Contracts\IGameService.cs" />
     <Compile Include="Contracts\ITetrominoService.cs" />
     <Compile Include="GameService.cs" />

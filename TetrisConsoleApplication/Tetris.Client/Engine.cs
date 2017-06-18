@@ -19,7 +19,7 @@ namespace Tetris.Client
         public Engine()
         {
             this.GameService = new GameService();
-            this.BoardStateService = new BoardStateService();
+            this.CurrentTetrominoService = new CurrentTetrominoService();
             this.MenuService = new MenuService();
             this.OutputService = new OutputService();
             this.TetrominoService = new TetrominoService();
@@ -27,7 +27,7 @@ namespace Tetris.Client
         }
 
         private IGameService GameService { get; set; }
-        private IBoardStateService BoardStateService { get; set; }
+        private ICurrentTetrominoService CurrentTetrominoService { get; set; }
         private MenuService MenuService { get; set; }
         private IOutputService OutputService { get; set; }
         private ITetrominoService TetrominoService { get; set; }
@@ -49,7 +49,7 @@ namespace Tetris.Client
                 Constants.BoardBottomSprite);
 
             Console.CursorVisible = false;
-            game.CurrentTetromino = BoardStateService.SpawnTetromino(
+            game.CurrentTetromino = CurrentTetrominoService.SpawnTetromino(
                 TetrominoService.GetNextTetromino(game.TetrominoRepository, game.TetrominoFactory), game.Board,
                 game.CurrentTetromino);
             OutputService.InitializeBoard(game.Board, game.ScoreInfo,
@@ -69,29 +69,29 @@ namespace Tetris.Client
                         if (key.Key == ConsoleKey.RightArrow)
                         {
                             game.CurrentTetromino =
-                                BoardStateService.MoveTetrominoRight(game.Board, game.CurrentTetromino);
+                                CurrentTetrominoService.MoveTetrominoRight(game.Board, game.CurrentTetromino);
                         }
                         else if (key.Key == ConsoleKey.LeftArrow)
                         {
                             game.CurrentTetromino =
-                                BoardStateService.MoveTetrominoLeft(game.Board, game.CurrentTetromino);
+                                CurrentTetrominoService.MoveTetrominoLeft(game.Board, game.CurrentTetromino);
                             OutputService.InitializeBoard(game.Board, game.ScoreInfo,
                                 TetrominoService.PeekNextTetromino(game.TetrominoRepository, game.TetrominoFactory));
                         }
                         else if (key.Key == ConsoleKey.Spacebar)
                         {
                             game.CurrentTetromino =
-                                BoardStateService.RotateTetromino(game.Board, game.CurrentTetromino);
+                                CurrentTetrominoService.RotateTetromino(game.Board, game.CurrentTetromino);
 
                         }
 
 
 
                     }
-                    game.CurrentTetromino = BoardStateService.MoveTetrominoDown(game.Board, game.CurrentTetromino);
+                    game.CurrentTetromino = CurrentTetrominoService.MoveTetrominoDown(game.Board, game.CurrentTetromino);
                     if (game.CurrentTetromino == null)
                     {
-                        game.CurrentTetromino = BoardStateService.SpawnTetromino(
+                        game.CurrentTetromino = CurrentTetrominoService.SpawnTetromino(
                             TetrominoService.GetNextTetromino(game.TetrominoRepository, game.TetrominoFactory), game.Board,
                             game.CurrentTetromino);
                     }

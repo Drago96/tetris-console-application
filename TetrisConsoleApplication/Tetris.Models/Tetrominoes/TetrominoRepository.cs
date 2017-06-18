@@ -12,10 +12,8 @@ namespace Tetris.Models.Tetrominoes
         public TetrominoRepository()
         {
             this.Tetrominoes = new Queue<ITetromino>();
-            IsTetrominoSpawned = false;
         }
 
-        public bool IsTetrominoSpawned { get; set; }
 
         public Queue<ITetromino> Tetrominoes { get; private set; }
 
