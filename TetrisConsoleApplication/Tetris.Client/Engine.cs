@@ -36,6 +36,7 @@ namespace Tetris.Client
         public void Run()
         {
             StartGame();
+            //MenuService.InitializeMenu();
         }
 
         private void StartGame()
