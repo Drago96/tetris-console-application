@@ -44,10 +44,9 @@ namespace Tetris.Services
             {
                 for (int j = currentTetromino.TetrominoAxisX; j < currentTetromino.TetrominoAxisX + currentTetromino.Blocks.GetLength(0); j++)
                 {
-                    if (currentTetromino.Blocks[j - currentTetromino.TetrominoAxisX,
-                            i - currentTetromino.TetrominoAxisY] == 1)
+                    if (currentTetromino.Blocks[j - currentTetromino.TetrominoAxisX,i - currentTetromino.TetrominoAxisY] == 1)
                     {
-                        blockToCheckY = currentTetromino.TetrominoAxisY + currentTetromino.Blocks.GetLength(1) + (currentTetromino.TetrominoAxisY + currentTetromino.Blocks.GetLength(1) - 1) - i ;
+                        blockToCheckY = i + 1 ;
                         break;
                     }
                 }
@@ -62,12 +61,13 @@ namespace Tetris.Services
             }
             for (int i = currentTetromino.TetrominoAxisX; i < currentTetromino.TetrominoAxisX + currentTetromino.Blocks.GetLength(0); i++)
             {
-                if (IsPointInBoardRange(board, i, 0) &&
-                    board.Blocks[i, currentTetromino.TetrominoAxisY  + currentTetromino.Blocks.GetLength(1)] == 1 &&
-                    currentTetromino.Blocks[i - currentTetromino.TetrominoAxisX, currentTetromino.Blocks.GetLength(1) - 1] == 1)
-                {
-                    return false;
-                }
+                    if (IsPointInBoardRange(board,i,0) &&
+                        board.Blocks[i, blockToCheckY] == 1 &&
+                        currentTetromino.Blocks[i - currentTetromino.TetrominoAxisX, blockToCheckY - currentTetromino.TetrominoAxisY - 1] == 1)
+                    {
+                        return false;
+                    }     
+  
             }
             return true;
         }
@@ -90,19 +90,18 @@ namespace Tetris.Services
             {
                 return false;
             }
-            int blockToCheckY = 0;
+            int blockToCheckY = -1;
             for (int i = currentTetromino.TetrominoAxisY; i < currentTetromino.TetrominoAxisY + currentTetromino.Blocks.GetLength(1); i++)
             {
                 for (int j = currentTetromino.TetrominoAxisX; j < currentTetromino.TetrominoAxisX + currentTetromino.Blocks.GetLength(0); j++)
                 {
                     if (currentTetromino.Blocks[j - currentTetromino.TetrominoAxisX, i - currentTetromino.TetrominoAxisY] == 1)
                     {
-                        blockToCheckY = i + (i - currentTetromino.TetrominoAxisY - 1);
+                        blockToCheckY = i  - 1;
                         break;
                     }
-
                 }
-                if (blockToCheckY != 0)
+                if (blockToCheckY != -1)
                 {
                     break;
                 }
@@ -112,15 +111,13 @@ namespace Tetris.Services
                 return false;
             }
             for (int i = currentTetromino.TetrominoAxisX; i < currentTetromino.TetrominoAxisX + currentTetromino.Blocks.GetLength(0); i++)
-            {
-               
+            {              
                     if (IsPointInBoardRange(board, i, 0) &&
-                        board.Blocks[i, currentTetromino.TetrominoAxisY - 1] == 1 &&
-                        currentTetromino.Blocks[i - currentTetromino.TetrominoAxisX, 0] == 1)
+                        board.Blocks[i, blockToCheckY] == 1 &&
+                        currentTetromino.Blocks[i - currentTetromino.TetrominoAxisX, blockToCheckY - currentTetromino.TetrominoAxisY + 1] == 1)
                     {
                         return false;
-                    }
-                
+                    }             
             }
             return true;
         }

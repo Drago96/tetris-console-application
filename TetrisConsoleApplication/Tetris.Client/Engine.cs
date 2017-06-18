@@ -74,6 +74,8 @@ namespace Tetris.Client
                         {
                             game.CurrentTetromino =
                                 BoardStateService.MoveTetrominoLeft(game.Board, game.CurrentTetromino);
+                            OutputService.InitializeBoard(game.Board, game.ScoreInfo,
+                                TetrominoService.PeekNextTetromino(game.TetrominoRepository, game.TetrominoFactory));
                         }
                         else if (key.Key == ConsoleKey.Spacebar)
                         {
