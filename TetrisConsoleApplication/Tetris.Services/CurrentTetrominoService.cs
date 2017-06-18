@@ -94,16 +94,19 @@ namespace Tetris.Services
             {
                 return false;
             }
+            ClearTetromino(currentTetromino, board);
             for (int i = currentTetromino.Row; i < currentTetromino.Row + currentTetromino.Blocks.GetLength(0); i++)
             {
-                    if (IsPointInBoardRange(board,i,currentTetromino.Col) &&
-                        board.Blocks[i, blockToCheckY] == 1 &&
-                        currentTetromino.Blocks[i - currentTetromino.Row, blockToCheckY - currentTetromino.Col - 1] == 1)
+                for (int j = blockToCheckY -1 ; j >= currentTetromino.Col ; j--)
+                {
+                    if (currentTetromino.Blocks[i - currentTetromino.Row, j - currentTetromino.Col] == 1 && board.Blocks[i, j + 1] == 1)
                     {
+                        RespawnTetromino(currentTetromino, board);
                         return false;
-                    }     
-  
+                    }
+                }
             }
+            RespawnTetromino(currentTetromino, board);
             return true;
         }
 
@@ -145,15 +148,19 @@ namespace Tetris.Services
             {
                 return false;
             }
+            ClearTetromino(currentTetromino,board);
             for (int i = currentTetromino.Row; i < currentTetromino.Row + currentTetromino.Blocks.GetLength(0); i++)
-            {              
-                    if (IsPointInBoardRange(board, i, currentTetromino.Col) &&
-                        board.Blocks[i, blockToCheckY] == 1 &&
-                        currentTetromino.Blocks[i - currentTetromino.Row, blockToCheckY - currentTetromino.Col + 1] == 1)
+            {
+                for (int j = blockToCheckY; j < currentTetromino.Col + currentTetromino.Blocks.GetLength(1) - 1; j++)
+                {
+                    if (currentTetromino.Blocks[i - currentTetromino.Row, j - currentTetromino.Col + 1] == 1 && board.Blocks[i, j] == 1)
                     {
+                        RespawnTetromino(currentTetromino, board);
                         return false;
-                    }             
+                    }
+                }
             }
+            RespawnTetromino(currentTetromino, board);
             return true;
         }
 
@@ -177,7 +184,7 @@ namespace Tetris.Services
         {
             if (IsTetrominoMoveDownPossible(board,currentTetromino))
             {
-                ClearTetromino(currentTetromino, board);
+                ClearTetromino(currentTetromino,board);
                 currentTetromino.Row++;
                 RespawnTetromino(currentTetromino, board);
                 return currentTetromino;
@@ -200,26 +207,19 @@ namespace Tetris.Services
             {
                 return false;
             }
-            for (int i = currentTetromino.Row; i < currentTetromino.Row + currentTetromino.Blocks.GetLength(0) - 1; i++)
+            ClearTetromino(currentTetromino,board);
+            for (int i = currentTetromino.Row; i < blockToCheckX; i++)
             {
                 for (int j = currentTetromino.Col; j < currentTetromino.Col + currentTetromino.Blocks.GetLength(1); j++)
                 {                  
-                        if (currentTetromino.Blocks[i - currentTetromino.Row,   j - currentTetromino.Col] == 1 &&
-                            currentTetromino.Blocks[i - currentTetromino.Row + 1, j - currentTetromino.Col] == 0 &&
-                            board.Blocks[i+ 1,j] == 1)
+                        if (currentTetromino.Blocks[i - currentTetromino.Row,   j - currentTetromino.Col] == 1 && board.Blocks[i+ 1,j] == 1)
                         {
+                            RespawnTetromino(currentTetromino,board);
                             return false;
                         }                   
                 }
             }
-            for (int j = currentTetromino.Col;j < currentTetromino.Col + currentTetromino.Blocks.GetLength(1);j++)
-            {             
-                    if (currentTetromino.Blocks[currentTetromino.Blocks.GetLength(0) - 1, j - currentTetromino.Col] == 1 &&
-                        board.Blocks[currentTetromino.Row + currentTetromino.Blocks.GetLength(0), j] == 1)
-                    {
-                        return false;
-                    }               
-            }
+            RespawnTetromino(currentTetromino, board);
             return true;
         }
 
