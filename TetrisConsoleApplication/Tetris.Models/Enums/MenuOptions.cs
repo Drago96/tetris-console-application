@@ -4,8 +4,7 @@
 
     public enum MenuOptions
     {
-        [Description("New anonymous game")] NewGameAnonymous,
-        [Description("New game as a registered user")] NewGameRegistered,
+        [Description("New game")] NewGameAnonymous,
         [Description("Highscores of single user")] HighscoresPerUser,
         [Description("Top 10")] Top10,
         [Description("Credits")] Credits,

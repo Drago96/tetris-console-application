@@ -2,9 +2,9 @@
 {
     using System;
     using System.ComponentModel;
+    using System.Data.Entity;
     using System.Linq;
-    using System.Net.Mime;
-    using System.Reflection;
+    using Data;
     using Models.Enums;
 
     public class MenuService
@@ -45,11 +45,6 @@
             switch (input)
             {
                 case MenuOptions.NewGameAnonymous:
-                    GameService gameService = new GameService();
-                    //gameService.InitializeGame();
-                    break;
-
-                case MenuOptions.NewGameRegistered:
                     break;
 
                 case MenuOptions.Credits:
@@ -75,7 +70,10 @@
 
         public void ShowTop10()
         {
-            
+            using (var context = new TetrisDbContext())
+            {
+                context.HighScores.OrderByDescending(h => h.Points).Take(10).ToList().ForEach(h => Console.WriteLine($"{h.User} - {h.Points}"));
+            }
         }
 
         public void ShowHighscoresForUser()
