@@ -186,8 +186,7 @@ namespace Tetris.Services
             for (int j = currentTetromino.TetrominoAxisY;j < currentTetromino.TetrominoAxisY + currentTetromino.Blocks.GetLength(1);j++)
             {
                
-                    if (currentTetromino.Blocks[currentTetromino.Blocks.GetLength(0) - 1,
-                            j - currentTetromino.TetrominoAxisY] == 1 &&
+                    if (currentTetromino.Blocks[currentTetromino.Blocks.GetLength(0) - 1, j - currentTetromino.TetrominoAxisY] == 1 &&
                         board.Blocks[currentTetromino.TetrominoAxisX + currentTetromino.Blocks.GetLength(0), j] == 1)
                     {
                         return false;
@@ -243,8 +242,7 @@ namespace Tetris.Services
                 {
                     if (IsPointInBoardRange(board, j, i))
                     {
-                        if (currentTetromino.Blocks[j - currentTetromino.TetrominoAxisX,
-                                i - currentTetromino.TetrominoAxisY] == 1)
+                        if (currentTetromino.Blocks[j - currentTetromino.TetrominoAxisX,i - currentTetromino.TetrominoAxisY] == 1)
                         {
                             board.Blocks[j, i] = 0;
                         }

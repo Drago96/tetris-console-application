@@ -35,12 +35,17 @@ namespace Tetris.Client
 
         public void Run()
         {
+            StartGame();
+        }
+
+        private void StartGame()
+        {
             ConsoleKeyInfo key = new ConsoleKeyInfo();
-         
+
 
             IGame game = new Game(Constants.BoardWidth, Constants.BoardHeight, Constants.StartLevel,
                 Constants.StartScore, Constants.StartLinesCleared, Constants.BlockSprite, Constants.BoardRearWallSprite,
-                Constants.BoardBottomSprite);       
+                Constants.BoardBottomSprite);
 
             Console.CursorVisible = false;
             game.CurrentTetromino = BoardStateService.SpawnTetromino(
@@ -53,19 +58,19 @@ namespace Tetris.Client
 
             while (true)
             {
-                if (game.DropTimer.ElapsedMilliseconds > 150)
+                if (game.DropTimer.ElapsedMilliseconds > 100)
                 {
-                   
+
                     while (Console.KeyAvailable)
                     {
                         key = Console.ReadKey();
-                        
-                        if (key.Key == ConsoleKey.RightArrow )
+
+                        if (key.Key == ConsoleKey.RightArrow)
                         {
                             game.CurrentTetromino =
                                 BoardStateService.MoveTetrominoRight(game.Board, game.CurrentTetromino);
                         }
-                        else if (key.Key == ConsoleKey.LeftArrow )
+                        else if (key.Key == ConsoleKey.LeftArrow)
                         {
                             game.CurrentTetromino =
                                 BoardStateService.MoveTetrominoLeft(game.Board, game.CurrentTetromino);
@@ -76,7 +81,9 @@ namespace Tetris.Client
                                 BoardStateService.RotateTetromino(game.Board, game.CurrentTetromino);
 
                         }
-                       
+
+
+
                     }
                     game.CurrentTetromino = BoardStateService.MoveTetrominoDown(game.Board, game.CurrentTetromino);
                     if (game.CurrentTetromino == null)
@@ -87,18 +94,12 @@ namespace Tetris.Client
                     }
                     OutputService.InitializeBoard(game.Board, game.ScoreInfo,
                         TetrominoService.PeekNextTetromino(game.TetrominoRepository, game.TetrominoFactory));
-                    
+
                     game.DropTimer.Restart();
                 }
-                
-                
+
+
             }
-
-
-
-
         }
-
-
     }
 }
