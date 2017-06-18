@@ -1,13 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using Tetris.Client.Contracts;
 using Tetris.Models;
 using Tetris.Models.Contracts;
-using Tetris.Models.Tetrominoes;
 using Tetris.Services;
 using Tetris.Services.Contracts;
 using Tetris.Utilities;
@@ -35,8 +29,8 @@ namespace Tetris.Client
 
         public void Run()
         {
-            StartGame();
-            //MenuService.InitializeMenu();
+            //StartGame();
+            MenuService.InitializeMenu();
         }
 
         private void StartGame()

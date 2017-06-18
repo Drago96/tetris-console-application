@@ -2,7 +2,6 @@
 {
     using System;
     using System.ComponentModel;
-    using System.Data.Entity;
     using System.Linq;
     using Data;
     using Models.Enums;
@@ -16,6 +15,7 @@
 
         public void ShowMenu()
         {
+            Console.Clear();
             Console.CursorVisible = false;
             var startCursorPos = 1;
             var currentCursorPos = startCursorPos;
@@ -43,7 +43,7 @@
                 }
                 else if (pressedKey.Key == ConsoleKey.Enter)
                 {
-                    
+                    ChooseAction(currentCursorPos);
                 }
 
                 PrintMenuOptions(currentCursorPos);
@@ -51,7 +51,7 @@
             }
         }
 
-        public static string GetMenuItemDescription(object enumValue)
+        private static string GetMenuItemDescription(object enumValue)
         {
             var fi = enumValue.GetType().GetField(enumValue.ToString());
 
@@ -68,19 +68,34 @@
 
         public void ShowTop10()
         {
+            Console.Clear();
             using (var context = new TetrisDbContext())
             {
-                context.HighScores.OrderByDescending(h => h.Points).Take(10).ToList().ForEach(h => Console.WriteLine($"{h.User} - {h.Points}"));
+                var highscores = context.HighScores.OrderByDescending(h => h.Points).Take(10).ToList();
+                if (highscores.Count > 0)
+                {
+                    Console.WriteLine("TOP 10");
+                    highscores.ForEach(h => Console.WriteLine($"{h.User.Name} - {h.Points}"));
+                }
+                else
+                {
+                    Console.WriteLine("There are no scores to show.");
+                }
+                Console.WriteLine();
+                Console.WriteLine("Press ESC to go to the previous menu.");
+                while (Console.ReadKey().Key != ConsoleKey.Escape){ }
+                ShowMenu();
             }
         }
 
         public void ShowHighscoresForUser()
         {
-            Console.WriteLine("Please enter username");
+            Console.Clear();
+            Console.WriteLine("Please enter username.");
             var username = Console.ReadLine();
             UserService userService = new UserService();
             var userHighscores = userService.GetUserHighScoresByName(username);
-            if (userHighscores == null || userHighscores.Count() == 0)
+            if (!userHighscores.Any())
             {
                 Console.WriteLine($"{username} doesn't have any scores on the board.");
             }
@@ -88,10 +103,14 @@
             {
                 foreach (var score in userHighscores.OrderBy(s => s.Points))
                 {
-                    Console.WriteLine($"{score.Points} - {score.Date}");
+                    Console.WriteLine($"{score.Points} - {score.Date:d}");
                 }
             }
-            
+            Console.WriteLine();
+            Console.WriteLine("Press ESC to go to the previous menu.");
+            while (Console.ReadKey().Key != ConsoleKey.Escape) { }
+            ShowMenu();
+
         }
 
         public void PrintMenuOptions(int currentCursorPos)
@@ -114,9 +133,24 @@
             }
         }
 
-        public void ChooseAction()
+        public void ChooseAction(int action)
         {
-            
+            switch (action)
+            {
+                case 1:
+                    break;
+                case 2:
+                    ShowHighscoresForUser();
+                    break;
+                case 3:
+                    ShowTop10();
+                    break;
+                case 5:
+                    Environment.Exit(0);
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }
