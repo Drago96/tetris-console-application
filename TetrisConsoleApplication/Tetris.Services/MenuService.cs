@@ -8,6 +8,9 @@
 
     public class MenuService
     {
+        public delegate void StartNewGame();
+        public event StartNewGame StartGame;
+
         public void InitializeMenu()
         {
             ShowMenu();
@@ -138,6 +141,7 @@
             switch (action)
             {
                 case 1:
+                    StartGame();
                     break;
                 case 2:
                     ShowHighscoresForUser();

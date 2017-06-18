@@ -25,11 +25,11 @@ namespace Tetris.Client
         private MenuService MenuService { get; set; }
         private IOutputService OutputService { get; set; }
         private ITetrominoService TetrominoService { get; set; }
-        private UserService UserService { get; set; }
+        private UserService UserService { get; set; }       
 
         public void Run()
         {
-            //StartGame();
+            MenuService.StartGame += new MenuService.StartNewGame(StartGame);
             MenuService.InitializeMenu();
         }
 
