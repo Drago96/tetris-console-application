@@ -2,9 +2,9 @@
 {
     public interface ICurrentTetromino 
     {
-        int TetrominoAxisX { get; set; }
+        int Row { get; set; }
 
-        int TetrominoAxisY { get; set; }
+        int Col { get; set; }
 
         byte[,] Blocks { get;}
 

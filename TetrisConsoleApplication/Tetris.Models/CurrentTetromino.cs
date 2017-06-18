@@ -13,8 +13,8 @@ namespace Tetris.Models
         public CurrentTetromino(ITetromino tetromino, int tetrominoAxisX, int tetrominoAxisY )
         {
             this.Tetromino = tetromino;
-            this.TetrominoAxisX = tetrominoAxisX;
-            this.TetrominoAxisY = tetrominoAxisY;
+            this.Row = tetrominoAxisX;
+            this.Col = tetrominoAxisY;
         }
 
         public ITetromino Tetromino { get; set; }
@@ -25,9 +25,9 @@ namespace Tetris.Models
             private set { this.Blocks = value; }
         }
 
-        public int TetrominoAxisX { get; set; }
+        public int Row { get; set; }
 
-        public int TetrominoAxisY { get; set; }
+        public int Col { get; set; }
 
     }
 }
