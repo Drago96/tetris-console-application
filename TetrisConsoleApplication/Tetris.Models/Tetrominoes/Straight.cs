@@ -5,29 +5,34 @@ namespace Tetris.Models.Tetrominoes
     public class Straight : Tetromino
     {
         private static readonly byte[,] StraightFigure = new byte[,] {{0,0,0,0}, { 1, 1, 1, 1 },{0,0,0,0},{0,0,0,0} };
-        private int rotateState;
+
 
         public Straight() : base(StraightFigure, Constants.BlockSprite)
         {
-            this.rotateState = 0;
+            
         }
 
         public override void Rotate()
         {
-            if (rotateState == 0)
+            if (RotateState == 0)
             {
                 this.Blocks = new byte[,] {{0, 0, 1, 0}, {0, 0, 1, 0}, {0, 0, 1, 0}, {0, 0, 1, 0}};
-                rotateState++;
+                RotateState++;
             }
-            else if (rotateState == 1)
+            else if (RotateState == 1)
             {
                 this.Blocks = new byte[,] { { 0, 0, 0, 0 }, { 0, 0, 0, 0 }, { 1,1,1,1 }, {0,0,0,0 } };
-                rotateState++;
+                RotateState++;
             }
-            else if (rotateState == 2)
+            else if (RotateState == 2)
             {
                 this.Blocks = new byte[,] { { 0, 1, 0, 0 }, { 0, 1, 0, 0 }, { 0,1,0,0 }, { 0, 1, 0, 0 } };
-                rotateState = 0;
+                RotateState++;
+            }
+            else
+            {
+                this.Blocks = new byte[,] { { 0, 0, 0, 0 }, { 1, 1, 1, 1 }, { 0, 0, 0, 0 }, { 0, 0, 0, 0 } };
+                RotateState = 0;
             }
         }
 

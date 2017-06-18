@@ -10,7 +10,10 @@ namespace Tetris.Models.Tetrominoes
         {           
             this.Blocks = blocks;
             this.BlockSprite = blockSprite;
+            this.RotateState = 0;
         }
+
+        protected int RotateState;
 
         public byte[,] Blocks { get; protected set; }
         
