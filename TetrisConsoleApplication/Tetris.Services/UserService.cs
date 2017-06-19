@@ -19,7 +19,7 @@
 
         public bool AddScore(string username, long points)
         {
-            if (username == null)
+            if (username == null || !UserExists(username))
             {
                 return false;
             }
