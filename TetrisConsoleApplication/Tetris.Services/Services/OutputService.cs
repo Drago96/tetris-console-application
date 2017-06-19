@@ -20,12 +20,12 @@ namespace Tetris.Services
 
         public IOutputWriter ConsoleWriter { get; private set; }
 
-        public void InitializeBoard(IBoard board, ScoreInfo scoreInfo,ITetromino tetromino)
+        public void InitializeBoard(IBoard board, ScoreInfo scoreInfo, ITetromino tetromino)
         {
             this.DrawBorder(board);
             this.DrawBoard(board);
-            this.DisplayInfo(board,scoreInfo);
-            this.DisplayNextTetromino(board,tetromino);
+            this.DisplayInfo(board, scoreInfo);
+            this.DisplayNextTetromino(board, tetromino);
         }
 
         public void DrawBoard(IBoard board)
@@ -51,8 +51,8 @@ namespace Tetris.Services
                 this.ConsoleWriter.PrintOnPosition(board.Height - 2, lengthCount, board.BoardBorder.RearWallSprite);
             }
 
-            Console.SetCursorPosition(0 , board.Height);
-           
+            Console.SetCursorPosition(0, board.Height);
+
             for (int widthCount = 0; widthCount <= board.Width; widthCount++)
             {
                 //this.ConsoleWriter.PrintOnPosition(0, Board.Height, Board.BoardBorder.BottomSprite); not working 
@@ -65,9 +65,10 @@ namespace Tetris.Services
             this.ConsoleWriter.PrintLineOnPosition(board.Height + 2, 0, Constants.LevelLable + scoreInfo.Level);
             this.ConsoleWriter.PrintLineOnPosition(board.Height + 2, 1, Constants.ScoreLable + scoreInfo.Score);
             this.ConsoleWriter.PrintLineOnPosition(board.Height + 2, 2, Constants.LinesClearedLable + scoreInfo.LinesCleared);
+            this.ConsoleWriter.PrintLineOnPosition(board.Height + 2, 3, Constants.CurrentPlayerNameLabel + AuthenticationManager.GetCurrentUser().Name);
         }
 
-        public void DisplayNextTetromino(IBoard board,ITetromino tetromino)
+        public void DisplayNextTetromino(IBoard board, ITetromino tetromino)
         {
             Console.SetCursorPosition(board.Height + 2, 4);
             ClearArea();
