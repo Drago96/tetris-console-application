@@ -7,9 +7,7 @@ namespace Tetris.Client
     {
         static void Main(string[] args)
         {    
-
-            IEngine engine = new Engine();
-            engine.Run();
+            MainMenu.ShowMenu();
         }
     }
 }

@@ -29,8 +29,7 @@ namespace Tetris.Client
 
         public void Run()
         {
-            MenuService.StartGame += new MenuService.StartNewGame(StartGame);
-            MenuService.InitializeMenu();
+            StartGame();
         }
 
         private void StartGame()

@@ -22,6 +22,13 @@ namespace Tetris.Utilities
         public const string ScoreLable = "Score: ";
         public const string LinesClearedLable = "Lines cleared: ";
 
+        public const string NoScoresToShow = "There are no scores to show.";
+        public const string ChooseAction = "Please choose an action...";
+        public const string EscapeToReturnToPreviousMenu = "Press ESC to go to the previous menu.";
+        public const string PleaseEnterUsername = "Please enter username.";
+        public const string UserDoesNotHaveScores = "doesn't have any scores on the board.";
+        public const string Top10 = "TOP 10";
+
         public const int StartLevel = 1;
         public const int StartScore = 0;
         public const int StartLinesCleared = 0;
