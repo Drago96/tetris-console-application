@@ -12,9 +12,9 @@ namespace Tetris.Models.Contracts
 
         ITetrominoRepository TetrominoRepository { get; set; }
 
-        Stopwatch Timer { get; set; }
-
         Stopwatch DropTimer { get; set; }
+
+        int TetrominoDropRate { get; set; }
 
         ScoreInfo ScoreInfo { get; set; }
     }

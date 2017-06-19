@@ -9,7 +9,6 @@ namespace Tetris.Services.Services
     {      
         public void StartTimers(IGame game)
         {
-            game.Timer.Start();
             game.DropTimer.Start();
         }
 
@@ -20,6 +19,7 @@ namespace Tetris.Services.Services
             if (progressionToNextLevel + lines >= 5)
             {
                 game.ScoreInfo.Level++;
+                game.TetrominoDropRate -= 25;
             }
             game.ScoreInfo.LinesCleared += lines;
         }

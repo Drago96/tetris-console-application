@@ -72,7 +72,7 @@ namespace Tetris.Client
 
             IGame game = new Game(Constants.BoardWidth, Constants.BoardHeight, Constants.StartLevel,
                 Constants.StartScore, Constants.StartLinesCleared, Constants.BlockSprite, Constants.BoardRearWallSprite,
-                Constants.BoardBottomSprite);
+                Constants.BoardBottomSprite,Constants.TetrominoDropRate);
 
             Console.CursorVisible = false;
             game.CurrentTetromino = CurrentTetrominoService.SpawnTetromino(
@@ -125,7 +125,7 @@ namespace Tetris.Client
 
                 }
 
-                if (game.DropTimer.ElapsedMilliseconds > 200)
+                if (game.DropTimer.ElapsedMilliseconds > game.TetrominoDropRate)
                 {
                     game.CurrentTetromino = CurrentTetrominoService.MoveTetrominoDown(game.Board, game.CurrentTetromino);
                     if (game.CurrentTetromino == null)
