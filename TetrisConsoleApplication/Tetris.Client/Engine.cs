@@ -11,6 +11,8 @@ using Tetris.Models.Entities;
 
 namespace Tetris.Client
 {
+    using Services.Services;
+
     public class Engine : IEngine
     {
         public Engine()

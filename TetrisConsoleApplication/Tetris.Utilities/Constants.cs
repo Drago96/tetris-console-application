@@ -29,6 +29,12 @@ namespace Tetris.Utilities
         public const string UserDoesNotHaveScores = "doesn't have any scores on the board.";
         public const string Top10 = "TOP 10";
 
+        public const string LeftArrow = "← - Slide tetrimino left";
+        public const string RightArrow = "→ - Slide tetrimino right";
+        public const string UpArrow = "↑ - Hard drop";
+        public const string DownArrow = "↓ - Soft drop";
+        public const string Space = "Space - Rotate tetrimino";
+
         public const int StartLevel = 1;
         public const int StartScore = 0;
         public const int StartLinesCleared = 0;

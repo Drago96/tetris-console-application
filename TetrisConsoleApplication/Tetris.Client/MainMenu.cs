@@ -3,15 +3,17 @@
     using System;
     using System.ComponentModel;
     using Models.Enums;
+    using Services;
     using Services.IO;
     using Utilities;
 
     public class MainMenu
     {
         private static readonly ConsoleWriter ConsoleWriter = new ConsoleWriter();
-        public static void ShowMenu()
+        private CommandParser commandParser = new CommandParser();
+
+        public void ShowMenu()
         {
-            Console.Clear();
             Console.CursorVisible = false;
             var startCursorPos = 1;
             var currentCursorPos = startCursorPos;
@@ -21,8 +23,6 @@
             while (true)
             {
                 Console.Clear();
-                ConsoleWriter.PrintLine(Constants.ChooseAction);
-
                 if (pressedKey.Key == ConsoleKey.DownArrow)
                 {
                     if (currentCursorPos < menuElementsCount)
@@ -39,9 +39,10 @@
                 }
                 else if (pressedKey.Key == ConsoleKey.Enter)
                 {
-                    Console.Clear();
-                    CommandParser.ParseCommand(currentCursorPos);
+                    commandParser.ParseCommand(currentCursorPos);
                 }
+                Console.Clear();
+                ConsoleWriter.PrintLine(Constants.ChooseAction);
                 PrintMenuOptions(currentCursorPos);
                 pressedKey = Console.ReadKey();
             }

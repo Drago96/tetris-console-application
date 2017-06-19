@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Tetris.Models;
-using Tetris.Models.Contracts;
-using Tetris.Services.Contracts;
-using Tetris.Services.IO;
-using Tetris.Utilities;
-
-namespace Tetris.Services
+﻿namespace Tetris.Services.Services
 {
+    using System;
+    using Contracts;
+    using IO;
+    using Models;
+    using Models.Contracts;
+    using Utilities;
+
     public class OutputService : IOutputService
     {
         public OutputService()

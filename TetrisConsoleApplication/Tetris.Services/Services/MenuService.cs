@@ -1,7 +1,8 @@
-﻿namespace Tetris.Services
+﻿namespace Tetris.Services.Services
 {
     using System;
     using System.Linq;
+    using System.Text;
     using Data;
     using IO;
     using Utilities;
@@ -9,7 +10,6 @@
     public class MenuService
     {
         private static readonly ConsoleWriter ConsoleWriter = new ConsoleWriter();
-        private static readonly ConsoleReader ConsoleReader = new ConsoleReader();
 
         public void ShowTop10()
         {
@@ -31,12 +31,10 @@
             }
         }
 
-        public void ShowScoresForUser()
-        {
-            ConsoleWriter.PrintLine(Constants.PleaseEnterUsername);
-            var username = ConsoleReader.ReadLine();
+        public void ShowScoresForUser(string username)
+        {      
             var userService = new UserService();
-            var userHighscores = userService.GetUserHighScoresByName(username);
+            var userHighscores = userService.GetScoresByUsername(username);
             if (!userHighscores.Any())
             {
                 ConsoleWriter.PrintLine(string.Join(" ", username, Constants.UserDoesNotHaveScores));
@@ -55,12 +53,23 @@
 
         public void ShowCredits()
         {
-            
+            ConsoleWriter.PrintLine("Drago96\nhopeee\nIliyanPopov\ndimpeev\nNikola");
+            ConsoleWriter.PrintLine(Constants.EscapeToReturnToPreviousMenu);
+            while (Console.ReadKey().Key != ConsoleKey.Escape) { }
+
         }
 
         public void ShowHowToPlay()
         {
-            
+            Console.OutputEncoding = Encoding.UTF8;
+            ConsoleWriter.PrintLine(Constants.LeftArrow);
+            ConsoleWriter.PrintLine(Constants.RightArrow);
+            ConsoleWriter.PrintLine(Constants.UpArrow);
+            ConsoleWriter.PrintLine(Constants.DownArrow);
+            ConsoleWriter.PrintLine(Constants.Space);
+            Console.OutputEncoding = Encoding.ASCII;
+            ConsoleWriter.PrintLine(Constants.EscapeToReturnToPreviousMenu);
+            while (Console.ReadKey().Key != ConsoleKey.Escape) { }
         }
     }
 }

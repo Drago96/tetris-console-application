@@ -1,4 +1,4 @@
-﻿namespace Tetris.Services
+﻿namespace Tetris.Services.Services
 {
     using System;
     using System.Collections.Generic;
@@ -44,9 +44,9 @@
             return isNewHighscore;
         }
 
-        public List<HighScore> GetUserHighScoresByName(string username)
+        public List<HighScore> GetScoresByUsername(string username)
         {
-            if (!UserExists(username))
+            if (username == null || !UserExists(username))
             {
                 return new List<HighScore>();
             }

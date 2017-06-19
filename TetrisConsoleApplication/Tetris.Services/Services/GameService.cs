@@ -1,17 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using Tetris.Models;
-using Tetris.Models.Contracts;
-using Tetris.Services.Contracts;
-using Tetris.Utilities;
-
-namespace Tetris.Services
+﻿namespace Tetris.Services.Services
 {
+    using Contracts;
+    using Models.Contracts;
+
     public class GameService : IGameService
     {      
         public void StartTimers(IGame game)
