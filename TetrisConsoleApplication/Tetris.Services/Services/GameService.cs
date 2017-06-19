@@ -1,4 +1,6 @@
-﻿namespace Tetris.Services.Services
+﻿using System.Runtime.Remoting.Activation;
+
+namespace Tetris.Services.Services
 {
     using Contracts;
     using Models.Contracts;
@@ -11,6 +13,16 @@
             game.DropTimer.Start();
         }
 
+        public void UpdateScoreInfo(IGame game, int lines)
+        {
+            game.ScoreInfo.Score += lines * game.ScoreInfo.Level * 10;
+            int progressionToNextLevel = game.ScoreInfo.LinesCleared % 5;
+            if (progressionToNextLevel + lines >= 5)
+            {
+                game.ScoreInfo.Level++;
+            }
+            game.ScoreInfo.LinesCleared += lines;
+        }
         
     }
 }

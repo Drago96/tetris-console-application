@@ -130,7 +130,8 @@ namespace Tetris.Client
                     game.CurrentTetromino = CurrentTetrominoService.MoveTetrominoDown(game.Board, game.CurrentTetromino);
                     if (game.CurrentTetromino == null)
                     {
-                        BoardService.UpdateBoard(game.Board);
+                        int linesCleared = BoardService.UpdateBoard(game.Board);
+                        GameService.UpdateScoreInfo(game,linesCleared);
                         game.CurrentTetromino = CurrentTetrominoService.SpawnTetromino(
                             TetrominoService.GetNextTetromino(game.TetrominoRepository, game.TetrominoFactory), game.Board,
                             game.CurrentTetromino);
