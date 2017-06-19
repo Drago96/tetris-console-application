@@ -8,6 +8,8 @@ using Tetris.Utilities;
 using System.Linq;
 using Tetris.Data;
 using Tetris.Models.Entities;
+using Tetris.Models.Enums;
+using Tetris.Services.IO;
 
 namespace Tetris.Client
 {
@@ -15,140 +17,56 @@ namespace Tetris.Client
 
     public class Engine : IEngine
     {
+        private readonly CommandParser commandParser;
+        private readonly MenuService menuService;
+
         public Engine()
         {
-            this.GameService = new GameService();
-            this.CurrentTetrominoService = new CurrentTetrominoService();
-            this.MenuService = new MenuService();
-            this.OutputService = new OutputService();
-            this.TetrominoService = new TetrominoService();
-            this.UserService = new UserService();
-            this.BoardService = new BoardService();
+            this.commandParser = new CommandParser();
+            this.menuService = new MenuService();
         }
 
-        private IGameService GameService { get; set; }
-        private ICurrentTetrominoService CurrentTetrominoService { get; set; }
-        private MenuService MenuService { get; set; }
-        private IOutputService OutputService { get; set; }
-        private ITetrominoService TetrominoService { get; set; }
-        private UserService UserService { get; set; }
-        private BoardService BoardService;
+        
 
         public void Run()
         {
-            //need to register first
-            if (!AuthenticationManager.IsAuthenticated())
-            {
-                Console.WriteLine("Please enter your name...");
-                var username = Console.ReadLine();
-
-                User user = new User()
-                {
-                    Name = username
-                };
-
-                using (var context = new TetrisDbContext())
-                {
-                    if (context.Users.Any(u => u.Name == username))
-                    {
-                        var userFromDb = context.Users.First(u => u.Name == username);
-                        AuthenticationManager.Login(userFromDb);
-                    }
-                    else
-                    {
-                        context.Users.Add(user);
-                        context.SaveChanges();
-                        AuthenticationManager.Login(user);
-                    }
-                }
-            }
-            StartGame();
-        }
-
-        private void StartGame()
-        {
-            ConsoleKeyInfo key = new ConsoleKeyInfo();
-
-
-            IGame game = new Game(Constants.BoardWidth, Constants.BoardHeight, Constants.StartLevel,
-                Constants.StartScore, Constants.StartLinesCleared, Constants.BlockSprite, Constants.BoardRearWallSprite,
-                Constants.BoardBottomSprite,Constants.TetrominoDropRate);
-
-            Console.CursorVisible = false;
-            game.CurrentTetromino = CurrentTetrominoService.SpawnTetromino(
-                TetrominoService.GetNextTetromino(game.TetrominoRepository, game.TetrominoFactory), game.Board,
-                game.CurrentTetromino);
-            OutputService.InitializeBoard(game.Board, game.ScoreInfo,
-                TetrominoService.PeekNextTetromino(game.TetrominoRepository, game.TetrominoFactory));
-            OutputService.StartGamePrompt(game);
-            GameService.StartTimers(game);
-
+            Menu menu = new Menu();
+            menuService.ShowMenu(menu);
+            //Console.CursorVisible = false;
+            //var startCursorPos = 1;
+            //var currentCursorPos = startCursorPos;
+            //var menuElementsCount = Enum.GetNames(typeof(MenuOption)).Length;
+            //Console.SetCursorPosition(0, currentCursorPos);
+            var pressedKey = new ConsoleKeyInfo();
             while (true)
             {
-                if (Console.KeyAvailable)
+                Console.Clear();
+                if (pressedKey.Key == ConsoleKey.DownArrow)
                 {
-                    key = Console.ReadKey();
-
-                    if (key.Key == ConsoleKey.RightArrow)
+                    if (menu.CurrentCursorPosition < menu.MenuOptions.Length)
                     {
-                        game.CurrentTetromino =
-                            CurrentTetrominoService.MoveTetrominoRight(game.Board, game.CurrentTetromino);
+                        menu.CurrentCursorPosition++;
                     }
-                    else if (key.Key == ConsoleKey.LeftArrow)
-                    {
-                        game.CurrentTetromino =
-                            CurrentTetrominoService.MoveTetrominoLeft(game.Board, game.CurrentTetromino);
-                        OutputService.InitializeBoard(game.Board, game.ScoreInfo,
-                            TetrominoService.PeekNextTetromino(game.TetrominoRepository, game.TetrominoFactory));
-                    }
-                    else if (key.Key == ConsoleKey.Spacebar)
-                    {
-                        game.CurrentTetromino =
-                            CurrentTetrominoService.RotateTetromino(game.Board, game.CurrentTetromino);
-
-                    }
-                    else if (key.Key == ConsoleKey.DownArrow)
-                    {
-                        game.CurrentTetromino = CurrentTetrominoService.MoveTetrominoDown(game.Board, game.CurrentTetromino);
-
-                    }
-                    else if (key.Key == ConsoleKey.UpArrow)
-                    {
-                        while (game.CurrentTetromino != null)
-                        {
-                            game.CurrentTetromino = CurrentTetrominoService.MoveTetrominoDown(game.Board, game.CurrentTetromino);
-                        }
-                    }
-
-                    OutputService.InitializeBoard(game.Board, game.ScoreInfo,
-                        TetrominoService.PeekNextTetromino(game.TetrominoRepository, game.TetrominoFactory));
-
                 }
-
-                if (game.DropTimer.ElapsedMilliseconds > game.TetrominoDropRate)
+                else if (pressedKey.Key == ConsoleKey.UpArrow)
                 {
-                    game.CurrentTetromino = CurrentTetrominoService.MoveTetrominoDown(game.Board, game.CurrentTetromino);
-                    if (game.CurrentTetromino == null)
+                    if (menu.CurrentCursorPosition > 1)
                     {
-                        int linesCleared = BoardService.UpdateBoard(game.Board);
-                        GameService.UpdateScoreInfo(game,linesCleared);
-                        game.CurrentTetromino = CurrentTetrominoService.SpawnTetromino(
-                            TetrominoService.GetNextTetromino(game.TetrominoRepository, game.TetrominoFactory), game.Board,
-                            game.CurrentTetromino);
-                        if (game.CurrentTetromino == null)
-                        {
-                            OutputService.DisplayGameOver(game);
-                            break;
-                        }
+                        menu.CurrentCursorPosition--;
                     }
-
-                    OutputService.InitializeBoard(game.Board, game.ScoreInfo,
-                        TetrominoService.PeekNextTetromino(game.TetrominoRepository, game.TetrominoFactory));
-                    game.DropTimer.Restart();
                 }
-
-
+                else if (pressedKey.Key == ConsoleKey.Enter)
+                {
+                    commandParser.ParseCommand(menu.CurrentCursorPosition);
+                }
+                Console.Clear();
+                //ConsoleWriter.PrintLine(Constants.ChooseAction);
+                MenuService.PrintMenuOptions(menu.CurrentCursorPosition);
+                pressedKey = Console.ReadKey();
             }
+
         }
+
+        
     }
 }

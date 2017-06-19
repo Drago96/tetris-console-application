@@ -52,7 +52,6 @@
     <Compile Include="CommandParser.cs" />
     <Compile Include="Contracts\IEngine.cs" />
     <Compile Include="Engine.cs" />
-    <Compile Include="MainMenu.cs" />
     <Compile Include="StartUp.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -1,4 +1,8 @@
-﻿namespace Tetris.Services.Services
+﻿using System.ComponentModel;
+using Tetris.Models;
+using Tetris.Models.Enums;
+
+namespace Tetris.Services.Services
 {
     using System;
     using System.Linq;
@@ -10,6 +14,49 @@
     public class MenuService
     {
         private static readonly ConsoleWriter ConsoleWriter = new ConsoleWriter();
+
+        public void ShowMenu(Menu menu)
+        {
+            Console.CursorVisible = false;
+            var startCursorPos = 1;
+            var currentCursorPos = startCursorPos;
+            Console.SetCursorPosition(0, currentCursorPos);
+        }
+
+        public static void PrintMenuOptions(int currentCursorPos)
+        {
+            var counter = 1;
+            foreach (var menuOption in Enum.GetValues(typeof(MenuOption)))
+            {
+                if (currentCursorPos == counter)
+                {
+                    Console.BackgroundColor = ConsoleColor.DarkGray;
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    ConsoleWriter.PrintLine($"{GetMenuItemDescription(menuOption)}");
+                    Console.ResetColor();
+                }
+                else
+                {
+                    ConsoleWriter.PrintLine($"{GetMenuItemDescription(menuOption)}");
+                }
+                counter++;
+            }
+        }
+
+        private static string GetMenuItemDescription(object enumValue)
+        {
+            var fi = enumValue.GetType().GetField(enumValue.ToString());
+
+            if (null != fi)
+            {
+                var attrs = fi.GetCustomAttributes(typeof(DescriptionAttribute), true);
+                if (attrs != null && attrs.Length > 0)
+                {
+                    return ((DescriptionAttribute)attrs[0]).Description;
+                }
+            }
+            return enumValue.ToString();
+        }
 
         public void ShowTop10()
         {

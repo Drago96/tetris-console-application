@@ -61,14 +61,18 @@
             this.ConsoleWriter.PrintLineOnPosition(board.Height + 2, 0, Constants.LevelLable + scoreInfo.Level);
             this.ConsoleWriter.PrintLineOnPosition(board.Height + 2, 1, Constants.ScoreLable + scoreInfo.Score);
             this.ConsoleWriter.PrintLineOnPosition(board.Height + 2, 2, Constants.LinesClearedLable + scoreInfo.LinesCleared);
-            this.ConsoleWriter.PrintLineOnPosition(board.Height + 2, 3, Constants.CurrentPlayerNameLabel + AuthenticationManager.GetCurrentUser().Name);
+            if (AuthenticationManager.IsAuthenticated())
+            {
+                this.ConsoleWriter.PrintLineOnPosition(board.Height + 2, 3,
+                    Constants.CurrentPlayerNameLabel + AuthenticationManager.GetCurrentUser().Name);
+            }
         }
 
         public void DisplayNextTetromino(IBoard board, ITetromino tetromino)
         {
-            Console.SetCursorPosition(board.Height + 2, 4);
+            Console.SetCursorPosition(board.Height + 2, 5);
             ClearArea();
-            Console.SetCursorPosition(board.Height + 2, 4);
+            Console.SetCursorPosition(board.Height + 2, 5);
             tetromino.DrawTetromino();
         }
 

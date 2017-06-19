@@ -2,7 +2,7 @@
 {
     using System.ComponentModel;
 
-    public enum MenuOptions
+    public enum MenuOption
     {
         [Description("New game")] NewGame,
         [Description("How to play")] HowToPlay,
