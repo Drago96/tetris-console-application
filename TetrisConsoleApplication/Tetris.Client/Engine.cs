@@ -135,6 +135,11 @@ namespace Tetris.Client
                         game.CurrentTetromino = CurrentTetrominoService.SpawnTetromino(
                             TetrominoService.GetNextTetromino(game.TetrominoRepository, game.TetrominoFactory), game.Board,
                             game.CurrentTetromino);
+                        if (game.CurrentTetromino == null)
+                        {
+                            OutputService.DisplayGameOver(game);
+                            break;
+                        }
                     }
 
                     OutputService.InitializeBoard(game.Board, game.ScoreInfo,

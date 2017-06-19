@@ -90,5 +90,17 @@
             ConsoleWriter.PrintLine(Constants.StartGamePromptMessage);
             Console.ReadKey(true);
         }
+
+        public void DisplayGameOver(IGame game)
+        {
+            Console.SetCursorPosition(game.Board.Height / 6 + 3 , game.Board.Width / 2 - 1);
+            ConsoleWriter.PrintLine(new string(' ',10));
+            Console.SetCursorPosition(game.Board.Height / 6 + 3, game.Board.Width / 2 );
+            ConsoleWriter.PrintLine(" Game Over ");
+            Console.SetCursorPosition(game.Board.Height / 6 + 3 , game.Board.Width / 2 + 1 );
+            ConsoleWriter.PrintLine(new string(' ', 10));
+            Console.ReadKey();
+
+        }
     }
 }

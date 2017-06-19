@@ -18,5 +18,7 @@ namespace Tetris.Services.Contracts
         void DisplayNextTetromino(IBoard board, ITetromino tetromino);
 
         void StartGamePrompt(IGame game);
+
+        void DisplayGameOver(IGame game);
     }
 }
