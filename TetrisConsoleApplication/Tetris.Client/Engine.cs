@@ -5,13 +5,12 @@ using Tetris.Models.Contracts;
 using Tetris.Services;
 using Tetris.Services.Contracts;
 using Tetris.Utilities;
+using System.Linq;
+using Tetris.Data;
+using Tetris.Models.Entities;
 
 namespace Tetris.Client
 {
-    using System.Linq;
-    using Tetris.Data;
-    using Tetris.Models.Entities;
-
     public class Engine : IEngine
     {
         public Engine()
@@ -34,26 +33,33 @@ namespace Tetris.Client
         public void Run()
         {
             //need to register first
-            Console.WriteLine("Please enter your name...");
-            var username = Console.ReadLine();
-
-            User user = new User()
+            if (!AuthenticationManager.IsAuthenticated())
             {
-                Name = username
-            };
+                Console.WriteLine("Please enter your name...");
+                var username = Console.ReadLine();
 
-            using (var context = new TetrisDbContext())
-            {
-                if (context.Users.Any(u => u.Name == username))
+                User user = new User()
                 {
-                    var userFromDb = context.Users.First(u => u.Name == username);
-                    AuthenticationManager.Login(userFromDb);
-                }
+                    Name = username
+                };
 
-                context.Users.Add(user);
-                context.SaveChanges();
-                AuthenticationManager.Login(user);
-            }        }
+                using (var context = new TetrisDbContext())
+                {
+                    if (context.Users.Any(u => u.Name == username))
+                    {
+                        var userFromDb = context.Users.First(u => u.Name == username);
+                        AuthenticationManager.Login(userFromDb);
+                    }
+                    else
+                    {
+                        context.Users.Add(user);
+                        context.SaveChanges();
+                        AuthenticationManager.Login(user);
+                    }
+                }
+            }
+            StartGame();
+        }
 
         private void StartGame()
         {
