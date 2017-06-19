@@ -17,58 +17,40 @@
             }
         }
 
-        public void AddScore(string username, long points)
+        public bool AddScore(string username, long points)
         {
+            if (username == null)
+            {
+                return false;
+            }
+            var isNewHighscore = false;
             using (var context = new TetrisDbContext())
             {
-                if (this.UserExists(username))
-                {
-                    var user = context.Users.FirstOrDefault(u => u.Name == username);
-                    var highscore = new HighScore
-                    {
-                        User = user,
-                        Points = points,
-                        Date = DateTime.Now
-                    };
-                    context.HighScores.Add(highscore);
-                    context.SaveChanges();
-                }
-                else
-                {
-                    var user = new User
-                    {
-                        Name = username,
-                        HighScores = new List<HighScore>()
-                    };
-                    context.Users.Add(user);
-                    context.SaveChanges();
-                    var highscore = new HighScore
-                    {
-                        User = user,
-                        Points = points,
-                        Date = DateTime.Now
-                    };
-                    context.HighScores.Add(highscore);
-                    context.SaveChanges();
-                }
-            }
-        }
 
-        public List<HighScore> GetUserHighScoresById(int userId)
-        {
-            using (var context = new TetrisDbContext())
-            {
-                return context.Users.FirstOrDefault(u => u.Id == userId).HighScores.ToList();
+                if (context.HighScores.Max(h => h.Points) < points)
+                {
+                    isNewHighscore = true;
+                }
+                var user = context.Users.FirstOrDefault(u => u.Name == username);
+                var highscore = new HighScore
+                {
+                    User = user,
+                    Points = points,
+                    Date = DateTime.Now
+                };
+                context.HighScores.Add(highscore);
+                context.SaveChanges();
             }
+            return isNewHighscore;
         }
 
         public List<HighScore> GetUserHighScoresByName(string username)
         {
-            if (!this.UserExists(username))
+            if (!UserExists(username))
             {
                 return new List<HighScore>();
             }
-            if (!this.UserHasHighscores(username))
+            if (!UserHasHighscores(username))
             {
                 return new List<HighScore>();
             }
@@ -78,7 +60,7 @@
             }
         }
 
-        private bool UserExists(string username)
+        private static bool UserExists(string username)
         {
             using (var context = new TetrisDbContext())
             {
@@ -86,11 +68,11 @@
             }
         }
 
-        private bool UserHasHighscores(string username)
+        private static bool UserHasHighscores(string username)
         {
             using (var context = new TetrisDbContext())
             {
-                return this.UserExists(username) && context.Users.FirstOrDefault(u => u.Name == username).HighScores != null;
+                return UserExists(username) && context.Users.FirstOrDefault(u => u.Name == username).HighScores != null;
             }
         }
     }
