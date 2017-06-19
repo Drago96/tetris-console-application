@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity.Core.Objects;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Tetris.Models;
-using Tetris.Models.Contracts;
-using Tetris.Services.Contracts;
-
-namespace Tetris.Services
+﻿namespace Tetris.Services.Services
 {
+    using System;
+    using Contracts;
+    using Models;
+    using Models.Contracts;
+
     public class CurrentTetrominoService : ICurrentTetrominoService
     {
         public ICurrentTetromino RotateTetromino(IBoard board, ICurrentTetromino currentTetromino)

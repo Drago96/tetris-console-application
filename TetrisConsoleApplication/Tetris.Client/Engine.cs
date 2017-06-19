@@ -5,9 +5,14 @@ using Tetris.Models.Contracts;
 using Tetris.Services;
 using Tetris.Services.Contracts;
 using Tetris.Utilities;
+using System.Linq;
+using Tetris.Data;
+using Tetris.Models.Entities;
 
 namespace Tetris.Client
 {
+    using Services.Services;
+
     public class Engine : IEngine
     {
         public Engine()
@@ -25,12 +30,37 @@ namespace Tetris.Client
         private MenuService MenuService { get; set; }
         private IOutputService OutputService { get; set; }
         private ITetrominoService TetrominoService { get; set; }
-        private UserService UserService { get; set; }       
+        private UserService UserService { get; set; }
 
         public void Run()
         {
-            MenuService.StartGame += new MenuService.StartNewGame(StartGame);
-            MenuService.InitializeMenu();
+            //need to register first
+            if (!AuthenticationManager.IsAuthenticated())
+            {
+                Console.WriteLine("Please enter your name...");
+                var username = Console.ReadLine();
+
+                User user = new User()
+                {
+                    Name = username
+                };
+
+                using (var context = new TetrisDbContext())
+                {
+                    if (context.Users.Any(u => u.Name == username))
+                    {
+                        var userFromDb = context.Users.First(u => u.Name == username);
+                        AuthenticationManager.Login(userFromDb);
+                    }
+                    else
+                    {
+                        context.Users.Add(user);
+                        context.SaveChanges();
+                        AuthenticationManager.Login(user);
+                    }
+                }
+            }
+            StartGame();
         }
 
         private void StartGame()

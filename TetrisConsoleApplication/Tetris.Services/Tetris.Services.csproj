@@ -47,22 +47,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BoardService.cs" />
-    <Compile Include="CurrentTetrominoService.cs" />
+    <Compile Include="AuthenticationManager.cs" />
+    <Compile Include="Services\CurrentTetrominoService.cs" />
     <Compile Include="Contracts\IInputReader.cs" />
     <Compile Include="Contracts\IOutputService.cs" />
     <Compile Include="Contracts\IOutputWriter.cs" />
     <Compile Include="IO\ConsoleReader.cs" />
     <Compile Include="IO\ConsoleWriter.cs" />
-    <Compile Include="MenuService.cs" />
-    <Compile Include="OutputService.cs" />
+    <Compile Include="Services\MenuService.cs" />
+    <Compile Include="Services\OutputService.cs" />
     <Compile Include="Contracts\ICurrentTetrominoService.cs" />
     <Compile Include="Contracts\IGameService.cs" />
     <Compile Include="Contracts\ITetrominoService.cs" />
-    <Compile Include="GameService.cs" />
+    <Compile Include="Services\GameService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TetrominoService.cs" />
-    <Compile Include="UserService.cs" />
+    <Compile Include="Services\TetrominoService.cs" />
+    <Compile Include="Services\UserService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Tetris.Data\Tetris.Data.csproj">
@@ -82,5 +82,6 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

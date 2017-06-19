@@ -4,8 +4,9 @@
 
     public enum MenuOptions
     {
-        [Description("New game")] NewGameAnonymous,
-        [Description("Highscores of single user")] HighscoresPerUser,
+        [Description("New game")] NewGame,
+        [Description("How to play")] HowToPlay,
+        [Description("My scores")] CurrentUserScores,
         [Description("Top 10")] Top10,
         [Description("Credits")] Credits,
         [Description("Exit game")] Quit

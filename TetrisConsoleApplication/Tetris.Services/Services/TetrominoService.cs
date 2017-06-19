@@ -1,17 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Tetris.Models.Contracts;
-using Tetris.Models.Tetrominoes;
-using Tetris.Utilities;
-using System.Reflection;
-using Tetris.Models.Enums;
-using Tetris.Services.Contracts;
-
-namespace Tetris.Services
+﻿namespace Tetris.Services.Services
 {
+    using Contracts;
+    using Models.Contracts;
+    using Utilities;
+
     public class TetrominoService : ITetrominoService
     {
            
