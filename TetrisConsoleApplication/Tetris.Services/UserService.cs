@@ -21,7 +21,7 @@
         {
             using (var context = new TetrisDbContext())
             {
-                if (userExists(username))
+                if (this.UserExists(username))
                 {
                     var user = context.Users.FirstOrDefault(u => u.Name == username);
                     var highscore = new HighScore
@@ -64,11 +64,11 @@
 
         public List<HighScore> GetUserHighScoresByName(string username)
         {
-            if (!userExists(username))
+            if (!this.UserExists(username))
             {
                 return new List<HighScore>();
             }
-            if (!userHasHighscores(username))
+            if (!this.UserHasHighscores(username))
             {
                 return new List<HighScore>();
             }
@@ -78,7 +78,7 @@
             }
         }
 
-        private bool userExists(string username)
+        private bool UserExists(string username)
         {
             using (var context = new TetrisDbContext())
             {
@@ -86,11 +86,11 @@
             }
         }
 
-        private bool userHasHighscores(string username)
+        private bool UserHasHighscores(string username)
         {
             using (var context = new TetrisDbContext())
             {
-                return userExists(username) && context.Users.FirstOrDefault(u => u.Name == username).HighScores != null;
+                return this.UserExists(username) && context.Users.FirstOrDefault(u => u.Name == username).HighScores != null;
             }
         }
     }
