@@ -23,6 +23,7 @@ namespace Tetris.Client
             this.OutputService = new OutputService();
             this.TetrominoService = new TetrominoService();
             this.UserService = new UserService();
+            this.BoardService = new BoardService();
         }
 
         private IGameService GameService { get; set; }
@@ -31,6 +32,7 @@ namespace Tetris.Client
         private IOutputService OutputService { get; set; }
         private ITetrominoService TetrominoService { get; set; }
         private UserService UserService { get; set; }
+        private BoardService BoardService;
 
         public void Run()
         {
@@ -128,6 +130,7 @@ namespace Tetris.Client
                     game.CurrentTetromino = CurrentTetrominoService.MoveTetrominoDown(game.Board, game.CurrentTetromino);
                     if (game.CurrentTetromino == null)
                     {
+                        BoardService.UpdateBoard(game.Board);
                         game.CurrentTetromino = CurrentTetrominoService.SpawnTetromino(
                             TetrominoService.GetNextTetromino(game.TetrominoRepository, game.TetrominoFactory), game.Board,
                             game.CurrentTetromino);

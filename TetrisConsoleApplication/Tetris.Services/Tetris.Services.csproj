@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AuthenticationManager.cs" />
+    <Compile Include="Services\BoardService.cs" />
     <Compile Include="Services\CurrentTetrominoService.cs" />
     <Compile Include="Contracts\IInputReader.cs" />
     <Compile Include="Contracts\IOutputService.cs" />
