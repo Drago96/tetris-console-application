@@ -21,7 +21,7 @@ namespace Tetris.Client
         private IGameService GameService { get; set; }
         private ICurrentTetrominoService CurrentTetrominoService { get; set; }
         private MenuService MenuService { get; set; }
-        private IOutputService OutputService { get; set; }
+        private IBoardOutputService BoardOutputService { get; set; }
         private ITetrominoService TetrominoService { get; set; }
         private UserService UserService { get; set; }
         private BoardService BoardService { get; set; }
@@ -31,7 +31,7 @@ namespace Tetris.Client
             this.GameService = new GameService();
             this.CurrentTetrominoService = new CurrentTetrominoService();
             this.MenuService = new MenuService();
-            this.OutputService = new OutputService();
+            this.BoardOutputService = new BoardOutputService();
             this.TetrominoService = new TetrominoService();
             this.UserService = new UserService();
             this.BoardService = new BoardService();
@@ -95,6 +95,7 @@ namespace Tetris.Client
                     }
                 }
             }
+            Console.Clear();
         }
 
         private void StartGame()
@@ -113,9 +114,9 @@ namespace Tetris.Client
             game.CurrentTetromino = CurrentTetrominoService.SpawnTetromino(
                 TetrominoService.GetNextTetromino(game.TetrominoRepository, game.TetrominoFactory), game.Board,
                 game.CurrentTetromino);
-            OutputService.InitializeBoard(game.Board, game.ScoreInfo,
+            BoardOutputService.InitializeBoard(game.Board, game.ScoreInfo,
                 TetrominoService.PeekNextTetromino(game.TetrominoRepository, game.TetrominoFactory));
-            OutputService.StartGamePrompt(game);
+            BoardOutputService.StartGamePrompt(game);
             GameService.StartTimers(game);
 
             while (true)
@@ -133,7 +134,7 @@ namespace Tetris.Client
                     {
                         game.CurrentTetromino =
                             CurrentTetrominoService.MoveTetrominoLeft(game.Board, game.CurrentTetromino);
-                        OutputService.InitializeBoard(game.Board, game.ScoreInfo,
+                        BoardOutputService.InitializeBoard(game.Board, game.ScoreInfo,
                             TetrominoService.PeekNextTetromino(game.TetrominoRepository, game.TetrominoFactory));
                     }
                     else if (key.Key == ConsoleKey.Spacebar)
@@ -155,7 +156,7 @@ namespace Tetris.Client
                         }
                     }
 
-                    OutputService.InitializeBoard(game.Board, game.ScoreInfo,
+                    BoardOutputService.InitializeBoard(game.Board, game.ScoreInfo,
                         TetrominoService.PeekNextTetromino(game.TetrominoRepository, game.TetrominoFactory));
 
                 }
@@ -172,12 +173,12 @@ namespace Tetris.Client
                             game.CurrentTetromino);
                         if (game.CurrentTetromino == null)
                         {
-                            OutputService.DisplayGameOver(game);
+                            BoardOutputService.DisplayGameOver(game);
                             break;
                         }
                     }
 
-                    OutputService.InitializeBoard(game.Board, game.ScoreInfo,
+                    BoardOutputService.InitializeBoard(game.Board, game.ScoreInfo,
                         TetrominoService.PeekNextTetromino(game.TetrominoRepository, game.TetrominoFactory));
                     game.DropTimer.Restart();
                 }

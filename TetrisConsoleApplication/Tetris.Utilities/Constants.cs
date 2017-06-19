@@ -47,5 +47,7 @@ namespace Tetris.Utilities
         public const string CurrentPlayerNameLabel = "Player name: ";
 
         public const int TetrominoDropRate = 250;
+
+        public const string GameOverLabel = " Game Over ";
     }
 }

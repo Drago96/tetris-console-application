@@ -7,14 +7,14 @@
     using Models.Contracts;
     using Utilities;
 
-    public class OutputService : IOutputService
+    public class BoardOutputService : IBoardOutputService
     {
-        public OutputService()
+        public BoardOutputService()
         {
-            this.ConsoleWriter = new ConsoleWriter();
+            this.consoleWriter = new ConsoleWriter();
         }
 
-        public IOutputWriter ConsoleWriter { get; private set; }
+        public IOutputWriter consoleWriter { get; private set; }
 
         public void InitializeBoard(IBoard board, ScoreInfo scoreInfo, ITetromino tetromino)
         {
@@ -31,11 +31,11 @@
                 Console.SetCursorPosition(1, i);
                 for (int j = 0; j < board.Width; j++)
                 {
-                    this.ConsoleWriter.Print(board.Blocks[i, j] == 0 ? " " : board.BoardSprite.ToString());
-                    this.ConsoleWriter.Print(" ");
+                    this.consoleWriter.Print(board.Blocks[i, j] == 0 ? " " : board.BoardSprite.ToString());
+                    this.consoleWriter.Print(" ");
                 }
 
-                this.ConsoleWriter.PrintEmptyLine();
+                this.consoleWriter.PrintEmptyLine();
             }
         }
 
@@ -43,27 +43,26 @@
         {
             for (int lengthCount = 0; lengthCount < board.Height; ++lengthCount)
             {
-                this.ConsoleWriter.PrintOnPosition(0, lengthCount, board.BoardBorder.RearWallSprite);
-                this.ConsoleWriter.PrintOnPosition(board.Height - 2, lengthCount, board.BoardBorder.RearWallSprite);
+                this.consoleWriter.PrintOnPosition(0, lengthCount, board.BoardBorder.RearWallSprite);
+                this.consoleWriter.PrintOnPosition(board.Height - 2, lengthCount, board.BoardBorder.RearWallSprite);
             }
 
             Console.SetCursorPosition(0, board.Height);
 
             for (int widthCount = 0; widthCount <= board.Width; widthCount++)
             {
-                //this.ConsoleWriter.PrintOnPosition(0, Board.Height, Board.BoardBorder.BottomSprite); not working 
                 Console.Write(board.BoardBorder.BottomSprite);
             }
         }
 
         public void DisplayInfo(IBoard board, ScoreInfo scoreInfo)
         {
-            this.ConsoleWriter.PrintLineOnPosition(board.Height + 2, 0, Constants.LevelLable + scoreInfo.Level);
-            this.ConsoleWriter.PrintLineOnPosition(board.Height + 2, 1, Constants.ScoreLable + scoreInfo.Score);
-            this.ConsoleWriter.PrintLineOnPosition(board.Height + 2, 2, Constants.LinesClearedLable + scoreInfo.LinesCleared);
+            this.consoleWriter.PrintLineOnPosition(board.Height + 2, 0, Constants.LevelLable + scoreInfo.Level);
+            this.consoleWriter.PrintLineOnPosition(board.Height + 2, 1, Constants.ScoreLable + scoreInfo.Score);
+            this.consoleWriter.PrintLineOnPosition(board.Height + 2, 2, Constants.LinesClearedLable + scoreInfo.LinesCleared);
             if (AuthenticationManager.IsAuthenticated())
             {
-                this.ConsoleWriter.PrintLineOnPosition(board.Height + 2, 3,
+                this.consoleWriter.PrintLineOnPosition(board.Height + 2, 3,
                     Constants.CurrentPlayerNameLabel + AuthenticationManager.GetCurrentUser().Name);
             }
         }
@@ -91,18 +90,18 @@
         public void StartGamePrompt(IGame game)
         {
             Console.SetCursorPosition(game.Board.Height / 6, game.Board.Width / 2);
-            ConsoleWriter.PrintLine(Constants.StartGamePromptMessage);
+            consoleWriter.PrintLine(Constants.StartGamePromptMessage);
             Console.ReadKey(true);
         }
 
         public void DisplayGameOver(IGame game)
         {
             Console.SetCursorPosition(game.Board.Height / 6 + 3 , game.Board.Width / 2 - 1);
-            ConsoleWriter.PrintLine(new string(' ',10));
+            consoleWriter.PrintLine(new string(' ',10));
             Console.SetCursorPosition(game.Board.Height / 6 + 3, game.Board.Width / 2 );
-            ConsoleWriter.PrintLine(" Game Over ");
+            consoleWriter.PrintLine(Constants.GameOverLabel);
             Console.SetCursorPosition(game.Board.Height / 6 + 3 , game.Board.Width / 2 + 1 );
-            ConsoleWriter.PrintLine(new string(' ', 10));
+            consoleWriter.PrintLine(new string(' ', 10));
             Console.ReadKey();
 
         }

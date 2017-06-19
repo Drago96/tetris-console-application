@@ -3,9 +3,9 @@ using Tetris.Models.Contracts;
 
 namespace Tetris.Services.Contracts
 {
-    public interface IOutputService
+    public interface IBoardOutputService
     {
-        IOutputWriter ConsoleWriter { get; }
+        IOutputWriter consoleWriter { get; }
 
         void InitializeBoard(IBoard board, ScoreInfo scoreInfo, ITetromino tetromino);
 

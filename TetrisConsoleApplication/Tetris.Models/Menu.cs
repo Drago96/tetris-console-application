@@ -12,12 +12,12 @@ namespace Tetris.Models
         public Menu()
         {
             this.CurrentCursorPosition = 1;
-            this.MenuOptions = Enum.GetValues(typeof(MenuOption));
+            this.MenuOptions = new HashSet<MenuOption>(Enum.GetValues(typeof(MenuOption)).Cast<MenuOption>());
 
         }
 
         public int CurrentCursorPosition { get; set; }
 
-        public Array MenuOptions { get; set; }
+        public ICollection<MenuOption> MenuOptions { get; set; }
     }
 }

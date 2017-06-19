@@ -13,37 +13,36 @@ namespace Tetris.Services.Services
 
     public class MenuService
     {
-        private static readonly ConsoleWriter ConsoleWriter = new ConsoleWriter();
+        private readonly ConsoleWriter consoleWriter;
 
-        public void ShowMenu(Menu menu)
+        public MenuService()
         {
-            Console.CursorVisible = false;
-            var startCursorPos = 1;
-            var currentCursorPos = startCursorPos;
-            Console.SetCursorPosition(0, currentCursorPos);
+            this.consoleWriter = new ConsoleWriter();
         }
 
-        public static void PrintMenuOptions(int currentCursorPos)
+        public void PrintMenuOptions(Menu menu)
         {
+            Console.CursorVisible = false;
+            consoleWriter.PrintLine(Constants.ChooseAction);
             var counter = 1;
             foreach (var menuOption in Enum.GetValues(typeof(MenuOption)))
             {
-                if (currentCursorPos == counter)
+                if (menu.CurrentCursorPosition == counter)
                 {
                     Console.BackgroundColor = ConsoleColor.DarkGray;
                     Console.ForegroundColor = ConsoleColor.Yellow;
-                    ConsoleWriter.PrintLine($"{GetMenuItemDescription(menuOption)}");
+                    consoleWriter.PrintLine($"{GetMenuItemDescription(menuOption)}");
                     Console.ResetColor();
                 }
                 else
                 {
-                    ConsoleWriter.PrintLine($"{GetMenuItemDescription(menuOption)}");
+                    consoleWriter.PrintLine($"{GetMenuItemDescription(menuOption)}");
                 }
                 counter++;
             }
         }
 
-        private static string GetMenuItemDescription(object enumValue)
+        private string GetMenuItemDescription(object enumValue)
         {
             var fi = enumValue.GetType().GetField(enumValue.ToString());
 
@@ -58,64 +57,64 @@ namespace Tetris.Services.Services
             return enumValue.ToString();
         }
 
-        public void ShowTop10()
+        public void ShowTop10( )
         {
             using (var context = new TetrisDbContext())
             {
                 var highscores = context.HighScores.OrderByDescending(h => h.Points).Take(10).ToList();
                 if (highscores.Count > 0)
                 {
-                    ConsoleWriter.PrintLine(Constants.Top10);
+                    consoleWriter.PrintLine(Constants.Top10);
                     highscores.ForEach(h => Console.WriteLine($"{h.User.Name} - {h.Points}"));
                 }
                 else
                 {
-                    ConsoleWriter.PrintLine(Constants.NoScoresToShow);
+                    consoleWriter.PrintLine(Constants.NoScoresToShow);
                 }
-                ConsoleWriter.PrintEmptyLine();
-                ConsoleWriter.PrintLine(Constants.EscapeToReturnToPreviousMenu);
+                consoleWriter.PrintEmptyLine();
+                consoleWriter.PrintLine(Constants.EscapeToReturnToPreviousMenu);
                 while (Console.ReadKey().Key != ConsoleKey.Escape){ }
             }
         }
 
-        public void ShowScoresForUser(string username)
+        public void ShowScoresForUser(string username )
         {      
             var userService = new UserService();
             var userHighscores = userService.GetScoresByUsername(username);
             if (!userHighscores.Any())
             {
-                ConsoleWriter.PrintLine(string.Join(" ", username, Constants.UserDoesNotHaveScores));
+                consoleWriter.PrintLine(string.Join(" ", username, Constants.UserDoesNotHaveScores));
             }
             else
             {
                 foreach (var score in userHighscores.OrderBy(s => s.Points))
                 {
-                    ConsoleWriter.PrintLine($"{score.Points} - {score.Date:d}");
+                    consoleWriter.PrintLine($"{score.Points} - {score.Date:d}");
                 }
             }
-            ConsoleWriter.PrintEmptyLine();
-            ConsoleWriter.PrintLine(Constants.EscapeToReturnToPreviousMenu);
+            consoleWriter.PrintEmptyLine();
+            consoleWriter.PrintLine(Constants.EscapeToReturnToPreviousMenu);
             while (Console.ReadKey().Key != ConsoleKey.Escape) { }
         }
 
-        public void ShowCredits()
+        public void ShowCredits( )
         {
-            ConsoleWriter.PrintLine("Drago96\nhopeee\nIliyanPopov\ndimpeev\nNikola");
-            ConsoleWriter.PrintLine(Constants.EscapeToReturnToPreviousMenu);
+            consoleWriter.PrintLine("Drago96\nhopeee\nIliyanPopov\ndimpeev\nNikola");
+            consoleWriter.PrintLine(Constants.EscapeToReturnToPreviousMenu);
             while (Console.ReadKey().Key != ConsoleKey.Escape) { }
 
         }
 
-        public void ShowHowToPlay()
+        public void ShowHowToPlay( )
         {
             Console.OutputEncoding = Encoding.UTF8;
-            ConsoleWriter.PrintLine(Constants.LeftArrow);
-            ConsoleWriter.PrintLine(Constants.RightArrow);
-            ConsoleWriter.PrintLine(Constants.UpArrow);
-            ConsoleWriter.PrintLine(Constants.DownArrow);
-            ConsoleWriter.PrintLine(Constants.Space);
+            consoleWriter.PrintLine(Constants.LeftArrow);
+            consoleWriter.PrintLine(Constants.RightArrow);
+            consoleWriter.PrintLine(Constants.UpArrow);
+            consoleWriter.PrintLine(Constants.DownArrow);
+            consoleWriter.PrintLine(Constants.Space);
             Console.OutputEncoding = Encoding.ASCII;
-            ConsoleWriter.PrintLine(Constants.EscapeToReturnToPreviousMenu);
+            consoleWriter.PrintLine(Constants.EscapeToReturnToPreviousMenu);
             while (Console.ReadKey().Key != ConsoleKey.Escape) { }
         }
     }
