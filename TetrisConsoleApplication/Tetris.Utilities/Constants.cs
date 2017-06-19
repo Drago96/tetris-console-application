@@ -30,5 +30,7 @@ namespace Tetris.Utilities
 
         public const int LinesToClear = 4;
         public const int ColumnsToClear = 10;
+
+        public const string CurrentPlayerNameLabel = "Player name: ";
     }
 }
