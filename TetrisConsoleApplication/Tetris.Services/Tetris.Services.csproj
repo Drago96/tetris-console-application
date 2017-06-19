@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BoardService.cs" />
     <Compile Include="CurrentTetrominoService.cs" />
     <Compile Include="Contracts\IInputReader.cs" />
     <Compile Include="Contracts\IOutputService.cs" />

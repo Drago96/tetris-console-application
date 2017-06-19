@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Tetris.Services
 {
-    class BoardService
+    public class BoardService
     {
     }
 }
