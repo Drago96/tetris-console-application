@@ -4,7 +4,7 @@
     using Models.Contracts;
     using Utilities;
 
-    public class TetrominoService : ITetrominoService
+    public class TetrominoService 
     {
            
         public ITetromino GetNextTetromino(ITetrominoRepository tetrominoRepository, ITetrominoFactory tetrominoFactory)

@@ -7,7 +7,7 @@
     using Models.Contracts;
     using Utilities;
 
-    public class BoardOutputService : IBoardOutputService
+    public class BoardOutputService 
     {
         public BoardOutputService()
         {

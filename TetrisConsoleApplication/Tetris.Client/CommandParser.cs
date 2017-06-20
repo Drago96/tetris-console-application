@@ -14,27 +14,26 @@ namespace Tetris.Client
     using Services.IO;
     using Services.Services;
 
-    public class CommandParser
+    public class CommandParser : ICommandParser
     {
-        private readonly MenuService menuService = new MenuService();
-        private readonly ConsoleWriter consoleWriter = new ConsoleWriter();
-        private IGameService GameService { get; set; }
-        private ICurrentTetrominoService CurrentTetrominoService { get; set; }
-        private MenuService MenuService { get; set; }
-        private IBoardOutputService BoardOutputService { get; set; }
-        private ITetrominoService TetrominoService { get; set; }
-        private UserService UserService { get; set; }
-        private BoardService BoardService { get; set; }
+        private readonly MenuService menuService;
+        private readonly GameService gameService;
+        private readonly CurrentTetrominoService currentTetrominoService;
+        private readonly BoardOutputService boardOutputService;
+        private readonly TetrominoService tetrominoService;
+        private readonly UserService userService;
+        private readonly BoardService boardService;
 
         public CommandParser()
         {
-            this.GameService = new GameService();
-            this.CurrentTetrominoService = new CurrentTetrominoService();
-            this.MenuService = new MenuService();
-            this.BoardOutputService = new BoardOutputService();
-            this.TetrominoService = new TetrominoService();
-            this.UserService = new UserService();
-            this.BoardService = new BoardService();
+            this.menuService = new MenuService();
+            this.gameService = new GameService();
+            this.currentTetrominoService = new CurrentTetrominoService();
+            this.menuService = new MenuService();
+            this.boardOutputService = new BoardOutputService();
+            this.tetrominoService = new TetrominoService();
+            this.userService = new UserService();
+            this.boardService = new BoardService();
         }
 
         public void ParseCommand(int action)
@@ -42,7 +41,10 @@ namespace Tetris.Client
             switch (action)
             {
                 case 1:
-                    StartGame();
+                    IGame game = new Game(Constants.BoardWidth, Constants.BoardHeight, Constants.StartLevel,
+                        Constants.StartScore, Constants.StartLinesCleared, Constants.BlockSprite, Constants.BoardRearWallSprite,
+                        Constants.BoardBottomSprite, Constants.TetrominoDropRate);
+                    gameService.StartGame(game, userService,boardOutputService,tetrominoService,currentTetrominoService,boardService);
                     break;
                 case 2:
                     menuService.ShowHowToPlay();
@@ -62,129 +64,9 @@ namespace Tetris.Client
                 case 6:
                     Environment.Exit(0);
                     break;
-
-                default:
-                    break;
             }
         }
 
-        private void LoginUser()
-        {
-            if (!AuthenticationManager.IsAuthenticated())
-            {
-                Console.WriteLine("Please enter your name...");
-                var username = Console.ReadLine();
-
-                User user = new User()
-                {
-                    Name = username
-                };
-
-                using (var context = new TetrisDbContext())
-                {
-                    if (context.Users.Any(u => u.Name == username))
-                    {
-                        var userFromDb = context.Users.First(u => u.Name == username);
-                        AuthenticationManager.Login(userFromDb);
-                    }
-                    else
-                    {
-                        context.Users.Add(user);
-                        context.SaveChanges();
-                        AuthenticationManager.Login(user);
-                    }
-                }
-            }
-            Console.Clear();
-        }
-
-        private void StartGame()
-        {
-
-            LoginUser();
-
-            ConsoleKeyInfo key = new ConsoleKeyInfo();
-
-
-            IGame game = new Game(Constants.BoardWidth, Constants.BoardHeight, Constants.StartLevel,
-                Constants.StartScore, Constants.StartLinesCleared, Constants.BlockSprite, Constants.BoardRearWallSprite,
-                Constants.BoardBottomSprite, Constants.TetrominoDropRate);
-
-            Console.CursorVisible = false;
-            game.CurrentTetromino = CurrentTetrominoService.SpawnTetromino(
-                TetrominoService.GetNextTetromino(game.TetrominoRepository, game.TetrominoFactory), game.Board,
-                game.CurrentTetromino);
-            BoardOutputService.InitializeBoard(game.Board, game.ScoreInfo,
-                TetrominoService.PeekNextTetromino(game.TetrominoRepository, game.TetrominoFactory));
-            BoardOutputService.StartGamePrompt(game);
-            GameService.StartTimers(game);
-
-            while (true)
-            {
-                if (Console.KeyAvailable)
-                {
-                    key = Console.ReadKey();
-
-                    if (key.Key == ConsoleKey.RightArrow)
-                    {
-                        game.CurrentTetromino =
-                            CurrentTetrominoService.MoveTetrominoRight(game.Board, game.CurrentTetromino);
-                    }
-                    else if (key.Key == ConsoleKey.LeftArrow)
-                    {
-                        game.CurrentTetromino =
-                            CurrentTetrominoService.MoveTetrominoLeft(game.Board, game.CurrentTetromino);
-                        BoardOutputService.InitializeBoard(game.Board, game.ScoreInfo,
-                            TetrominoService.PeekNextTetromino(game.TetrominoRepository, game.TetrominoFactory));
-                    }
-                    else if (key.Key == ConsoleKey.Spacebar)
-                    {
-                        game.CurrentTetromino =
-                            CurrentTetrominoService.RotateTetromino(game.Board, game.CurrentTetromino);
-
-                    }
-                    else if (key.Key == ConsoleKey.DownArrow)
-                    {
-                        game.CurrentTetromino = CurrentTetrominoService.MoveTetrominoDown(game.Board, game.CurrentTetromino);
-
-                    }
-                    else if (key.Key == ConsoleKey.UpArrow)
-                    {
-                        while (game.CurrentTetromino != null)
-                        {
-                            game.CurrentTetromino = CurrentTetrominoService.MoveTetrominoDown(game.Board, game.CurrentTetromino);
-                        }
-                    }
-
-                    BoardOutputService.InitializeBoard(game.Board, game.ScoreInfo,
-                        TetrominoService.PeekNextTetromino(game.TetrominoRepository, game.TetrominoFactory));
-
-                }
-
-                if (game.DropTimer.ElapsedMilliseconds > game.TetrominoDropRate)
-                {
-                    game.CurrentTetromino = CurrentTetrominoService.MoveTetrominoDown(game.Board, game.CurrentTetromino);
-                    if (game.CurrentTetromino == null)
-                    {
-                        int linesCleared = BoardService.UpdateBoard(game.Board);
-                        GameService.UpdateScoreInfo(game, linesCleared);
-                        game.CurrentTetromino = CurrentTetrominoService.SpawnTetromino(
-                            TetrominoService.GetNextTetromino(game.TetrominoRepository, game.TetrominoFactory), game.Board,
-                            game.CurrentTetromino);
-                        if (game.CurrentTetromino == null)
-                        {
-                            BoardOutputService.DisplayGameOver(game);
-                            break;
-                        }
-                    }
-
-                    BoardOutputService.InitializeBoard(game.Board, game.ScoreInfo,
-                        TetrominoService.PeekNextTetromino(game.TetrominoRepository, game.TetrominoFactory));
-                    game.DropTimer.Restart();
-                }
-
-
-            }
-        }
+     
     }
 }

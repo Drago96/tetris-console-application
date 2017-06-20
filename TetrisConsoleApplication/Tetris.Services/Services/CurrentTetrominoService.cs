@@ -5,7 +5,7 @@
     using Models;
     using Models.Contracts;
 
-    public class CurrentTetrominoService : ICurrentTetrominoService
+    public class CurrentTetrominoService 
     {
         public ICurrentTetromino RotateTetromino(IBoard board, ICurrentTetromino currentTetromino)
         {

@@ -51,15 +51,11 @@
     <Compile Include="Services\BoardService.cs" />
     <Compile Include="Services\CurrentTetrominoService.cs" />
     <Compile Include="Contracts\IInputReader.cs" />
-    <Compile Include="Contracts\IBoardOutputService.cs" />
     <Compile Include="Contracts\IOutputWriter.cs" />
     <Compile Include="IO\ConsoleReader.cs" />
     <Compile Include="IO\ConsoleWriter.cs" />
     <Compile Include="Services\MenuService.cs" />
     <Compile Include="Services\BoardOutputService.cs" />
-    <Compile Include="Contracts\ICurrentTetrominoService.cs" />
-    <Compile Include="Contracts\IGameService.cs" />
-    <Compile Include="Contracts\ITetrominoService.cs" />
     <Compile Include="Services\GameService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\TetrominoService.cs" />

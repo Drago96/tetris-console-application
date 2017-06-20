@@ -54,6 +54,7 @@
     <Compile Include="Contracts\ICurrentTetromino.cs" />
     <Compile Include="Contracts\IGame.cs" />
     <Compile Include="Contracts\IGrid.cs" />
+    <Compile Include="Contracts\IScoreInfo.cs" />
     <Compile Include="Contracts\ITetromino.cs" />
     <Compile Include="Contracts\ITetrominoRepository.cs" />
     <Compile Include="Contracts\ITetrominoFactory.cs" />

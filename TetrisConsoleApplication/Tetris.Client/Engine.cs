@@ -17,7 +17,7 @@ namespace Tetris.Client
 
     public class Engine : IEngine
     {
-        private readonly CommandParser commandParser;
+        private readonly ICommandParser commandParser;
         private readonly MenuService menuService;
 
         public Engine()
@@ -34,6 +34,7 @@ namespace Tetris.Client
             var pressedKey = new ConsoleKeyInfo();
             while (true)
             {
+                Console.Clear();
                 if (pressedKey.Key == ConsoleKey.DownArrow)
                 {
                     if (menu.CurrentCursorPosition < menu.MenuOptions.Count)
