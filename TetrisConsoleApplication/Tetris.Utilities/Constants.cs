@@ -22,6 +22,7 @@
         public const string PleaseEnterUsername = "Please enter username.";
         public const string UserDoesNotHaveScores = "doesn't have any scores on the board.";
         public const string Top10 = "TOP 10";
+        public const string NoSuchUserOrNoScores = "Their is no such user or the user doesn't have any scores.";
 
         public const string LeftArrow = "← - Slide tetrimino left";
         public const string RightArrow = "→ - Slide tetrimino right";

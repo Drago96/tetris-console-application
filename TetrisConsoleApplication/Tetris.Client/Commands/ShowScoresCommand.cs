@@ -14,10 +14,7 @@
 
         public void Execute()
         {
-            if (AuthenticationManager.IsAuthenticated())
-            {
-                this.menuService.ShowScoresForUser(AuthenticationManager.GetCurrentUser().Name);
-            }
+                this.menuService.ShowScoresForUser();
         }
     }
 }

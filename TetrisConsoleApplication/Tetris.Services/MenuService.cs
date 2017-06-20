@@ -13,10 +13,12 @@
     public class MenuService
     {
         private readonly ConsoleWriter consoleWriter;
+        private readonly ConsoleReader consoleReader;
 
         public MenuService()
         {
             this.consoleWriter = new ConsoleWriter();
+            this.consoleReader = new ConsoleReader();
         }
 
         public void PrintMenuOptions(Menu menu)
@@ -78,13 +80,15 @@
             }
         }
 
-        public void ShowScoresForUser(string username)
+        public void ShowScoresForUser()
         {
+            this.consoleWriter.PrintLine(Constants.PleaseEnterUsername);
+            var username = consoleReader.ReadLine();
             var userService = new UserService();
             var userHighscores = userService.GetScoresByUsername(username);
             if (!userHighscores.Any())
             {
-                this.consoleWriter.PrintLine(string.Join(" ", username, Constants.UserDoesNotHaveScores));
+                this.consoleWriter.PrintLine(Constants.NoSuchUserOrNoScores);
             }
             else
             {
