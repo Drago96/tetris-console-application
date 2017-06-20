@@ -27,7 +27,7 @@ How to Play
 </ul>
 <p>&nbsp;</p>
 
-Screen Shots
+Screenshots
 ======
 
 <p align="center"><img src="https://github.com/Drago96/tetris-console-application/blob/master/TetrisConsoleApplication/Screenshots/0TetrisGame.JPG" width="400" height="350"></p>
