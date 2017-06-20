@@ -1,7 +1,7 @@
 Tetris
 ======
 <p>This console application is the developed during the SoftUni C# Advanced Module by team "Arpas"</p>
-## Goal
+<p><strong>Goal</strong></p>
 <p>Score as much points as possible, so your name will stay in top 10 forever J</p>
 <p><a href="https://en.wikipedia.org/wiki/Tetris">Description and Rules on Wikipedia</a></p>
 <p><strong>Overview</strong></p>
@@ -12,22 +12,26 @@ Tetris
 <li>High scores of a user</li>
 <li>Top 10 High scores</li>
 </ul>
-## How to play
+<p><strong>How to Play</strong></p>
 <ul>
-<li>в&dagger;ђ - Slide tetrimino left</li>
-<li>в&dagger;&rsquo; - Slide tetrimino right</li>
-<li>в&dagger;&lsquo; - Hard drop</li>
-<li>в&dagger;&ldquo; - Soft drop</li>
+<li>left arrow - Slide tetrimino left</li>
+<li>right arrow - Slide tetrimino right</li>
+<li>up arrow; - Hard drop</li>
+<li>down arrow; - Soft drop</li>
 <li>Space - Rotate tetrimino</li>
 </ul>
 <p>&nbsp;</p>
-## Screen Shots
-<p align="center"><img src=""></p>
-<p align="center"><img src=""></p>
-<p align="center"><img src=""></p>
-## Team Members
-<p><a href="https://en.wikipedia.org/wiki/Tetris">Drago96</a></p>
-<p><a href="https://en.wikipedia.org/wiki/Tetris">hopeee</a></p>
-<p><a href="https://en.wikipedia.org/wiki/Tetris">IliyanPopov</a></p>
-<p><a href="https://en.wikipedia.org/wiki/Tetris">dimpeev</a></p>
+<p><strong>Screen Shots</strong></p>
+<p align="center"><img src="https://raw.githubusercontent.com/Drago96/tetris-console-application/blob/master/TetrisConsoleApplication/Screenshots/0TetrisGame.JPG"></p>
+<p align="center"><img src="https://raw.githubusercontent.com/Drago96/tetris-console-application/blob/master/TetrisConsoleApplication/Screenshots/1TetrisMenu.JPG"></p>
+<p align="center"><img src="https://raw.githubusercontent.com/Drago96/tetris-console-application/blob/master/TetrisConsoleApplication/Screenshots/2TetrisHowToPlay.JPG"></p>
+<p><strong>Team members</strong></p>
+<p>&nbsp;</p>
+<p><a href="https://github.com/Drago96">Drago96</a></p>
+<p><a href="https://github.com/hopeee">hopeee</a></p>
+<p><a href="https://github.com/IliyanPopov">Iliyan Popov</a></p>
+<p><a href="https://github.com/dimpeev">dimpeev</a></p>
 <p><a href="https://en.wikipedia.org/wiki/Tetris">Nikola</a></p>
+
+
+
