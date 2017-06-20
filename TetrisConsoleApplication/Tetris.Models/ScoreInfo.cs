@@ -9,7 +9,7 @@ namespace Tetris.Models
 {
     public class ScoreInfo : IScoreInfo
     {
-        public ScoreInfo(int level, int score, int linesCleared)
+        public ScoreInfo(int level, long score, int linesCleared)
         {
             this.Level = level;
             this.Score = score;
@@ -18,7 +18,7 @@ namespace Tetris.Models
 
         public int Level { get; set; }
 
-        public int Score { get; set; }
+        public long Score { get; set; }
 
         public int LinesCleared { get; set; }
     }

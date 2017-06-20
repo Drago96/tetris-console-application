@@ -81,6 +81,8 @@ namespace Tetris.Services.Services
                             game.CurrentTetromino);
                         if (game.CurrentTetromino == null)
                         {
+                            userService.AddScore(AuthenticationManager.GetCurrentUser().Name, game.ScoreInfo.Score);
+                            AuthenticationManager.Logout();
                             boardOutputService.DisplayGameOver(game);
                             break;
                         }

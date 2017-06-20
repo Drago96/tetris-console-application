@@ -7,7 +7,7 @@
         [Description("New game")] NewGame,
         [Description("How to play")] HowToPlay,
         [Description("My scores")] CurrentUserScores,
-        [Description("Top 10")] Top10,
+        [Description("High Scores")] HighScores,
         [Description("Credits")] Credits,
         [Description("Exit game")] Quit
     }

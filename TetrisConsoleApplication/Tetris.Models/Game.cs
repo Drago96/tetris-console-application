@@ -12,7 +12,7 @@ namespace Tetris.Models
 {
     public class Game : IGame
     {
-        public Game(int boardWidth, int boardHeight,int level, int score, int linesCleared,
+        public Game(int boardWidth, int boardHeight,int level, long score, int linesCleared,
             char blockSprite, string boardRearWallSprite, string bottomSprite, int tetrominoDropRate)
         {
             this.Board = new Board(boardWidth,boardHeight,blockSprite,  boardRearWallSprite,  bottomSprite);

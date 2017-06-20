@@ -19,7 +19,7 @@ namespace Tetris.Client.Commands
 
         public void Execute()
         {
-            menuService.ShowTop10();
+            menuService.ShowHighScores();
         }
     }
 }

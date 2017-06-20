@@ -10,7 +10,7 @@ namespace Tetris.Models.Contracts
     {
         int Level { get; set; }
 
-        int Score { get; set; }
+        long Score { get; set; }
 
         int LinesCleared { get; set; }
     } 

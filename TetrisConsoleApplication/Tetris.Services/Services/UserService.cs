@@ -19,15 +19,18 @@
 
         public bool AddScore(string username, long points)
         {
-            if (username == null || !UserExists(username))
+            if (string.IsNullOrEmpty(username) || !UserExists(username))
             {
                 return false;
             }
             var isNewHighscore = false;
             using (var context = new TetrisDbContext())
             {
-
-                if (context.HighScores.Max(h => h.Points) < points)
+                if (!context.HighScores.Any())
+                {
+                    isNewHighscore = true;
+                }
+                else if (context.HighScores.Max(h => h.Points) < points)
                 {
                     isNewHighscore = true;
                 }
@@ -80,7 +83,7 @@
         {
             if (!AuthenticationManager.IsAuthenticated())
             {
-                Console.WriteLine("Please enter your name...");
+                Console.WriteLine("Please enter your name... (Press ENTER if you want to play anonimously)");
                 var username = Console.ReadLine();
 
                 User user = new User()

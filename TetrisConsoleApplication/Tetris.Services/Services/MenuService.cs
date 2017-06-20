@@ -57,7 +57,7 @@ namespace Tetris.Services.Services
             return enumValue.ToString();
         }
 
-        public void ShowTop10( )
+        public void ShowHighScores( )
         {
             using (var context = new TetrisDbContext())
             {
