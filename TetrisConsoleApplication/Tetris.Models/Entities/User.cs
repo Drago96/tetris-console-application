@@ -1,4 +1,6 @@
-﻿namespace Tetris.Models.Entities
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Tetris.Models.Entities
 {
     using System.Collections.Generic;
     using Microsoft.Build.Framework;
@@ -19,10 +21,10 @@
             this.Name = name;
         }
 
+        [Key]
         public int Id { get; set; }
 
         [Required]
-
         public string Name { get; set; }
 
         public virtual ICollection<HighScore> HighScores

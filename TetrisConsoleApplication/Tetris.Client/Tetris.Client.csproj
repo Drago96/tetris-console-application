@@ -50,6 +50,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CommandParser.cs" />
+    <Compile Include="Commands\HowToPlayCommand.cs" />
+    <Compile Include="Commands\ShowCreditsCommand.cs" />
+    <Compile Include="Commands\ShowHighScoresCommand.cs" />
+    <Compile Include="Commands\ShowScoresCommand.cs" />
+    <Compile Include="Commands\StartGameCommand.cs" />
+    <Compile Include="Contracts\ICommand.cs" />
     <Compile Include="Contracts\ICommandParser.cs" />
     <Compile Include="Contracts\IEngine.cs" />
     <Compile Include="Engine.cs" />
@@ -78,5 +84,6 @@
       <Name>Tetris.Utilities</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

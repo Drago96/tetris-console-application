@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using Tetris.Client.Commands;
 using Tetris.Data;
 using Tetris.Models;
 using Tetris.Models.Contracts;
@@ -41,25 +42,24 @@ namespace Tetris.Client
             switch (action)
             {
                 case 1:
-                    IGame game = new Game(Constants.BoardWidth, Constants.BoardHeight, Constants.StartLevel,
-                        Constants.StartScore, Constants.StartLinesCleared, Constants.BlockSprite, Constants.BoardRearWallSprite,
-                        Constants.BoardBottomSprite, Constants.TetrominoDropRate);
-                    gameService.StartGame(game, userService,boardOutputService,tetrominoService,currentTetrominoService,boardService);
+                    ICommand startGameCommand = new StartGameCommand(gameService,userService,boardOutputService,tetrominoService,currentTetrominoService,boardService);
+                    startGameCommand.Execute();
                     break;
                 case 2:
-                    menuService.ShowHowToPlay();
+                    ICommand howToPlayCommand = new HowToPlayCommand(menuService);
+                    howToPlayCommand.Execute();
                     break;
                 case 3:
-                    if (AuthenticationManager.IsAuthenticated())
-                    {
-                        menuService.ShowScoresForUser(AuthenticationManager.GetCurrentUser().Name);
-                    }
+                    ICommand showScoresCommand = new ShowScoresCommand(menuService);
+                    showScoresCommand.Execute();
                     break;
                 case 4:
-                    menuService.ShowTop10();
+                    ICommand showHighScoresCommand = new ShowHighScoresCommand(menuService);
+                    showHighScoresCommand.Execute();
                     break;
                 case 5:
-                    menuService.ShowCredits();
+                    ICommand showCreditsCommand = new ShowCreditsCommand(menuService);
+                    showCreditsCommand.Execute();
                     break;
                 case 6:
                     Environment.Exit(0);
