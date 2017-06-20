@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Tetris.Models.Contracts;
-using Tetris.Models.Tetrominoes;
-
-namespace Tetris.Models
+﻿namespace Tetris.Models
 {
-    public class CurrentTetromino :  ICurrentTetromino
+    using Tetris.Models.Contracts;
+
+    public class CurrentTetromino : ICurrentTetromino
     {
-        public CurrentTetromino(ITetromino tetromino, int tetrominoAxisX, int tetrominoAxisY )
+        public CurrentTetromino(ITetromino tetromino, int tetrominoAxisX, int tetrominoAxisY)
         {
             this.Tetromino = tetromino;
             this.Row = tetrominoAxisX;
@@ -28,6 +22,5 @@ namespace Tetris.Models
         public int Row { get; set; }
 
         public int Col { get; set; }
-
     }
 }

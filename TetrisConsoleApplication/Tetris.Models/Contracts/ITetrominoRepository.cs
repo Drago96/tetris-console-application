@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-
-namespace Tetris.Models.Contracts
+﻿namespace Tetris.Models.Contracts
 {
+    using System.Collections.Generic;
+
     public interface ITetrominoRepository
     {
         Queue<ITetromino> Tetrominoes { get; }
@@ -11,7 +11,5 @@ namespace Tetris.Models.Contracts
         ITetromino GetFirstElement();
 
         ITetromino PeekNextElement();
-
-        
     }
 }

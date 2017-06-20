@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Tetris.Models.Contracts
+﻿namespace Tetris.Models.Contracts
 {
     interface IScoreInfo
     {
@@ -13,5 +7,5 @@ namespace Tetris.Models.Contracts
         long Score { get; set; }
 
         int LinesCleared { get; set; }
-    } 
+    }
 }

@@ -1,11 +1,11 @@
-﻿using System;
-using System.Linq;
-using System.Reflection;
-using Tetris.Models.Contracts;
-using Tetris.Models.Enums;
-
-namespace Tetris.Models.Tetrominoes
+﻿namespace Tetris.Models.Tetrominoes
 {
+    using System;
+    using System.Linq;
+    using System.Reflection;
+    using Tetris.Models.Contracts;
+    using Tetris.Models.Enums;
+
     public class TetrominoFactory : ITetrominoFactory
     {
         private Random randomNumberGenerator;
@@ -13,25 +13,25 @@ namespace Tetris.Models.Tetrominoes
 
         public TetrominoFactory()
         {
-            randomNumberGenerator = new Random();
-            tetrominoTypes = Enum.GetValues(typeof(TetrominoType)).Cast<TetrominoType>().ToArray();
+            this.randomNumberGenerator = new Random();
+            this.tetrominoTypes = Enum.GetValues(typeof(TetrominoType)).Cast<TetrominoType>().ToArray();
         }
 
         public ITetromino CreateTetromino()
         {
-            TetrominoType type = GenerateRandomTetrominoType();
+            TetrominoType type = this.GenerateRandomTetrominoType();
 
-            var typeOfTetromino = Assembly.GetExecutingAssembly().GetTypes().FirstOrDefault(v => v.Name == type.ToString());
+            var typeOfTetromino = Assembly.GetExecutingAssembly().GetTypes()
+                .FirstOrDefault(v => v.Name == type.ToString());
 
-            ITetromino tetromino = (ITetromino)Activator.CreateInstance(typeOfTetromino);
+            ITetromino tetromino = (ITetromino) Activator.CreateInstance(typeOfTetromino);
 
             return tetromino;
         }
 
         private TetrominoType GenerateRandomTetrominoType()
         {
-            return tetrominoTypes[randomNumberGenerator.Next(0, tetrominoTypes.Length)];
+            return this.tetrominoTypes[this.randomNumberGenerator.Next(0, this.tetrominoTypes.Length)];
         }
-
     }
 }

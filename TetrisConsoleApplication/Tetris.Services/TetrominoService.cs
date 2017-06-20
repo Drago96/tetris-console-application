@@ -1,8 +1,7 @@
-﻿namespace Tetris.Services.Services
+﻿namespace Tetris.Services
 {
-    using Contracts;
-    using Models.Contracts;
-    using Utilities;
+    using Tetris.Models.Contracts;
+    using Tetris.Utilities;
 
     public class TetrominoService 
     {

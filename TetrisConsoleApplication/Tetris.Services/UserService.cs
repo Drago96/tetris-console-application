@@ -1,4 +1,4 @@
-﻿namespace Tetris.Services.Services
+﻿namespace Tetris.Services
 {
     using System;
     using System.Collections.Generic;

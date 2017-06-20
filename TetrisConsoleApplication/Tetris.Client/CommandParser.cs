@@ -1,29 +1,19 @@
-﻿using System.Linq;
-using Tetris.Client.Commands;
-using Tetris.Data;
-using Tetris.Models;
-using Tetris.Models.Contracts;
-using Tetris.Models.Entities;
-using Tetris.Services.Contracts;
-using Tetris.Utilities;
-
-namespace Tetris.Client
+﻿namespace Tetris.Client
 {
     using System;
-    using Contracts;
-    using Services;
-    using Services.IO;
-    using Services.Services;
+    using Tetris.Client.Commands;
+    using Tetris.Client.Contracts;
+    using Tetris.Services;
 
     public class CommandParser : ICommandParser
     {
-        private readonly MenuService menuService;
-        private readonly GameService gameService;
-        private readonly CurrentTetrominoService currentTetrominoService;
         private readonly BoardOutputService boardOutputService;
+        private readonly BoardService boardService;
+        private readonly CurrentTetrominoService currentTetrominoService;
+        private readonly GameService gameService;
+        private readonly MenuService menuService;
         private readonly TetrominoService tetrominoService;
         private readonly UserService userService;
-        private readonly BoardService boardService;
 
         public CommandParser()
         {
@@ -38,27 +28,29 @@ namespace Tetris.Client
         }
 
         public void ParseCommand(int action)
-        {          
+        {
             switch (action)
             {
                 case 1:
-                    ICommand startGameCommand = new StartGameCommand(gameService,userService,boardOutputService,tetrominoService,currentTetrominoService,boardService);
+                    ICommand startGameCommand = new StartGameCommand(this.gameService, this.userService,
+                        this.boardOutputService, this.tetrominoService, this.currentTetrominoService,
+                        this.boardService);
                     startGameCommand.Execute();
                     break;
                 case 2:
-                    ICommand howToPlayCommand = new HowToPlayCommand(menuService);
+                    ICommand howToPlayCommand = new HowToPlayCommand(this.menuService);
                     howToPlayCommand.Execute();
                     break;
                 case 3:
-                    ICommand showScoresCommand = new ShowScoresCommand(menuService);
+                    ICommand showScoresCommand = new ShowScoresCommand(this.menuService);
                     showScoresCommand.Execute();
                     break;
                 case 4:
-                    ICommand showHighScoresCommand = new ShowHighScoresCommand(menuService);
+                    ICommand showHighScoresCommand = new ShowHighScoresCommand(this.menuService);
                     showHighScoresCommand.Execute();
                     break;
                 case 5:
-                    ICommand showCreditsCommand = new ShowCreditsCommand(menuService);
+                    ICommand showCreditsCommand = new ShowCreditsCommand(this.menuService);
                     showCreditsCommand.Execute();
                     break;
                 case 6:
@@ -66,7 +58,5 @@ namespace Tetris.Client
                     break;
             }
         }
-
-     
     }
 }

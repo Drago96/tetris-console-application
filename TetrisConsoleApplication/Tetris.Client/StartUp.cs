@@ -1,12 +1,11 @@
-﻿using Tetris.Client.Contracts;
-using Tetris.Services;
-
-namespace Tetris.Client
+﻿namespace Tetris.Client
 {
+    using Tetris.Client.Contracts;
+
     class StartUp
     {
         static void Main(string[] args)
-        {    
+        {
             IEngine engine = new Engine();
             engine.Run();
         }

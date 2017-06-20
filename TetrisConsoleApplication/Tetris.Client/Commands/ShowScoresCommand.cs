@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Tetris.Client.Contracts;
-using Tetris.Services;
-using Tetris.Services.Services;
-
-namespace Tetris.Client.Commands
+﻿namespace Tetris.Client.Commands
 {
+    using Tetris.Client.Contracts;
+    using Tetris.Services;
+
     class ShowScoresCommand : ICommand
     {
         private readonly MenuService menuService;
@@ -22,7 +16,7 @@ namespace Tetris.Client.Commands
         {
             if (AuthenticationManager.IsAuthenticated())
             {
-                menuService.ShowScoresForUser(AuthenticationManager.GetCurrentUser().Name);
+                this.menuService.ShowScoresForUser(AuthenticationManager.GetCurrentUser().Name);
             }
         }
     }

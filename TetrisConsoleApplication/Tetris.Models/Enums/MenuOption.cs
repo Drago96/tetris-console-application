@@ -11,5 +11,4 @@
         [Description("Credits")] Credits,
         [Description("Exit game")] Quit
     }
-
 }

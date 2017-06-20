@@ -1,10 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-
-namespace Tetris.Models.Entities
+﻿namespace Tetris.Models.Entities
 {
     using System;
-    using Microsoft.Build.Framework;
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
 
     public class HighScore
     {
@@ -13,12 +11,12 @@ namespace Tetris.Models.Entities
 
         public DateTime Date { get; set; }
 
-        [Required]
+        [Microsoft.Build.Framework.Required]
         public long Points { get; set; }
 
         [ForeignKey("User")]
         public int UserId { get; set; }
-        
+
         public virtual User User { get; set; }
     }
 }

@@ -1,6 +1,4 @@
-﻿using System.Net.Configuration;
-
-namespace Tetris.Models.Contracts
+﻿namespace Tetris.Models.Contracts
 {
     public interface ITetromino : IGrid
     {

@@ -1,9 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace Tetris.Models.Entities
+﻿namespace Tetris.Models.Entities
 {
     using System.Collections.Generic;
-    using Microsoft.Build.Framework;
+    using System.ComponentModel.DataAnnotations;
 
     public class User
     {
@@ -24,7 +22,7 @@ namespace Tetris.Models.Entities
         [Key]
         public int Id { get; set; }
 
-        [Required]
+        [Microsoft.Build.Framework.Required]
         public string Name { get; set; }
 
         public virtual ICollection<HighScore> HighScores

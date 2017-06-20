@@ -1,8 +1,8 @@
-﻿using System;
-using Tetris.Services.Contracts;
-
-namespace Tetris.Services.IO
+﻿namespace Tetris.Services.IO
 {
+    using System;
+    using Tetris.Services.Contracts;
+
     public class ConsoleReader : IInputReader
     {
         public string ReadLine()

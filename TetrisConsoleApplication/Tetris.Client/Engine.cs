@@ -1,19 +1,9 @@
-﻿using System;
-using Tetris.Client.Contracts;
-using Tetris.Models;
-using Tetris.Models.Contracts;
-using Tetris.Services;
-using Tetris.Services.Contracts;
-using Tetris.Utilities;
-using System.Linq;
-using Tetris.Data;
-using Tetris.Models.Entities;
-using Tetris.Models.Enums;
-using Tetris.Services.IO;
-
-namespace Tetris.Client
+﻿namespace Tetris.Client
 {
-    using Services.Services;
+    using System;
+    using Tetris.Client.Contracts;
+    using Tetris.Models;
+    using Tetris.Services;
 
     public class Engine : IEngine
     {
@@ -26,7 +16,6 @@ namespace Tetris.Client
             this.menuService = new MenuService();
         }
 
-        
 
         public void Run()
         {
@@ -51,15 +40,12 @@ namespace Tetris.Client
                 }
                 else if (pressedKey.Key == ConsoleKey.Enter)
                 {
-                    commandParser.ParseCommand(menu.CurrentCursorPosition);
+                    this.commandParser.ParseCommand(menu.CurrentCursorPosition);
                 }
                 Console.Clear();
-                menuService.PrintMenuOptions(menu);
+                this.menuService.PrintMenuOptions(menu);
                 pressedKey = Console.ReadKey();
             }
-
         }
-
-        
     }
 }

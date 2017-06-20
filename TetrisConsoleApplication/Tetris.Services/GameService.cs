@@ -1,22 +1,18 @@
-﻿using System;
-using System.Runtime.Remoting.Activation;
-using Tetris.Models;
-using Tetris.Utilities;
-
-namespace Tetris.Services.Services
+﻿namespace Tetris.Services
 {
-    using Contracts;
-    using Models.Contracts;
+    using System;
+    using Tetris.Models.Contracts;
 
-    public class GameService 
+    public class GameService
     {
-        public void StartGame(IGame game, UserService userService, BoardOutputService boardOutputService, TetrominoService tetrominoService,CurrentTetrominoService currentTetrominoService,BoardService boardService)
+        public void StartGame(IGame game, UserService userService, BoardOutputService boardOutputService,
+            TetrominoService tetrominoService, CurrentTetrominoService currentTetrominoService,
+            BoardService boardService)
         {
             userService.LoginUser();
 
             ConsoleKeyInfo key = new ConsoleKeyInfo();
 
-           
 
             Console.CursorVisible = false;
             boardOutputService.InitializeBoard(game.Board, game.ScoreInfo,
@@ -25,7 +21,7 @@ namespace Tetris.Services.Services
             game.CurrentTetromino = currentTetrominoService.SpawnTetromino(
                 tetrominoService.GetNextTetromino(game.TetrominoRepository, game.TetrominoFactory), game.Board,
                 game.CurrentTetromino);
-            StartTimers(game);
+            this.StartTimers(game);
 
             while (true)
             {
@@ -49,35 +45,36 @@ namespace Tetris.Services.Services
                     {
                         game.CurrentTetromino =
                             currentTetrominoService.RotateTetromino(game.Board, game.CurrentTetromino);
-
                     }
                     else if (key.Key == ConsoleKey.DownArrow)
                     {
-                        game.CurrentTetromino = currentTetrominoService.MoveTetrominoDown(game.Board, game.CurrentTetromino);
-
+                        game.CurrentTetromino =
+                            currentTetrominoService.MoveTetrominoDown(game.Board, game.CurrentTetromino);
                     }
                     else if (key.Key == ConsoleKey.UpArrow)
                     {
                         while (game.CurrentTetromino != null)
                         {
-                            game.CurrentTetromino = currentTetrominoService.MoveTetrominoDown(game.Board, game.CurrentTetromino);
+                            game.CurrentTetromino =
+                                currentTetrominoService.MoveTetrominoDown(game.Board, game.CurrentTetromino);
                         }
                     }
 
                     boardOutputService.InitializeBoard(game.Board, game.ScoreInfo,
                         tetrominoService.PeekNextTetromino(game.TetrominoRepository, game.TetrominoFactory));
-
                 }
 
                 if (game.DropTimer.ElapsedMilliseconds > game.TetrominoDropRate)
                 {
-                    game.CurrentTetromino = currentTetrominoService.MoveTetrominoDown(game.Board, game.CurrentTetromino);
+                    game.CurrentTetromino =
+                        currentTetrominoService.MoveTetrominoDown(game.Board, game.CurrentTetromino);
                     if (game.CurrentTetromino == null)
                     {
                         int linesCleared = boardService.UpdateBoard(game.Board);
-                        UpdateScoreInfo(game, linesCleared);
+                        this.UpdateScoreInfo(game, linesCleared);
                         game.CurrentTetromino = currentTetrominoService.SpawnTetromino(
-                            tetrominoService.GetNextTetromino(game.TetrominoRepository, game.TetrominoFactory), game.Board,
+                            tetrominoService.GetNextTetromino(game.TetrominoRepository, game.TetrominoFactory),
+                            game.Board,
                             game.CurrentTetromino);
                         if (game.CurrentTetromino == null)
                         {
@@ -92,8 +89,6 @@ namespace Tetris.Services.Services
                         tetrominoService.PeekNextTetromino(game.TetrominoRepository, game.TetrominoFactory));
                     game.DropTimer.Restart();
                 }
-
-
             }
         }
 
@@ -113,6 +108,5 @@ namespace Tetris.Services.Services
             }
             game.ScoreInfo.LinesCleared += lines;
         }
-        
     }
 }

@@ -1,44 +1,43 @@
-﻿namespace Tetris.Services.Services
+﻿namespace Tetris.Services
 {
     using System;
-    using Contracts;
-    using Models;
-    using Models.Contracts;
+    using Tetris.Models;
+    using Tetris.Models.Contracts;
 
-    public class CurrentTetrominoService 
+    public class CurrentTetrominoService
     {
         public ICurrentTetromino RotateTetromino(IBoard board, ICurrentTetromino currentTetromino)
         {
-            if (IsRotatePossible(board, currentTetromino))
+            if (this.IsRotatePossible(board, currentTetromino))
             {
-                ClearTetromino(currentTetromino, board);
+                this.ClearTetromino(currentTetromino, board);
                 currentTetromino.Tetromino.Rotate();
-                RespawnTetromino(currentTetromino, board);
+                this.RespawnTetromino(currentTetromino, board);
                 return currentTetromino;
             }
-            if (IsTetrominoMoveRightPossible(board, currentTetromino))
+            if (this.IsTetrominoMoveRightPossible(board, currentTetromino))
             {
-                MoveTetrominoRight(board, currentTetromino);
-                if (IsRotatePossible(board, currentTetromino))
+                this.MoveTetrominoRight(board, currentTetromino);
+                if (this.IsRotatePossible(board, currentTetromino))
                 {
-                    ClearTetromino(currentTetromino, board);
+                    this.ClearTetromino(currentTetromino, board);
                     currentTetromino.Tetromino.Rotate();
-                    RespawnTetromino(currentTetromino, board);
+                    this.RespawnTetromino(currentTetromino, board);
                     return currentTetromino;
                 }
-                MoveTetrominoLeft(board, currentTetromino);
+                this.MoveTetrominoLeft(board, currentTetromino);
             }
-            if (IsTetrominoMoveLeftPossible(board, currentTetromino))
+            if (this.IsTetrominoMoveLeftPossible(board, currentTetromino))
             {
-                MoveTetrominoLeft(board, currentTetromino);
-                if (IsRotatePossible(board, currentTetromino))
+                this.MoveTetrominoLeft(board, currentTetromino);
+                if (this.IsRotatePossible(board, currentTetromino))
                 {
-                    ClearTetromino(currentTetromino, board);
+                    this.ClearTetromino(currentTetromino, board);
                     currentTetromino.Tetromino.Rotate();
-                    RespawnTetromino(currentTetromino, board);
+                    this.RespawnTetromino(currentTetromino, board);
                     return currentTetromino;
                 }
-                MoveTetrominoRight(board, currentTetromino);
+                this.MoveTetrominoRight(board, currentTetromino);
             }
             return currentTetromino;
         }
@@ -48,15 +47,16 @@
             byte[,] nextRotation = currentTetromino.Tetromino.GetNextRotation();
             for (int i = currentTetromino.Row; i < currentTetromino.Row + currentTetromino.Blocks.GetLength(0); i++)
             {
-                for (int j = currentTetromino.Col;j < currentTetromino.Col + currentTetromino.Blocks.GetLength(1);j++)
+                for (int j = currentTetromino.Col; j < currentTetromino.Col + currentTetromino.Blocks.GetLength(1); j++)
                 {
-                    if (!IsPointInBoardRange(board, i, j) && nextRotation[i - currentTetromino.Row,j - currentTetromino.Col] == 1)
+                    if (!this.IsPointInBoardRange(board, i, j) &&
+                        nextRotation[i - currentTetromino.Row, j - currentTetromino.Col] == 1)
                     {
                         return false;
                     }
-                    if (IsPointInBoardRange(board, i, j) &&
+                    if (this.IsPointInBoardRange(board, i, j) &&
                         nextRotation[i - currentTetromino.Row, j - currentTetromino.Col] == 1 &&
-                        currentTetromino.Blocks[i - currentTetromino.Row,j - currentTetromino.Col] == 0 &&
+                        currentTetromino.Blocks[i - currentTetromino.Row, j - currentTetromino.Col] == 0 &&
                         board.Blocks[i, j] == 1)
                     {
                         return false;
@@ -65,14 +65,14 @@
             }
             return true;
         }
-            
+
         public ICurrentTetromino MoveTetrominoRight(IBoard board, ICurrentTetromino currentTetromino)
         {
-            if (IsTetrominoMoveRightPossible(board, currentTetromino))
+            if (this.IsTetrominoMoveRightPossible(board, currentTetromino))
             {
-                ClearTetromino(currentTetromino,board);
+                this.ClearTetromino(currentTetromino, board);
                 currentTetromino.Col++;
-                RespawnTetromino(currentTetromino,board);
+                this.RespawnTetromino(currentTetromino, board);
             }
 
             return currentTetromino;
@@ -84,30 +84,33 @@
             {
                 return false;
             }
-            int blockToCheckY = GetRightSideColumnToCheck(currentTetromino);
-            if (!IsPointInBoardRange(board, currentTetromino.Row, blockToCheckY))
+            int blockToCheckY = this.GetRightSideColumnToCheck(currentTetromino);
+            if (!this.IsPointInBoardRange(board, currentTetromino.Row, blockToCheckY))
             {
                 return false;
             }
-            ClearTetromino(currentTetromino, board);
+            this.ClearTetromino(currentTetromino, board);
             for (int i = currentTetromino.Row; i < currentTetromino.Row + currentTetromino.Blocks.GetLength(0); i++)
             {
-                for (int j = blockToCheckY -1 ; j >= currentTetromino.Col ; j--)
+                for (int j = blockToCheckY - 1; j >= currentTetromino.Col; j--)
                 {
-                    if (currentTetromino.Blocks[i - currentTetromino.Row, j - currentTetromino.Col] == 1 && board.Blocks[i, j + 1] == 1)
+                    if (currentTetromino.Blocks[i - currentTetromino.Row, j - currentTetromino.Col] == 1 &&
+                        board.Blocks[i, j + 1] == 1)
                     {
-                        RespawnTetromino(currentTetromino, board);
+                        this.RespawnTetromino(currentTetromino, board);
                         return false;
                     }
                 }
             }
-            RespawnTetromino(currentTetromino, board);
+            this.RespawnTetromino(currentTetromino, board);
             return true;
         }
 
         private int GetRightSideColumnToCheck(ICurrentTetromino currentTetromino)
         {
-            for (int i = currentTetromino.Col + currentTetromino.Blocks.GetLength(1) - 1; i >= currentTetromino.Col; i--)
+            for (int i = currentTetromino.Col + currentTetromino.Blocks.GetLength(1) - 1;
+                i >= currentTetromino.Col;
+                i--)
             {
                 for (int j = currentTetromino.Row; j < currentTetromino.Row + currentTetromino.Blocks.GetLength(0); j++)
                 {
@@ -122,12 +125,11 @@
 
         public ICurrentTetromino MoveTetrominoLeft(IBoard board, ICurrentTetromino currentTetromino)
         {
-            if (IsTetrominoMoveLeftPossible(board, currentTetromino))
+            if (this.IsTetrominoMoveLeftPossible(board, currentTetromino))
             {
-                ClearTetromino(currentTetromino,board);
+                this.ClearTetromino(currentTetromino, board);
                 currentTetromino.Col--;
-                RespawnTetromino(currentTetromino,board);
-                
+                this.RespawnTetromino(currentTetromino, board);
             }
             return currentTetromino;
         }
@@ -138,24 +140,25 @@
             {
                 return false;
             }
-            int blockToCheckY = GetLeftSideColumnToCheck(currentTetromino);
-            if (!IsPointInBoardRange(board, currentTetromino.Row, blockToCheckY))
+            int blockToCheckY = this.GetLeftSideColumnToCheck(currentTetromino);
+            if (!this.IsPointInBoardRange(board, currentTetromino.Row, blockToCheckY))
             {
                 return false;
             }
-            ClearTetromino(currentTetromino,board);
+            this.ClearTetromino(currentTetromino, board);
             for (int i = currentTetromino.Row; i < currentTetromino.Row + currentTetromino.Blocks.GetLength(0); i++)
             {
                 for (int j = blockToCheckY; j < currentTetromino.Col + currentTetromino.Blocks.GetLength(1) - 1; j++)
                 {
-                    if (currentTetromino.Blocks[i - currentTetromino.Row, j - currentTetromino.Col + 1] == 1 && board.Blocks[i, j] == 1)
+                    if (currentTetromino.Blocks[i - currentTetromino.Row, j - currentTetromino.Col + 1] == 1 &&
+                        board.Blocks[i, j] == 1)
                     {
-                        RespawnTetromino(currentTetromino, board);
+                        this.RespawnTetromino(currentTetromino, board);
                         return false;
                     }
                 }
             }
-            RespawnTetromino(currentTetromino, board);
+            this.RespawnTetromino(currentTetromino, board);
             return true;
         }
 
@@ -170,25 +173,23 @@
                         return i - 1;
                     }
                 }
-                
             }
             return -1;
         }
 
-        public ICurrentTetromino MoveTetrominoDown(IBoard board,ICurrentTetromino currentTetromino)
+        public ICurrentTetromino MoveTetrominoDown(IBoard board, ICurrentTetromino currentTetromino)
         {
-            if (IsTetrominoMoveDownPossible(board,currentTetromino))
+            if (this.IsTetrominoMoveDownPossible(board, currentTetromino))
             {
-                ClearTetromino(currentTetromino,board);
+                this.ClearTetromino(currentTetromino, board);
                 currentTetromino.Row++;
-                RespawnTetromino(currentTetromino, board);
+                this.RespawnTetromino(currentTetromino, board);
                 return currentTetromino;
             }
             else
             {
                 return null;
             }
-            
         }
 
         private bool IsTetrominoMoveDownPossible(IBoard board, ICurrentTetromino currentTetromino)
@@ -197,46 +198,50 @@
             {
                 return false;
             }
-            int blockToCheckX = GetRowToCheck(currentTetromino);
-            if (!IsPointInBoardRange(board, blockToCheckX, 0))
+            int blockToCheckX = this.GetRowToCheck(currentTetromino);
+            if (!this.IsPointInBoardRange(board, blockToCheckX, 0))
             {
                 return false;
             }
-            ClearTetromino(currentTetromino,board);
+            this.ClearTetromino(currentTetromino, board);
             for (int i = currentTetromino.Row; i < blockToCheckX; i++)
             {
                 for (int j = currentTetromino.Col; j < currentTetromino.Col + currentTetromino.Blocks.GetLength(1); j++)
-                {                  
-                        if (currentTetromino.Blocks[i - currentTetromino.Row,   j - currentTetromino.Col] == 1 && board.Blocks[i+ 1,j] == 1)
-                        {
-                            RespawnTetromino(currentTetromino,board);
-                            return false;
-                        }                   
+                {
+                    if (currentTetromino.Blocks[i - currentTetromino.Row, j - currentTetromino.Col] == 1 &&
+                        board.Blocks[i + 1, j] == 1)
+                    {
+                        this.RespawnTetromino(currentTetromino, board);
+                        return false;
+                    }
                 }
             }
-            RespawnTetromino(currentTetromino, board);
+            this.RespawnTetromino(currentTetromino, board);
             return true;
         }
 
         private int GetRowToCheck(ICurrentTetromino currentTetromino)
         {
-            for (int i = currentTetromino.Row + currentTetromino.Blocks.GetLength(0) - 1; i >= currentTetromino.Row; i--)
+            for (int i = currentTetromino.Row + currentTetromino.Blocks.GetLength(0) - 1;
+                i >= currentTetromino.Row;
+                i--)
             {
                 for (int j = currentTetromino.Col; j < currentTetromino.Col + currentTetromino.Blocks.GetLength(1); j++)
                 {
                     if (currentTetromino.Blocks[i - currentTetromino.Row, j - currentTetromino.Col] == 1)
                     {
-                        return  i + 1;
+                        return i + 1;
                     }
                 }
             }
             return -1;
         }
 
-        public ICurrentTetromino SpawnTetromino(ITetromino tetromino, IBoard board,ICurrentTetromino currentTetromino)
+        public ICurrentTetromino SpawnTetromino(ITetromino tetromino, IBoard board, ICurrentTetromino currentTetromino)
         {
-            int tetrominoSpawnPoint = (int)(board.Width / 2 - Math.Ceiling((double)tetromino.Blocks.GetLength(1) / 2));
-            if (this.IsSpawnPossible(tetromino,board, tetrominoSpawnPoint,currentTetromino))
+            int tetrominoSpawnPoint =
+                (int) (board.Width / 2 - Math.Ceiling((double) tetromino.Blocks.GetLength(1) / 2));
+            if (this.IsSpawnPossible(tetromino, board, tetrominoSpawnPoint, currentTetromino))
             {
                 for (int i = 0; i < tetromino.Blocks.GetLength(0); i++)
                 {
@@ -248,15 +253,15 @@
                         }
                     }
                 }
-                return new CurrentTetromino(tetromino,0,tetrominoSpawnPoint);
+                return new CurrentTetromino(tetromino, 0, tetrominoSpawnPoint);
             }
 
             return currentTetromino;
         }
 
-        private bool IsSpawnPossible(ITetromino tetromino, IBoard board,  int tetrominoSpawnPoint, ICurrentTetromino currentTetromino)
+        private bool IsSpawnPossible(ITetromino tetromino, IBoard board, int tetrominoSpawnPoint,
+            ICurrentTetromino currentTetromino)
         {
-            
             for (int i = 0; i < tetromino.Blocks.GetLength(0); i++)
             {
                 for (int j = tetrominoSpawnPoint; j < tetrominoSpawnPoint + tetromino.Blocks.GetLength(1); j++)
@@ -276,9 +281,9 @@
             {
                 for (int i = currentTetromino.Col; i < currentTetromino.Col + currentTetromino.Blocks.GetLength(1); i++)
                 {
-                    if (IsPointInBoardRange(board, j, i))
+                    if (this.IsPointInBoardRange(board, j, i))
                     {
-                        if (currentTetromino.Blocks[j - currentTetromino.Row,i - currentTetromino.Col] == 1)
+                        if (currentTetromino.Blocks[j - currentTetromino.Row, i - currentTetromino.Col] == 1)
                         {
                             board.Blocks[j, i] = 0;
                         }
@@ -293,11 +298,12 @@
             {
                 for (int j = currentTetromino.Col; j < currentTetromino.Col + currentTetromino.Blocks.GetLength(1); j++)
                 {
-                    if (IsPointInBoardRange(board,i,j) && board.Blocks[i, j] == 0 && currentTetromino.Blocks[i - currentTetromino.Row, j - currentTetromino.Col] == 1)
+                    if (this.IsPointInBoardRange(board, i, j) && board.Blocks[i, j] == 0 &&
+                        currentTetromino.Blocks[i - currentTetromino.Row, j - currentTetromino.Col] == 1)
                     {
-                        board.Blocks[i, j] = currentTetromino.Blocks[i - currentTetromino.Row, j - currentTetromino.Col];
+                        board.Blocks[i, j] =
+                            currentTetromino.Blocks[i - currentTetromino.Row, j - currentTetromino.Col];
                     }
-
                 }
             }
         }
@@ -314,7 +320,5 @@
             }
             return true;
         }
-
-        
     }
 }
