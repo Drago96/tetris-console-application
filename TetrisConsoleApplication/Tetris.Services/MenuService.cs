@@ -117,7 +117,6 @@
             this.consoleWriter.PrintLine(Constants.UpArrow);
             this.consoleWriter.PrintLine(Constants.DownArrow);
             this.consoleWriter.PrintLine(Constants.Space);
-            Console.OutputEncoding = Encoding.ASCII;
             this.consoleWriter.PrintLine(Constants.EscapeToReturnToPreviousMenu);
             while (Console.ReadKey().Key != ConsoleKey.Escape)
             {
