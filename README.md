@@ -1,6 +1,6 @@
 Tetris
 ======
-<p>This console application is the developed during the SoftUni C# Advanced Module by team "Arpas"</p>
+<p>This console application is the developed during the SoftUni C# Advanced Module by team "Aphras"</p>
 <p><strong>Goal</strong></p>
 <p>Score as much points as possible, so your name will stay in top 10 forever J</p>
 <p><a href="https://en.wikipedia.org/wiki/Tetris">Description and Rules on Wikipedia</a></p>
