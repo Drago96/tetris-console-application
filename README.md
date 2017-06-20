@@ -1,19 +1,18 @@
 Tetris
 ======
-<p>This console application is the developed during the SoftUni C# Advanced Module by team "Aphras"</p>
+<p>This console application is developed during the SoftUni C# Advanced Module by team "Aphras"</p>
 <p><strong>Goal</strong></p>
-<p>Score as much points as possible, so your name will stay in top 10 forever J</p>
+<p>Score as many points as possible, so you will leave your mark on the scoreboards forever!</p>
 <p><a href="https://en.wikipedia.org/wiki/Tetris">Description and Rules on Wikipedia</a></p>
 
 Overview
 ======
 
 <ul>
-<li>Game menu</li>
-<li>Tetromino Pieces: I, J, L, O, S, T, Z</li>
-<li>Persistence for player names and player points</li>
-<li>High scores of a user</li>
-<li>Top 10 High scores</li>
+<li>The aim of this project is to develop a fully functional Tetris game.</li>
+<li>The application features an interactive menu in order to ease navigation.</li>
+<li>The game includes user high scores, as well as dynamic gameplay - as your score ramps up, the dificulty will increase as well.</li>
+<li>This project is built using C# and the .NET libraries.</li>
 </ul>
 
 How to Play
@@ -31,9 +30,8 @@ How to Play
 Screen Shots
 ======
 
-<p align="center"><img src="https://github.com/Drago96/tetris-console-application/blob/master/TetrisConsoleApplication/Screenshots/0TetrisGame.JPG"></p>
-<p align="center"><img src="https://github.com/Drago96/tetris-console-application/blob/master/TetrisConsoleApplication/Screenshots/1TetrisMenu.JPG"></p>
-<p align="center"><img src="https://github.com/Drago96/tetris-console-application/blob/master/TetrisConsoleApplication/Screenshots/2TetrisHowToPlay.JPG"></p>
+<p align="center"><img src="https://github.com/Drago96/tetris-console-application/blob/master/TetrisConsoleApplication/Screenshots/0TetrisGame.JPG" width="400" height="350"></p>
+<p align="center"><img src="https://github.com/Drago96/tetris-console-application/blob/master/TetrisConsoleApplication/Screenshots/1TetrisMenu.JPG" width="400" height="350"></p>
 
 Team members
 ======
