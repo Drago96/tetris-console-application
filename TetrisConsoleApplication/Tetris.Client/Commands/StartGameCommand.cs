@@ -52,6 +52,8 @@ namespace Tetris.Client.Commands
             Console.CursorVisible = false;
             ConsoleKeyInfo key = new ConsoleKeyInfo();
             this.InitializeGame(game);
+            game.CurrentTetromino = currentTetrominoService.SpawnTetromino(
+                tetrominoService.GetNextTetromino(game.TetrominoRepository, game.TetrominoFactory), game.Board,game.CurrentTetromino);
             while (true)
             {
                 this.ProcessNextMove(game, key);
@@ -62,6 +64,9 @@ namespace Tetris.Client.Commands
                     if (game.CurrentTetromino == null)
                     {
                         this.UpdateGameState(game);
+                        game.CurrentTetromino = currentTetrominoService.SpawnTetromino(
+                            tetrominoService.GetNextTetromino(game.TetrominoRepository, game.TetrominoFactory),
+                            game.Board,game.CurrentTetromino);
                         if (game.CurrentTetromino == null)
                         {
                             this.AddScoreToDatabase(game);
@@ -81,10 +86,6 @@ namespace Tetris.Client.Commands
         {
             int linesCleared = boardService.UpdateBoard(game.Board);
             gameService.UpdateScoreInfo(game, linesCleared);
-            game.CurrentTetromino = currentTetrominoService.SpawnTetromino(
-                tetrominoService.GetNextTetromino(game.TetrominoRepository, game.TetrominoFactory),
-                game.Board,
-                game.CurrentTetromino);
         }
 
         private void InitializeGame(IGame game)
@@ -93,9 +94,6 @@ namespace Tetris.Client.Commands
                 tetrominoService.PeekNextTetromino(game.TetrominoRepository, game.TetrominoFactory));
             boardOutputService.StartGamePrompt(game);
             gameService.StartTimers(game);
-            game.CurrentTetromino = currentTetrominoService.SpawnTetromino(
-                tetrominoService.GetNextTetromino(game.TetrominoRepository, game.TetrominoFactory), game.Board,
-                game.CurrentTetromino);
         }
 
         private void ProcessNextMove(IGame game, ConsoleKeyInfo key)
