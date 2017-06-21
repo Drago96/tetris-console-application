@@ -5,11 +5,10 @@
 
     public class GameService
     {
-        public void StartGame(IGame game, UserService userService, BoardOutputService boardOutputService,
-            TetrominoService tetrominoService, CurrentTetrominoService currentTetrominoService,
+        public void StartGame(IGame game, BoardOutputService boardOutputService,
+            TetrominoService tetrominoService,UserService userService, CurrentTetrominoService currentTetrominoService,
             BoardService boardService)
         {
-            userService.LoginUser();
 
             ConsoleKeyInfo key = new ConsoleKeyInfo();
 

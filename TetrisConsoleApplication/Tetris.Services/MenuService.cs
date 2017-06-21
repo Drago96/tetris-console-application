@@ -64,7 +64,7 @@ namespace Tetris.Services
             
                 if (highscores.Count > 0)
                 {
-                    this.consoleWriter.PrintLine(Constants.Top10);
+                    this.consoleWriter.PrintLine(Constants.Highscores);
                     highscores.ToList().ForEach(h => Console.WriteLine($"{h.User.Name} - {h.Points}"));
                 }
                 else
@@ -101,7 +101,7 @@ namespace Tetris.Services
 
         public void ShowCredits()
         {
-            this.consoleWriter.PrintLine("Drago96\nhopeee\nIliyanPopov\ndimpeev\nNikola");
+            this.consoleWriter.PrintLine(Constants.Credits);
             this.consoleWriter.PrintLine(Constants.EscapeToReturnToPreviousMenu);
             while (Console.ReadKey().Key != ConsoleKey.Escape)
             {

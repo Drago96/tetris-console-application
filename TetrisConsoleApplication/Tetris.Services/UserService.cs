@@ -69,34 +69,28 @@
             }
         }
 
-        public void LoginUser()
+        public void LoginUser(string username)
         {
-            if (!AuthenticationManager.IsAuthenticated())
-            {
-                Console.WriteLine("Please enter your name... (Press ENTER if you want to play anonimously)");
-                var username = Console.ReadLine();
 
-                User user = new User()
-                {
-                    Name = username
-                };
+           User user = new User()
+           {
+               Name = username
+           };
 
-                using (var context = new TetrisDbContext())
-                {
-                    if (context.Users.Any(u => u.Name == username))
-                    {
-                        var userFromDb = context.Users.First(u => u.Name == username);
-                        AuthenticationManager.Login(userFromDb);
-                    }
-                    else
-                    {
-                        context.Users.Add(user);
-                        context.SaveChanges();
-                        AuthenticationManager.Login(user);
-                    }
-                }
-            }
-            Console.Clear();
+           using (var context = new TetrisDbContext())
+           {
+               if (context.Users.Any(u => u.Name == username))
+               {
+                   var userFromDb = context.Users.First(u => u.Name == username);
+                   AuthenticationManager.Login(userFromDb);
+               }
+               else
+               {
+                   context.Users.Add(user);
+                   context.SaveChanges();
+                   AuthenticationManager.Login(user);
+               }
+           }      
         }
     }
 }

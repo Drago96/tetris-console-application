@@ -1,4 +1,6 @@
-﻿namespace Tetris.Client.Commands
+﻿using System;
+
+namespace Tetris.Client.Commands
 {
     using Tetris.Client.Contracts;
     using Tetris.Models;
@@ -29,10 +31,14 @@
 
         public void Execute()
         {
+            Console.WriteLine(Constants.EnterNamePrompt);
+            var username = Console.ReadLine();
+            userService.LoginUser(username);
+            Console.Clear();
             IGame game = new Game(Constants.BoardWidth, Constants.BoardHeight, Constants.StartLevel,
                 Constants.StartScore, Constants.StartLinesCleared, Constants.BlockSprite, Constants.BoardRearWallSprite,
                 Constants.BoardBottomSprite, Constants.TetrominoDropRate);
-            this.gameService.StartGame(game, this.userService, this.boardOutputService, this.tetrominoService,
+            this.gameService.StartGame(game, this.boardOutputService, this.tetrominoService, this.userService,
                 this.currentTetrominoService, this.boardService);
         }
     }
