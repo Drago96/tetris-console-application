@@ -53,20 +53,25 @@ namespace Tetris.Services
             return enumValue.ToString();
         }
 
-        public void ShowHighScores(ICollection<HighScore> highscores)
+        public void ShowHighScores(ICollection<HighScore> highScores)
         {
-            
-                if (highscores.Count > 0)
+                StringBuilder highScoresStringBuilder = new StringBuilder();
+                if (highScores.Count > 0)
                 {
-                    ConsoleWriter.WriteLine(Constants.Highscores);
-                    highscores.ToList().ForEach(h => ConsoleWriter.WriteLine($"{h.User.Name} - {h.Points}"));
+                    highScoresStringBuilder.AppendLine(Constants.Highscores);
+                    highScoresStringBuilder.AppendLine(Constants.BestHighScoresProperties);
+                    foreach (var h in highScores)
+                    {
+                        highScoresStringBuilder.AppendLine($"{h.User.Name,-10} | {h.Points,-5}");
+                    }
                 }
                 else
                 {
-                    ConsoleWriter.WriteLine(Constants.NoScoresToShow);
+                    highScoresStringBuilder.AppendLine(Constants.NoScoresToShow);
                 }
-                ConsoleWriter.WriteEmptyLine();
-                ConsoleWriter.WriteLine(Constants.EscapeToReturnToPreviousMenu);
+                highScoresStringBuilder.AppendLine();
+                highScoresStringBuilder.AppendLine(Constants.EscapeToReturnToPreviousMenu);
+                ConsoleWriter.WriteLine(highScoresStringBuilder.ToString());
                 while (Console.ReadKey().Key != ConsoleKey.Escape)
                 {
                 }
@@ -78,42 +83,39 @@ namespace Tetris.Services
             if (!userHighscores.Any())
             {
                 ConsoleWriter.WriteLine(Constants.NoSuchUserOrNoScores);
+                return;
             }
-            else
+            StringBuilder highScores = new StringBuilder();
+            highScores.AppendLine(Constants.HighScoreProperties);
+            foreach (var score in userHighscores.OrderByDescending(s => s.Points))
             {
-                foreach (var score in userHighscores.OrderByDescending(s => s.Points))
-                {
-                    ConsoleWriter.WriteLine($"{score.Points} - {score.Date:d}");
-                }
+                highScores.AppendLine($"{score.Points,-5} | {score.Date,-10:d}");
             }
-            ConsoleWriter.WriteEmptyLine();
-            ConsoleWriter.WriteLine(Constants.EscapeToReturnToPreviousMenu);
-            while (Console.ReadKey().Key != ConsoleKey.Escape)
-            {
-            }
+            highScores.AppendLine();
+            highScores.AppendLine(Constants.EscapeToReturnToPreviousMenu);
+            ConsoleWriter.WriteLine(highScores.ToString());
+            
         }
 
         public void ShowCredits()
         {
-            ConsoleWriter.WriteLine(Constants.Credits);
-            ConsoleWriter.WriteLine(Constants.EscapeToReturnToPreviousMenu);
-            while (Console.ReadKey().Key != ConsoleKey.Escape)
-            {
-            }
+            StringBuilder showCredits = new StringBuilder();
+            showCredits.AppendLine(Constants.Credits);
+            showCredits.AppendLine(Constants.EscapeToReturnToPreviousMenu);
+            ConsoleWriter.WriteLine(showCredits.ToString());
         }
 
         public void ShowHowToPlay()
         {
             Console.OutputEncoding = Encoding.UTF8;
-            ConsoleWriter.WriteLine(Constants.LeftArrow);
-            ConsoleWriter.WriteLine(Constants.RightArrow);
-            ConsoleWriter.WriteLine(Constants.UpArrow);
-            ConsoleWriter.WriteLine(Constants.DownArrow);
-            ConsoleWriter.WriteLine(Constants.Space);
-            ConsoleWriter.WriteLine(Constants.EscapeToReturnToPreviousMenu);
-            while (Console.ReadKey().Key != ConsoleKey.Escape)
-            {
-            }
+            StringBuilder howToPlay = new StringBuilder();
+            howToPlay.AppendLine(Constants.LeftArrow);
+            howToPlay.AppendLine(Constants.RightArrow);
+            howToPlay.AppendLine(Constants.UpArrow);
+            howToPlay.AppendLine(Constants.DownArrow);
+            howToPlay.AppendLine(Constants.Space);
+            howToPlay.AppendLine(Constants.EscapeToReturnToPreviousMenu);
+            ConsoleWriter.WriteLine(howToPlay.ToString());
         }
     }
 }

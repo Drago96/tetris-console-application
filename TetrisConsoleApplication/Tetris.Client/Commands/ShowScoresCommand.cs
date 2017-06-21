@@ -26,6 +26,9 @@ namespace Tetris.Client.Commands
             var username = ConsoleReader.ReadLine();
             ICollection<HighScore> highScores = userService.GetScoresByUsername(username);
             this.menuService.ShowScoresForUser(username,highScores);
+            while (Console.ReadKey().Key != ConsoleKey.Escape)
+            {
+            }
         }
     }
 }

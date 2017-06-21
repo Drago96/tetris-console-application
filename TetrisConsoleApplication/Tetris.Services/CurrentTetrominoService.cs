@@ -241,7 +241,7 @@
         {
             int tetrominoSpawnPoint =
                 (int) (board.Width / 2 - Math.Ceiling((double) tetromino.Blocks.GetLength(1) / 2));
-            if (this.IsSpawnPossible(tetromino, board, tetrominoSpawnPoint, currentTetromino))
+            if (this.IsSpawnPossible(tetromino, board, tetrominoSpawnPoint))
             {
                 for (int i = 0; i < tetromino.Blocks.GetLength(0); i++)
                 {
@@ -259,8 +259,7 @@
             return currentTetromino;
         }
 
-        private bool IsSpawnPossible(ITetromino tetromino, IBoard board, int tetrominoSpawnPoint,
-            ICurrentTetromino currentTetromino)
+        private bool IsSpawnPossible(ITetromino tetromino, IBoard board, int tetrominoSpawnPoint)
         {
             for (int i = 0; i < tetromino.Blocks.GetLength(0); i++)
             {

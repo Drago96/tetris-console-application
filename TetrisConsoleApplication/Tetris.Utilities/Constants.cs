@@ -47,5 +47,8 @@
 
         public const int TetrominoDropRate = 250;
 
+        public const string HighScoreProperties = "Score | Date    ";
+        public const string BestHighScoresProperties = "Name       | Score";
+
     }
 }

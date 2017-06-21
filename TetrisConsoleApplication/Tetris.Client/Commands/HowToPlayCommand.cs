@@ -1,4 +1,6 @@
-﻿namespace Tetris.Client.Commands
+﻿using System;
+
+namespace Tetris.Client.Commands
 {
     using Tetris.Client.Contracts;
     using Tetris.Services;
@@ -15,6 +17,9 @@
         public void Execute()
         {
             this.menuService.ShowHowToPlay();
+            while (Console.ReadKey().Key != ConsoleKey.Escape)
+            {
+            }
         }
     }
 }
