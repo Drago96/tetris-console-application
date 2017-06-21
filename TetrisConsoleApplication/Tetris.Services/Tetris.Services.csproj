@@ -52,6 +52,7 @@
     <Compile Include="CurrentTetrominoService.cs" />
     <Compile Include="Contracts\IInputReader.cs" />
     <Compile Include="Contracts\IOutputWriter.cs" />
+    <Compile Include="HighScoreService.cs" />
     <Compile Include="IO\ConsoleReader.cs" />
     <Compile Include="IO\ConsoleWriter.cs" />
     <Compile Include="MenuService.cs" />

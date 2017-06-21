@@ -1,4 +1,7 @@
-﻿namespace Tetris.Services
+﻿using System.Collections.Generic;
+using Tetris.Models.Entities;
+
+namespace Tetris.Services
 {
     using System;
     using System.ComponentModel;
@@ -13,12 +16,10 @@
     public class MenuService
     {
         private readonly ConsoleWriter consoleWriter;
-        private readonly ConsoleReader consoleReader;
 
         public MenuService()
         {
             this.consoleWriter = new ConsoleWriter();
-            this.consoleReader = new ConsoleReader();
         }
 
         public void PrintMenuOptions(Menu menu)
@@ -58,15 +59,13 @@
             return enumValue.ToString();
         }
 
-        public void ShowHighScores()
+        public void ShowHighScores(ICollection<HighScore> highscores)
         {
-            using (var context = new TetrisDbContext())
-            {
-                var highscores = context.HighScores.OrderByDescending(h => h.Points).Take(10).ToList();
+            
                 if (highscores.Count > 0)
                 {
                     this.consoleWriter.PrintLine(Constants.Top10);
-                    highscores.ForEach(h => Console.WriteLine($"{h.User.Name} - {h.Points}"));
+                    highscores.ToList().ForEach(h => Console.WriteLine($"{h.User.Name} - {h.Points}"));
                 }
                 else
                 {
@@ -77,15 +76,11 @@
                 while (Console.ReadKey().Key != ConsoleKey.Escape)
                 {
                 }
-            }
+            
         }
 
-        public void ShowScoresForUser()
+        public void ShowScoresForUser(string username, ICollection<HighScore> userHighscores)
         {
-            this.consoleWriter.PrintLine(Constants.PleaseEnterUsername);
-            var username = consoleReader.ReadLine();
-            var userService = new UserService();
-            var userHighscores = userService.GetScoresByUsername(username);
             if (!userHighscores.Any())
             {
                 this.consoleWriter.PrintLine(Constants.NoSuchUserOrNoScores);

@@ -14,6 +14,7 @@
         private readonly MenuService menuService;
         private readonly TetrominoService tetrominoService;
         private readonly UserService userService;
+        private readonly HighScoreService highScoreService;
 
         public CommandParser()
         {
@@ -25,6 +26,7 @@
             this.tetrominoService = new TetrominoService();
             this.userService = new UserService();
             this.boardService = new BoardService();
+            this.highScoreService = new HighScoreService();
         }
 
         public void ParseCommand(int action)
@@ -42,11 +44,11 @@
                     howToPlayCommand.Execute();
                     break;
                 case 3:
-                    ICommand showScoresCommand = new ShowScoresCommand(this.menuService);
+                    ICommand showScoresCommand = new ShowScoresCommand(this.menuService,this.userService);
                     showScoresCommand.Execute();
                     break;
                 case 4:
-                    ICommand showHighScoresCommand = new ShowHighScoresCommand(this.menuService);
+                    ICommand showHighScoresCommand = new ShowHighScoresCommand(this.menuService,this.highScoreService);
                     showHighScoresCommand.Execute();
                     break;
                 case 5:
