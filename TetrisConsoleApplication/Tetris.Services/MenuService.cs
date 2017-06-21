@@ -92,7 +92,7 @@
             }
             else
             {
-                foreach (var score in userHighscores.OrderBy(s => s.Points))
+                foreach (var score in userHighscores.OrderByDescending(s => s.Points))
                 {
                     this.consoleWriter.PrintLine($"{score.Points} - {score.Date:d}");
                 }
