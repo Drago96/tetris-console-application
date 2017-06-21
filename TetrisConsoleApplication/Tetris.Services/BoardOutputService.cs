@@ -37,15 +37,17 @@
         {
             for (int lengthCount = 0; lengthCount < board.Height; ++lengthCount)
             {
-                ConsoleWriter.WriteOnPosition(0, lengthCount, board.BoardBorder.RearWallSprite);
-                ConsoleWriter.WriteOnPosition(board.Width * 2 + 1, lengthCount, board.BoardBorder.RearWallSprite);
+                ConsoleWriter.WriteOnPosition(0, lengthCount, board.BoardBorder.RearWallSprite.ToString());
+                ConsoleWriter.WriteOnPosition(board.Width * 2 + 1, lengthCount, board.BoardBorder.RearWallSprite.ToString());
             }
 
             Console.SetCursorPosition(0, board.Height);
-
-            for (int widthCount = 0; widthCount <= board.Width; widthCount++)
+            int counter = 0;
+            char[] bottomBorder = board.BoardBorder.BottomSprite.ToCharArray();
+            for (int widthCount = 0; widthCount <= board.Width * 2 + 1; widthCount++)
             {
-                ConsoleWriter.Write(board.BoardBorder.BottomSprite);
+                ConsoleWriter.Write(bottomBorder[counter%bottomBorder.Length].ToString());
+                counter++;
             }
         }
 

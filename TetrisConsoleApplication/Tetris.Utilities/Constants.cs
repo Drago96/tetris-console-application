@@ -8,7 +8,7 @@ namespace Tetris.Utilities
         public const int BoardWidth = 10;
 
         public const char BlockSprite = '■';
-
+        
         public const int StartLevel = 1;
         public const long StartScore = 0;
         public const int StartLinesCleared = 0;
@@ -19,7 +19,7 @@ namespace Tetris.Utilities
         public const int ScorePerLine = 10;
         public const int LinesPerLevel = 5;
 
-        public const string BoardRearWallSprite = "*";
+        public const char BoardRearWallSprite = '*';
         public const string BoardBottomSprite = "*-";
 
         public const int TetrominoRefillCount = 10;

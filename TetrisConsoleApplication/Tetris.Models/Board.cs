@@ -4,7 +4,7 @@ namespace Tetris.Models
 {
     public class Board : IBoard
     {
-        public Board(int width, int height,char boardSprite,string rearWallSprite, string bottomSprite)
+        public Board(int width, int height,char boardSprite,char rearWallSprite, string bottomSprite)
         {
             this.BoardBorder = new BoardBorder(rearWallSprite,bottomSprite);
             this.Width = width;

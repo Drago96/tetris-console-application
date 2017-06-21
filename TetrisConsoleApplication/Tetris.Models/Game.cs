@@ -7,7 +7,7 @@
     public class Game : IGame
     {
         public Game(int boardWidth, int boardHeight, int level, long score, int linesCleared,
-            char blockSprite, string boardRearWallSprite, string bottomSprite, int tetrominoDropRate, int tetrominoDropRateIncrease,
+            char blockSprite, char boardRearWallSprite, string bottomSprite, int tetrominoDropRate, int tetrominoDropRateIncrease,
             int scorePerLine, int linesPerLevel)
         {
             this.Board = new Board(boardWidth, boardHeight, blockSprite, boardRearWallSprite, bottomSprite);
