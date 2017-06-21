@@ -4,7 +4,7 @@
     {
         char BoardSprite { get; }
 
-        BoardBorder BoardBorder { get; }
+        IBoardBorder BoardBorder { get; }
 
         int Width { get; }
 

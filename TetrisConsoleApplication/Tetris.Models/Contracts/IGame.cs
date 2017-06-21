@@ -18,6 +18,6 @@ namespace Tetris.Models.Contracts
 
         int TetrominoDropRateIncrease { get; set; }
 
-        ScoreInfo ScoreInfo { get; set; }
+        IScoreInfo ScoreInfo { get; set; }
     }
 }

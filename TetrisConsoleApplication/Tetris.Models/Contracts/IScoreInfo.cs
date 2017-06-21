@@ -1,6 +1,6 @@
 ﻿namespace Tetris.Models.Contracts
 {
-    interface IScoreInfo
+    public interface IScoreInfo
     {
         int Level { get; set; }
 

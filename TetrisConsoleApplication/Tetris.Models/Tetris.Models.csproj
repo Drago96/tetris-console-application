@@ -51,6 +51,7 @@
     <Compile Include="Board.cs" />
     <Compile Include="BoardBorder.cs" />
     <Compile Include="Contracts\IBoard.cs" />
+    <Compile Include="Contracts\IBoardBorder.cs" />
     <Compile Include="Contracts\ICurrentTetromino.cs" />
     <Compile Include="Contracts\IGame.cs" />
     <Compile Include="Contracts\IGrid.cs" />

@@ -18,7 +18,7 @@ namespace Tetris.Models
 
         public char BoardSprite { get; private set; }
 
-        public BoardBorder BoardBorder { get; private set; }
+        public IBoardBorder BoardBorder { get; private set; }
 
         public int Width { get; private set; }
 

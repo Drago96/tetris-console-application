@@ -1,6 +1,8 @@
-﻿namespace Tetris.Models
+﻿using Tetris.Models.Contracts;
+
+namespace Tetris.Models
 {
-    public class BoardBorder
+    public class BoardBorder : IBoardBorder
     {
         public BoardBorder(char rearWallSprite, string bottomSprite)
         {

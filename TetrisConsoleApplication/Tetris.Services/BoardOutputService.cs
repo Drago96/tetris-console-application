@@ -10,7 +10,7 @@
     {
 
 
-        public void InitializeBoard(IBoard board, ScoreInfo scoreInfo, ITetromino tetromino)
+        public void InitializeBoard(IBoard board, IScoreInfo scoreInfo, ITetromino tetromino)
         {
             this.DrawBorder(board);
             this.DrawBoard(board);
@@ -51,7 +51,7 @@
             }
         }
 
-        public void DisplayInfo(IBoard board, ScoreInfo scoreInfo)
+        public void DisplayInfo(IBoard board, IScoreInfo scoreInfo)
         {
             ConsoleWriter.WriteLineOnPosition(board.Width * 2 + 5, 0, Constants.LevelLable + scoreInfo.Level);
             ConsoleWriter.WriteLineOnPosition(board.Width * 2 + 5, 1, Constants.ScoreLable + scoreInfo.Score);

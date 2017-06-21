@@ -33,6 +33,6 @@
 
         public int TetrominoDropRateIncrease { get; set; }
 
-        public ScoreInfo ScoreInfo { get; set; }
+        public IScoreInfo ScoreInfo { get; set; }
     }
 }
