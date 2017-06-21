@@ -80,12 +80,14 @@ namespace Tetris.Services
 
         public void ShowScoresForUser(string username, ICollection<HighScore> userHighscores)
         {
+            StringBuilder highScores = new StringBuilder();
             if (!userHighscores.Any())
             {
-                ConsoleWriter.WriteLine(Constants.NoSuchUserOrNoScores);
+                highScores.AppendLine(Constants.NoSuchUserOrNoScores);
+                highScores.AppendLine(Constants.EscapeToReturnToPreviousMenu);
+                ConsoleWriter.WriteLine(highScores.ToString());
                 return;
             }
-            StringBuilder highScores = new StringBuilder();
             highScores.AppendLine(Constants.HighScoreProperties);
             foreach (var score in userHighscores.OrderByDescending(s => s.Points))
             {
