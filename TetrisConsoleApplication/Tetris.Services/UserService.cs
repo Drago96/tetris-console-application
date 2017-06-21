@@ -17,23 +17,14 @@
             }
         }
 
-        public bool AddScore(string username, long points)
+        public void AddScore(string username, long points)
         {
             if (string.IsNullOrEmpty(username) || !UserExists(username))
             {
-                return false;
+                return;
             }
-            var isNewHighscore = false;
             using (var context = new TetrisDbContext())
-            {
-                if (!context.HighScores.Any())
-                {
-                    isNewHighscore = true;
-                }
-                else if (context.HighScores.Max(h => h.Points) < points)
-                {
-                    isNewHighscore = true;
-                }
+            {                
                 var user = context.Users.FirstOrDefault(u => u.Name == username);
                 var highscore = new HighScore
                 {
@@ -44,7 +35,6 @@
                 context.HighScores.Add(highscore);
                 context.SaveChanges();
             }
-            return isNewHighscore;
         }
 
         public List<HighScore> GetScoresByUsername(string username)
