@@ -1,11 +1,10 @@
 ﻿namespace Tetris.Services.IO
 {
     using System;
-    using Tetris.Services.Contracts;
 
-    public class ConsoleReader : IInputReader
+    public static class ConsoleReader 
     {
-        public string ReadLine()
+        public static string ReadLine()
         {
             string input = Console.ReadLine();
 

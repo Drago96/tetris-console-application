@@ -1,35 +1,34 @@
 ﻿namespace Tetris.Services.IO
 {
     using System;
-    using Tetris.Services.Contracts;
 
-    public class ConsoleWriter : IOutputWriter
+    public static class ConsoleWriter 
     {
-        public void PrintEmptyLine()
+        public static void WriteEmptyLine()
         {
             Console.WriteLine();
         }
 
-        public void Print(string message)
+        public static void Write(string message)
         {
             Console.Write(message);
         }
 
-        public void PrintLine(string message)
+        public static void WriteLine(string message)
         {
             Console.WriteLine(message);
         }
 
-        public void PrintOnPosition(int row, int col, string message)
-        {
-            Console.SetCursorPosition(row, col);
-            Console.Write(message);
-        }
+       public static void WriteOnPosition(int row, int col, string message)
+       {
+           Console.SetCursorPosition(row, col);
+           Console.Write(message);
+       }
 
-        public void PrintLineOnPosition(int row, int col, string message)
-        {
-            Console.SetCursorPosition(row, col);
-            Console.WriteLine(message);
-        }
+       public static void WriteLineOnPosition(int row, int col, string message)
+       {
+           Console.SetCursorPosition(row, col);
+           Console.WriteLine(message);
+       }
     }
 }

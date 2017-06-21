@@ -1,7 +1,6 @@
 ﻿namespace Tetris.Services
 {
     using System;
-    using Contracts;
     using IO;
     using Models;
     using Models.Contracts;
@@ -9,12 +8,7 @@
 
     public class BoardOutputService 
     {
-        public BoardOutputService()
-        {
-            this.consoleWriter = new ConsoleWriter();
-        }
 
-        public IOutputWriter consoleWriter { get; private set; }
 
         public void InitializeBoard(IBoard board, ScoreInfo scoreInfo, ITetromino tetromino)
         {
@@ -31,11 +25,11 @@
                 Console.SetCursorPosition(1, i);
                 for (int j = 0; j < board.Width; j++)
                 {
-                    this.consoleWriter.Print(board.Blocks[i, j] == 0 ? " " : board.BoardSprite.ToString());
-                    this.consoleWriter.Print(" ");
+                    ConsoleWriter.Write(board.Blocks[i, j] == 0 ? " " : board.BoardSprite.ToString());
+                    ConsoleWriter.Write(" ");
                 }
 
-                this.consoleWriter.PrintEmptyLine();
+                ConsoleWriter.WriteEmptyLine();
             }
         }
 
@@ -43,8 +37,8 @@
         {
             for (int lengthCount = 0; lengthCount < board.Height; ++lengthCount)
             {
-                this.consoleWriter.PrintOnPosition(0, lengthCount, board.BoardBorder.RearWallSprite);
-                this.consoleWriter.PrintOnPosition(board.Height - 2, lengthCount, board.BoardBorder.RearWallSprite);
+                ConsoleWriter.WriteOnPosition(0, lengthCount, board.BoardBorder.RearWallSprite);
+                ConsoleWriter.WriteOnPosition(board.Height - 2, lengthCount, board.BoardBorder.RearWallSprite);
             }
 
             Console.SetCursorPosition(0, board.Height);
@@ -57,12 +51,12 @@
 
         public void DisplayInfo(IBoard board, ScoreInfo scoreInfo)
         {
-            this.consoleWriter.PrintLineOnPosition(board.Height + 2, 0, Constants.LevelLable + scoreInfo.Level);
-            this.consoleWriter.PrintLineOnPosition(board.Height + 2, 1, Constants.ScoreLable + scoreInfo.Score);
-            this.consoleWriter.PrintLineOnPosition(board.Height + 2, 2, Constants.LinesClearedLable + scoreInfo.LinesCleared);
+            ConsoleWriter.WriteLineOnPosition(board.Height + 2, 0, Constants.LevelLable + scoreInfo.Level);
+            ConsoleWriter.WriteLineOnPosition(board.Height + 2, 1, Constants.ScoreLable + scoreInfo.Score);
+            ConsoleWriter.WriteLineOnPosition(board.Height + 2, 2, Constants.LinesClearedLable + scoreInfo.LinesCleared);
             if (AuthenticationManager.IsAuthenticated())
             {
-                this.consoleWriter.PrintLineOnPosition(board.Height + 2, 3,
+                ConsoleWriter.WriteLineOnPosition(board.Height + 2, 3,
                     Constants.CurrentPlayerNameLabel + AuthenticationManager.GetCurrentUser().Name);
             }
         }
@@ -90,18 +84,18 @@
         public void StartGamePrompt(IGame game)
         {
             Console.SetCursorPosition(game.Board.Height / 6, game.Board.Width / 2);
-            consoleWriter.PrintLine(Constants.StartGamePromptMessage);
+            ConsoleWriter.WriteLine(Constants.StartGamePromptMessage);
             Console.ReadKey(true);
         }
 
         public void DisplayGameOver(IGame game)
         {
             Console.SetCursorPosition(game.Board.Height / 6 + 3 , game.Board.Width / 2 - 1);
-            consoleWriter.PrintLine(new string(' ',10));
+            ConsoleWriter.WriteLine(new string(' ',10));
             Console.SetCursorPosition(game.Board.Height / 6 + 3, game.Board.Width / 2 );
-            consoleWriter.PrintLine(Constants.GameOverLabel);
+            ConsoleWriter.WriteLine(Constants.GameOverLabel);
             Console.SetCursorPosition(game.Board.Height / 6 + 3 , game.Board.Width / 2 + 1 );
-            consoleWriter.PrintLine(new string(' ', 10));
+            ConsoleWriter.WriteLine(new string(' ', 10));
             Console.ReadKey();
 
         }

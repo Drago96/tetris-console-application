@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Tetris.Models.Entities;
+using Tetris.Services.IO;
 using Tetris.Utilities;
 
 namespace Tetris.Client.Commands
@@ -21,8 +22,8 @@ namespace Tetris.Client.Commands
 
         public void Execute()
         {
-            Console.WriteLine(Constants.PleaseEnterUsername);
-            var username = Console.ReadLine();
+            ConsoleWriter.WriteLine(Constants.PleaseEnterUsername);
+            var username = ConsoleReader.ReadLine();
             ICollection<HighScore> highScores = userService.GetScoresByUsername(username);
             this.menuService.ShowScoresForUser(username,highScores);
         }

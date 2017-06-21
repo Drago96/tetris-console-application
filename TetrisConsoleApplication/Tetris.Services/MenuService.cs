@@ -15,17 +15,11 @@ namespace Tetris.Services
 
     public class MenuService
     {
-        private readonly ConsoleWriter consoleWriter;
-
-        public MenuService()
-        {
-            this.consoleWriter = new ConsoleWriter();
-        }
 
         public void PrintMenuOptions(Menu menu)
         {
             Console.CursorVisible = false;
-            this.consoleWriter.PrintLine(Constants.ChooseAction);
+            ConsoleWriter.WriteLine(Constants.ChooseAction);
             var counter = 1;
             foreach (var menuOption in Enum.GetValues(typeof(MenuOption)))
             {
@@ -33,12 +27,12 @@ namespace Tetris.Services
                 {
                     Console.BackgroundColor = ConsoleColor.DarkGray;
                     Console.ForegroundColor = ConsoleColor.Yellow;
-                    this.consoleWriter.PrintLine($"{this.GetMenuItemDescription(menuOption)}");
+                    ConsoleWriter.WriteLine($"{this.GetMenuItemDescription(menuOption)}");
                     Console.ResetColor();
                 }
                 else
                 {
-                    this.consoleWriter.PrintLine($"{this.GetMenuItemDescription(menuOption)}");
+                    ConsoleWriter.WriteLine($"{this.GetMenuItemDescription(menuOption)}");
                 }
                 counter++;
             }
@@ -64,15 +58,15 @@ namespace Tetris.Services
             
                 if (highscores.Count > 0)
                 {
-                    this.consoleWriter.PrintLine(Constants.Highscores);
-                    highscores.ToList().ForEach(h => Console.WriteLine($"{h.User.Name} - {h.Points}"));
+                    ConsoleWriter.WriteLine(Constants.Highscores);
+                    highscores.ToList().ForEach(h => ConsoleWriter.WriteLine($"{h.User.Name} - {h.Points}"));
                 }
                 else
                 {
-                    this.consoleWriter.PrintLine(Constants.NoScoresToShow);
+                    ConsoleWriter.WriteLine(Constants.NoScoresToShow);
                 }
-                this.consoleWriter.PrintEmptyLine();
-                this.consoleWriter.PrintLine(Constants.EscapeToReturnToPreviousMenu);
+                ConsoleWriter.WriteEmptyLine();
+                ConsoleWriter.WriteLine(Constants.EscapeToReturnToPreviousMenu);
                 while (Console.ReadKey().Key != ConsoleKey.Escape)
                 {
                 }
@@ -83,17 +77,17 @@ namespace Tetris.Services
         {
             if (!userHighscores.Any())
             {
-                this.consoleWriter.PrintLine(Constants.NoSuchUserOrNoScores);
+                ConsoleWriter.WriteLine(Constants.NoSuchUserOrNoScores);
             }
             else
             {
                 foreach (var score in userHighscores.OrderByDescending(s => s.Points))
                 {
-                    this.consoleWriter.PrintLine($"{score.Points} - {score.Date:d}");
+                    ConsoleWriter.WriteLine($"{score.Points} - {score.Date:d}");
                 }
             }
-            this.consoleWriter.PrintEmptyLine();
-            this.consoleWriter.PrintLine(Constants.EscapeToReturnToPreviousMenu);
+            ConsoleWriter.WriteEmptyLine();
+            ConsoleWriter.WriteLine(Constants.EscapeToReturnToPreviousMenu);
             while (Console.ReadKey().Key != ConsoleKey.Escape)
             {
             }
@@ -101,8 +95,8 @@ namespace Tetris.Services
 
         public void ShowCredits()
         {
-            this.consoleWriter.PrintLine(Constants.Credits);
-            this.consoleWriter.PrintLine(Constants.EscapeToReturnToPreviousMenu);
+            ConsoleWriter.WriteLine(Constants.Credits);
+            ConsoleWriter.WriteLine(Constants.EscapeToReturnToPreviousMenu);
             while (Console.ReadKey().Key != ConsoleKey.Escape)
             {
             }
@@ -111,12 +105,12 @@ namespace Tetris.Services
         public void ShowHowToPlay()
         {
             Console.OutputEncoding = Encoding.UTF8;
-            this.consoleWriter.PrintLine(Constants.LeftArrow);
-            this.consoleWriter.PrintLine(Constants.RightArrow);
-            this.consoleWriter.PrintLine(Constants.UpArrow);
-            this.consoleWriter.PrintLine(Constants.DownArrow);
-            this.consoleWriter.PrintLine(Constants.Space);
-            this.consoleWriter.PrintLine(Constants.EscapeToReturnToPreviousMenu);
+            ConsoleWriter.WriteLine(Constants.LeftArrow);
+            ConsoleWriter.WriteLine(Constants.RightArrow);
+            ConsoleWriter.WriteLine(Constants.UpArrow);
+            ConsoleWriter.WriteLine(Constants.DownArrow);
+            ConsoleWriter.WriteLine(Constants.Space);
+            ConsoleWriter.WriteLine(Constants.EscapeToReturnToPreviousMenu);
             while (Console.ReadKey().Key != ConsoleKey.Escape)
             {
             }

@@ -1,4 +1,5 @@
 ﻿using System;
+using Tetris.Services.IO;
 
 namespace Tetris.Client.Commands
 {
@@ -31,7 +32,7 @@ namespace Tetris.Client.Commands
 
         public void Execute()
         {
-            Console.WriteLine(Constants.EnterNamePrompt);
+            ConsoleWriter.WriteLine(Constants.EnterNamePrompt);
             var username = Console.ReadLine();
             userService.LoginUser(username);
             Console.Clear();
