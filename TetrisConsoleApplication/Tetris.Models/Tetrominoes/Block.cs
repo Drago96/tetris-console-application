@@ -11,7 +11,6 @@
         {
             this.ShapeRotations = new Queue<byte[,]>();
             this.ShapeRotations.Enqueue(new byte[,] {{1, 1}, {1, 1}});
-            this.ShapeRotations.Enqueue(new byte[,] {{1, 1}, {1, 1}});
         }
     }
 }
