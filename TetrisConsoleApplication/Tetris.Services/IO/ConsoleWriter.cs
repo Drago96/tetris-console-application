@@ -19,15 +19,15 @@
             Console.WriteLine(message);
         }
 
-       public static void WriteOnPosition(int row, int col, string message)
+       public static void WriteOnPosition(int col, int row, string message)
        {
-           Console.SetCursorPosition(row, col);
+           Console.SetCursorPosition(col, row);
            Console.Write(message);
        }
 
-       public static void WriteLineOnPosition(int row, int col, string message)
+       public static void WriteLineOnPosition(int col, int row, string message)
        {
-           Console.SetCursorPosition(row, col);
+           Console.SetCursorPosition(col, row);
            Console.WriteLine(message);
        }
     }

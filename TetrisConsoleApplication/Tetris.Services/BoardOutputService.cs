@@ -38,63 +38,63 @@
             for (int lengthCount = 0; lengthCount < board.Height; ++lengthCount)
             {
                 ConsoleWriter.WriteOnPosition(0, lengthCount, board.BoardBorder.RearWallSprite);
-                ConsoleWriter.WriteOnPosition(board.Height - 2, lengthCount, board.BoardBorder.RearWallSprite);
+                ConsoleWriter.WriteOnPosition(board.Width * 2 + 1, lengthCount, board.BoardBorder.RearWallSprite);
             }
 
             Console.SetCursorPosition(0, board.Height);
 
             for (int widthCount = 0; widthCount <= board.Width; widthCount++)
             {
-                Console.Write(board.BoardBorder.BottomSprite);
+                ConsoleWriter.Write(board.BoardBorder.BottomSprite);
             }
         }
 
         public void DisplayInfo(IBoard board, ScoreInfo scoreInfo)
         {
-            ConsoleWriter.WriteLineOnPosition(board.Height + 2, 0, Constants.LevelLable + scoreInfo.Level);
-            ConsoleWriter.WriteLineOnPosition(board.Height + 2, 1, Constants.ScoreLable + scoreInfo.Score);
-            ConsoleWriter.WriteLineOnPosition(board.Height + 2, 2, Constants.LinesClearedLable + scoreInfo.LinesCleared);
+            ConsoleWriter.WriteLineOnPosition(board.Width * 2 + 5, 0, Constants.LevelLable + scoreInfo.Level);
+            ConsoleWriter.WriteLineOnPosition(board.Width * 2 + 5, 1, Constants.ScoreLable + scoreInfo.Score);
+            ConsoleWriter.WriteLineOnPosition(board.Width * 2 + 5, 2, Constants.LinesClearedLable + scoreInfo.LinesCleared);
             if (AuthenticationManager.IsAuthenticated())
             {
-                ConsoleWriter.WriteLineOnPosition(board.Height + 2, 3,
+                ConsoleWriter.WriteLineOnPosition(board.Width * 2 + 5, 3,
                     Constants.CurrentPlayerNameLabel + AuthenticationManager.GetCurrentUser().Name);
             }
         }
 
         public void DisplayNextTetromino(IBoard board, ITetromino tetromino)
         {
-            Console.SetCursorPosition(board.Height + 2, 5);
+            Console.SetCursorPosition(board.Width * 2 + 5, 5);
             ClearArea();
-            Console.SetCursorPosition(board.Height + 2, 5);
+            Console.SetCursorPosition(board.Width * 2 + 5, 5);
             tetromino.DrawTetromino();
         }
 
         private void ClearArea()
         {
-            for (int i = 0; i < Constants.LinesToClear; i++)
+            for (int i = 0; i < Constants.NextTetrominoLinesToClear; i++)
             {
-                for (int j = 0; j < Constants.ColumnsToClear; j++)
+                for (int j = 0; j < Constants.NextTetrominoColumnsToClear; j++)
                 {
                     Console.Write(" ");
                 }
-                Console.SetCursorPosition(Console.CursorLeft - Constants.ColumnsToClear, Console.CursorTop + 1);
+                Console.SetCursorPosition(Console.CursorLeft - Constants.NextTetrominoColumnsToClear, Console.CursorTop + 1);
             }
         }
 
         public void StartGamePrompt(IGame game)
         {
-            Console.SetCursorPosition(game.Board.Height / 6, game.Board.Width / 2);
+            Console.SetCursorPosition(game.Board.Width / 2, game.Board.Height / 2 - 4);
             ConsoleWriter.WriteLine(Constants.StartGamePromptMessage);
             Console.ReadKey(true);
         }
 
         public void DisplayGameOver(IGame game)
         {
-            Console.SetCursorPosition(game.Board.Height / 6 + 3 , game.Board.Width / 2 - 1);
+            Console.SetCursorPosition(game.Board.Width / 2 , game.Board.Height / 2 - 5);
             ConsoleWriter.WriteLine(new string(' ',10));
-            Console.SetCursorPosition(game.Board.Height / 6 + 3, game.Board.Width / 2 );
+            Console.SetCursorPosition(game.Board.Width / 2, game.Board.Height / 2 - 4);
             ConsoleWriter.WriteLine(Constants.GameOverLabel);
-            Console.SetCursorPosition(game.Board.Height / 6 + 3 , game.Board.Width / 2 + 1 );
+            Console.SetCursorPosition(game.Board.Width / 2, game.Board.Height / 2 - 3);
             ConsoleWriter.WriteLine(new string(' ', 10));
             Console.ReadKey();
 

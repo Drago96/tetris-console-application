@@ -15,12 +15,12 @@ namespace Tetris.Services
 
         public void UpdateScoreInfo(IGame game, int lines)
         {
-            game.ScoreInfo.Score += lines * game.ScoreInfo.Level * 10;
-            int progressionToNextLevel = game.ScoreInfo.LinesCleared % 5;
-            if (progressionToNextLevel + lines >= 5)
+            game.ScoreInfo.Score += lines * game.ScoreInfo.Level * game.ScoreInfo.ScorePerLine;
+            int progressionToNextLevel = game.ScoreInfo.LinesCleared % game.ScoreInfo.LinesPerLevel;
+            if (progressionToNextLevel + lines >= game.ScoreInfo.LinesPerLevel)
             {
                 game.ScoreInfo.Level++;
-                game.TetrominoDropRate -= 25;
+                game.TetrominoDropRate -= game.TetrominoDropRateIncrease;
             }
             game.ScoreInfo.LinesCleared += lines;
         }
