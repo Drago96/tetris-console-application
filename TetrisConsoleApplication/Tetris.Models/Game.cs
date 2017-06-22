@@ -6,16 +6,14 @@
 
     public class Game : IGame
     {
-        public Game(int boardWidth, int boardHeight, int level, long score, int linesCleared,
-            char blockSprite, char boardRearWallSprite, string bottomSprite, int tetrominoDropRate, int tetrominoDropRateIncrease,
-            int scorePerLine, int linesPerLevel)
+        public Game(IBoard board,IScoreInfo scoreInfo, int tetrominoDropRate, int tetrominoDropRateIncrease)
         {
-            this.Board = new Board(boardWidth, boardHeight, blockSprite, boardRearWallSprite, bottomSprite);
+            this.Board = board;
             this.DropTimer = new Stopwatch();
-            this.ScoreInfo = new ScoreInfo(level, score, linesCleared,scorePerLine,linesPerLevel);
+            this.ScoreInfo = scoreInfo;
             this.TetrominoFactory = new TetrominoFactory();
             this.TetrominoRepository = new TetrominoRepository();
-            this.TetrominoDropRate = tetrominoDropRate - (level-1) * tetrominoDropRateIncrease;
+            this.TetrominoDropRate = tetrominoDropRate - (scoreInfo.Level-1) * tetrominoDropRateIncrease;
             this.TetrominoDropRateIncrease = tetrominoDropRateIncrease;
         }
 

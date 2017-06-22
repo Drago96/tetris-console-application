@@ -34,10 +34,9 @@ namespace Tetris.Client.Commands
         {
             this.PromptUserLogin();
             Console.Clear();
-            IGame game = new Game(Constants.BoardWidth, Constants.BoardHeight, Constants.StartLevel,
-                Constants.StartScore, Constants.StartLinesCleared, Constants.BlockSprite, Constants.BoardRearWallSprite,
-                Constants.BoardBottomSprite, Constants.TetrominoDropRate,Constants.TetrominoDropRateIncrease,
-                Constants.ScorePerLine,Constants.LinesPerLevel);
+            IBoard board = new Board(Constants.BoardWidth, Constants.BoardHeight, Constants.BlockSprite, Constants.BoardRearWallSprite, Constants.BoardBottomSprite);
+            IScoreInfo scoreInfo = new ScoreInfo(Constants.StartLevel,Constants.StartScore,Constants.StartLinesCleared,Constants.ScorePerLine,Constants.LinesPerLevel);
+            IGame game = new Game(board,scoreInfo,Constants.TetrominoDropRate,Constants.TetrominoDropRateIncrease);
             this.StartGame(game);
         }
 
