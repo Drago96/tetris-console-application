@@ -15,7 +15,7 @@
             this.ScoreInfo = new ScoreInfo(level, score, linesCleared,scorePerLine,linesPerLevel);
             this.TetrominoFactory = new TetrominoFactory();
             this.TetrominoRepository = new TetrominoRepository();
-            this.TetrominoDropRate = tetrominoDropRate;
+            this.TetrominoDropRate = tetrominoDropRate - (level-1) * tetrominoDropRateIncrease;
             this.TetrominoDropRateIncrease = tetrominoDropRateIncrease;
         }
 
