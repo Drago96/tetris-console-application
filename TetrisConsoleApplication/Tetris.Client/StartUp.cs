@@ -2,9 +2,9 @@
 {
     using Tetris.Client.Contracts;
 
-    class StartUp
+    internal class StartUp
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             IEngine engine = new Engine();
             engine.Run();

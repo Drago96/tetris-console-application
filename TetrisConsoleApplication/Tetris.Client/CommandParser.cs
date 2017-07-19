@@ -39,22 +39,27 @@
                         this.boardService);
                     startGameCommand.Execute();
                     break;
+
                 case 2:
                     ICommand howToPlayCommand = new HowToPlayCommand(this.menuService);
                     howToPlayCommand.Execute();
                     break;
+
                 case 3:
-                    ICommand showScoresCommand = new ShowScoresCommand(this.menuService,this.userService);
+                    ICommand showScoresCommand = new ShowScoresCommand(this.menuService, this.userService);
                     showScoresCommand.Execute();
                     break;
+
                 case 4:
-                    ICommand showHighScoresCommand = new ShowHighScoresCommand(this.menuService,this.highScoreService);
+                    ICommand showHighScoresCommand = new ShowHighScoresCommand(this.menuService, this.highScoreService);
                     showHighScoresCommand.Execute();
                     break;
+
                 case 5:
                     ICommand showCreditsCommand = new ShowCreditsCommand(this.menuService);
                     showCreditsCommand.Execute();
                     break;
+
                 case 6:
                     Environment.Exit(0);
                     break;

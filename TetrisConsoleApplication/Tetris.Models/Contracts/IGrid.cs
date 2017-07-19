@@ -3,6 +3,5 @@
     public interface IGrid
     {
         byte[,] Blocks { get; }
-
     }
 }

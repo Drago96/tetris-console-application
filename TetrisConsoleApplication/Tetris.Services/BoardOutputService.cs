@@ -1,15 +1,12 @@
 ﻿namespace Tetris.Services
 {
-    using System;
     using IO;
-    using Models;
     using Models.Contracts;
+    using System;
     using Utilities;
 
-    public class BoardOutputService 
+    public class BoardOutputService
     {
-
-
         public void InitializeBoard(IBoard board, IScoreInfo scoreInfo, ITetromino tetromino)
         {
             this.DrawBorder(board);
@@ -46,7 +43,7 @@
             char[] bottomBorder = board.BoardBorder.BottomSprite.ToCharArray();
             for (int widthCount = 0; widthCount <= board.Width * 2 + 1; widthCount++)
             {
-                ConsoleWriter.Write(bottomBorder[counter%bottomBorder.Length].ToString());
+                ConsoleWriter.Write(bottomBorder[counter % bottomBorder.Length].ToString());
                 counter++;
             }
         }
@@ -92,14 +89,13 @@
 
         public void DisplayGameOver(IGame game)
         {
-            Console.SetCursorPosition(game.Board.Width / 2 , game.Board.Height / 2 - 5);
-            ConsoleWriter.WriteLine(new string(' ',10));
+            Console.SetCursorPosition(game.Board.Width / 2, game.Board.Height / 2 - 5);
+            ConsoleWriter.WriteLine(new string(' ', 10));
             Console.SetCursorPosition(game.Board.Width / 2, game.Board.Height / 2 - 4);
             ConsoleWriter.WriteLine(Constants.GameOverLabel);
             Console.SetCursorPosition(game.Board.Width / 2, game.Board.Height / 2 - 3);
             ConsoleWriter.WriteLine(new string(' ', 10));
             Console.ReadKey();
-
         }
     }
 }

@@ -1,14 +1,13 @@
 ﻿namespace Tetris.Services
 {
+    using Data;
+    using Models.Entities;
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using Data;
-    using Models.Entities;
 
     public class UserService
     {
-
         public User GetUserById(int userId)
         {
             using (var context = new TetrisDbContext())
@@ -24,7 +23,7 @@
                 return;
             }
             using (var context = new TetrisDbContext())
-            {                
+            {
                 var user = context.Users.FirstOrDefault(u => u.Name == username);
                 var highscore = new HighScore
                 {
@@ -71,26 +70,25 @@
 
         public void LoginUser(string username)
         {
+            User user = new User()
+            {
+                Name = username
+            };
 
-           User user = new User()
-           {
-               Name = username
-           };
-
-           using (var context = new TetrisDbContext())
-           {
-               if (context.Users.Any(u => u.Name == username))
-               {
-                   var userFromDb = context.Users.First(u => u.Name == username);
-                   AuthenticationManager.Login(userFromDb);
-               }
-               else
-               {
-                   context.Users.Add(user);
-                   context.SaveChanges();
-                   AuthenticationManager.Login(user);
-               }
-           }      
+            using (var context = new TetrisDbContext())
+            {
+                if (context.Users.Any(u => u.Name == username))
+                {
+                    var userFromDb = context.Users.First(u => u.Name == username);
+                    AuthenticationManager.Login(userFromDb);
+                }
+                else
+                {
+                    context.Users.Add(user);
+                    context.SaveChanges();
+                    AuthenticationManager.Login(user);
+                }
+            }
         }
     }
 }

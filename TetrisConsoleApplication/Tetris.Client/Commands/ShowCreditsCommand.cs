@@ -5,7 +5,7 @@ namespace Tetris.Client.Commands
     using Tetris.Client.Contracts;
     using Tetris.Services;
 
-    class ShowCreditsCommand : ICommand
+    internal class ShowCreditsCommand : ICommand
     {
         private readonly MenuService menuService;
 

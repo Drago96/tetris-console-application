@@ -1,6 +1,4 @@
-﻿using System.Runtime.Remoting.Messaging;
-
-namespace Tetris.Utilities
+﻿namespace Tetris.Utilities
 {
     public class Constants
     {
@@ -8,7 +6,7 @@ namespace Tetris.Utilities
         public const int BoardWidth = 10;
 
         public const char BlockSprite = '■';
-        
+
         public const int StartLevel = 1;
         public const long StartScore = 0;
         public const int StartLinesCleared = 0;
@@ -54,6 +52,5 @@ namespace Tetris.Utilities
 
         public const string HighScoreProperties = "Score | Date    ";
         public const string BestHighScoresProperties = "Name       | Score";
-
     }
 }

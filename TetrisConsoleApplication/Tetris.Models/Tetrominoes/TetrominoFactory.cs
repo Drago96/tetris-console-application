@@ -24,7 +24,7 @@
             var typeOfTetromino = Assembly.GetExecutingAssembly().GetTypes()
                 .FirstOrDefault(v => v.Name == type.ToString());
 
-            ITetromino tetromino = (ITetromino) Activator.CreateInstance(typeOfTetromino);
+            ITetromino tetromino = (ITetromino)Activator.CreateInstance(typeOfTetromino);
 
             return tetromino;
         }

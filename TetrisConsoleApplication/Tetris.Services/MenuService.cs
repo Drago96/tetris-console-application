@@ -7,7 +7,6 @@ namespace Tetris.Services
     using System.ComponentModel;
     using System.Linq;
     using System.Text;
-    using Tetris.Data;
     using Tetris.Models;
     using Tetris.Models.Enums;
     using Tetris.Services.IO;
@@ -15,7 +14,6 @@ namespace Tetris.Services
 
     public class MenuService
     {
-
         public void PrintMenuOptions(Menu menu)
         {
             Console.CursorVisible = false;
@@ -47,7 +45,7 @@ namespace Tetris.Services
                 var attrs = fi.GetCustomAttributes(typeof(DescriptionAttribute), true);
                 if (attrs != null && attrs.Length > 0)
                 {
-                    return ((DescriptionAttribute) attrs[0]).Description;
+                    return ((DescriptionAttribute)attrs[0]).Description;
                 }
             }
             return enumValue.ToString();
@@ -55,27 +53,26 @@ namespace Tetris.Services
 
         public void ShowHighScores(ICollection<HighScore> highScores)
         {
-                StringBuilder highScoresStringBuilder = new StringBuilder();
-                if (highScores.Count > 0)
+            StringBuilder highScoresStringBuilder = new StringBuilder();
+            if (highScores.Count > 0)
+            {
+                highScoresStringBuilder.AppendLine(Constants.Highscores);
+                highScoresStringBuilder.AppendLine(Constants.BestHighScoresProperties);
+                foreach (var h in highScores)
                 {
-                    highScoresStringBuilder.AppendLine(Constants.Highscores);
-                    highScoresStringBuilder.AppendLine(Constants.BestHighScoresProperties);
-                    foreach (var h in highScores)
-                    {
-                        highScoresStringBuilder.AppendLine($"{h.User.Name,-10} | {h.Points,-5}");
-                    }
+                    highScoresStringBuilder.AppendLine($"{h.User.Name,-10} | {h.Points,-5}");
                 }
-                else
-                {
-                    highScoresStringBuilder.AppendLine(Constants.NoScoresToShow);
-                }
-                highScoresStringBuilder.AppendLine();
-                highScoresStringBuilder.AppendLine(Constants.EscapeToReturnToPreviousMenu);
-                ConsoleWriter.WriteLine(highScoresStringBuilder.ToString());
-                while (Console.ReadKey().Key != ConsoleKey.Escape)
-                {
-                }
-            
+            }
+            else
+            {
+                highScoresStringBuilder.AppendLine(Constants.NoScoresToShow);
+            }
+            highScoresStringBuilder.AppendLine();
+            highScoresStringBuilder.AppendLine(Constants.EscapeToReturnToPreviousMenu);
+            ConsoleWriter.WriteLine(highScoresStringBuilder.ToString());
+            while (Console.ReadKey().Key != ConsoleKey.Escape)
+            {
+            }
         }
 
         public void ShowScoresForUser(string username, ICollection<HighScore> userHighscores)
@@ -96,7 +93,6 @@ namespace Tetris.Services
             highScores.AppendLine();
             highScores.AppendLine(Constants.EscapeToReturnToPreviousMenu);
             ConsoleWriter.WriteLine(highScores.ToString());
-            
         }
 
         public void ShowCredits()

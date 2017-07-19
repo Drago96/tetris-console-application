@@ -1,6 +1,6 @@
 ﻿namespace Tetris.Client.Contracts
 {
-    interface ICommand
+    internal interface ICommand
     {
         void Execute();
     }

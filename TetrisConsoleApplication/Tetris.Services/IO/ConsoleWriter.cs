@@ -2,7 +2,7 @@
 {
     using System;
 
-    public static class ConsoleWriter 
+    public static class ConsoleWriter
     {
         public static void WriteEmptyLine()
         {
@@ -19,16 +19,16 @@
             Console.WriteLine(message);
         }
 
-       public static void WriteOnPosition(int col, int row, string message)
-       {
-           Console.SetCursorPosition(col, row);
-           Console.Write(message);
-       }
+        public static void WriteOnPosition(int col, int row, string message)
+        {
+            Console.SetCursorPosition(col, row);
+            Console.Write(message);
+        }
 
-       public static void WriteLineOnPosition(int col, int row, string message)
-       {
-           Console.SetCursorPosition(col, row);
-           Console.WriteLine(message);
-       }
+        public static void WriteLineOnPosition(int col, int row, string message)
+        {
+            Console.SetCursorPosition(col, row);
+            Console.WriteLine(message);
+        }
     }
 }

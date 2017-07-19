@@ -9,7 +9,7 @@ namespace Tetris.Client.Commands
     using Tetris.Services;
     using Tetris.Utilities;
 
-    class StartGameCommand : ICommand
+    internal class StartGameCommand : ICommand
     {
         private readonly BoardOutputService boardOutputService;
         private readonly BoardService boardService;
@@ -35,8 +35,8 @@ namespace Tetris.Client.Commands
             this.PromptUserLogin();
             Console.Clear();
             IBoard board = new Board(Constants.BoardWidth, Constants.BoardHeight, Constants.BlockSprite, Constants.BoardRearWallSprite, Constants.BoardBottomSprite);
-            IScoreInfo scoreInfo = new ScoreInfo(Constants.StartLevel,Constants.StartScore,Constants.StartLinesCleared,Constants.ScorePerLine,Constants.LinesPerLevel);
-            IGame game = new Game(board,scoreInfo,Constants.TetrominoDropRate,Constants.TetrominoDropRateIncrease);
+            IScoreInfo scoreInfo = new ScoreInfo(Constants.StartLevel, Constants.StartScore, Constants.StartLinesCleared, Constants.ScorePerLine, Constants.LinesPerLevel);
+            IGame game = new Game(board, scoreInfo, Constants.TetrominoDropRate, Constants.TetrominoDropRateIncrease);
             this.StartGame(game);
         }
 
@@ -53,7 +53,7 @@ namespace Tetris.Client.Commands
             ConsoleKeyInfo key = new ConsoleKeyInfo();
             this.InitializeGame(game);
             game.CurrentTetromino = currentTetrominoService.SpawnTetromino(
-                tetrominoService.GetNextTetromino(game.TetrominoRepository, game.TetrominoFactory), game.Board,game.CurrentTetromino);
+                tetrominoService.GetNextTetromino(game.TetrominoRepository, game.TetrominoFactory), game.Board, game.CurrentTetromino);
             while (true)
             {
                 this.ProcessNextMove(game, key);
@@ -66,7 +66,7 @@ namespace Tetris.Client.Commands
                         this.UpdateGameState(game);
                         game.CurrentTetromino = currentTetrominoService.SpawnTetromino(
                             tetrominoService.GetNextTetromino(game.TetrominoRepository, game.TetrominoFactory),
-                            game.Board,game.CurrentTetromino);
+                            game.Board, game.CurrentTetromino);
                         if (game.CurrentTetromino == null)
                         {
                             this.AddScoreToDatabase(game);
@@ -140,7 +140,5 @@ namespace Tetris.Client.Commands
             userService.AddScore(AuthenticationManager.GetCurrentUser().Name, game.ScoreInfo.Score);
             AuthenticationManager.Logout();
         }
-
-        
     }
 }

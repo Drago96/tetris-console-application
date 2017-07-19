@@ -6,14 +6,14 @@
 
     public class Game : IGame
     {
-        public Game(IBoard board,IScoreInfo scoreInfo, int tetrominoDropRate, int tetrominoDropRateIncrease)
+        public Game(IBoard board, IScoreInfo scoreInfo, int tetrominoDropRate, int tetrominoDropRateIncrease)
         {
             this.Board = board;
             this.DropTimer = new Stopwatch();
             this.ScoreInfo = scoreInfo;
             this.TetrominoFactory = new TetrominoFactory();
             this.TetrominoRepository = new TetrominoRepository();
-            this.TetrominoDropRate = tetrominoDropRate - (scoreInfo.Level-1) * tetrominoDropRateIncrease;
+            this.TetrominoDropRate = tetrominoDropRate - (scoreInfo.Level - 1) * tetrominoDropRateIncrease;
             this.TetrominoDropRateIncrease = tetrominoDropRateIncrease;
         }
 

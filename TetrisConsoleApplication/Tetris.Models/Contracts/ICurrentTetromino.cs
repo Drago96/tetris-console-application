@@ -1,12 +1,12 @@
 ﻿namespace Tetris.Models.Contracts
 {
-    public interface ICurrentTetromino 
+    public interface ICurrentTetromino
     {
         int Row { get; set; }
 
         int Col { get; set; }
 
-        byte[,] Blocks { get;}
+        byte[,] Blocks { get; }
 
         ITetromino Tetromino { get; set; }
     }

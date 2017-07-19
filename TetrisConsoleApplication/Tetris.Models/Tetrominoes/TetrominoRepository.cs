@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Tetris.Models.Contracts;
 
 namespace Tetris.Models.Tetrominoes
@@ -13,7 +9,6 @@ namespace Tetris.Models.Tetrominoes
         {
             this.Tetrominoes = new Queue<ITetromino>();
         }
-
 
         public Queue<ITetromino> Tetrominoes { get; private set; }
 

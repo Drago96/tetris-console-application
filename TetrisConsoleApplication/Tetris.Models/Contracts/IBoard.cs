@@ -9,6 +9,5 @@
         int Width { get; }
 
         int Height { get; }
-
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace Tetris.Client.Contracts
 {
-    interface ICommandParser
+    internal interface ICommandParser
     {
         void ParseCommand(int action);
     }

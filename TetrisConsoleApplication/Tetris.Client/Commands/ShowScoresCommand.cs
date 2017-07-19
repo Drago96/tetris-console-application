@@ -9,12 +9,12 @@ namespace Tetris.Client.Commands
     using Tetris.Client.Contracts;
     using Tetris.Services;
 
-    class ShowScoresCommand : ICommand
+    internal class ShowScoresCommand : ICommand
     {
         private readonly MenuService menuService;
         private readonly UserService userService;
 
-        public ShowScoresCommand(MenuService menuService,UserService userService)
+        public ShowScoresCommand(MenuService menuService, UserService userService)
         {
             this.menuService = menuService;
             this.userService = userService;
@@ -25,7 +25,7 @@ namespace Tetris.Client.Commands
             ConsoleWriter.WriteLine(Constants.PleaseEnterUsername);
             var username = ConsoleReader.ReadLine();
             ICollection<HighScore> highScores = userService.GetScoresByUsername(username);
-            this.menuService.ShowScoresForUser(username,highScores);
+            this.menuService.ShowScoresForUser(username, highScores);
             while (Console.ReadKey().Key != ConsoleKey.Escape)
             {
             }

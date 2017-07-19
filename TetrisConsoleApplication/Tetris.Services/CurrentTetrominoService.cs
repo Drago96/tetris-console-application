@@ -240,7 +240,7 @@
         public ICurrentTetromino SpawnTetromino(ITetromino tetromino, IBoard board, ICurrentTetromino currentTetromino)
         {
             int tetrominoSpawnPoint =
-                (int) (board.Width / 2 - Math.Ceiling((double) tetromino.Blocks.GetLength(1) / 2));
+                (int)(board.Width / 2 - Math.Ceiling((double)tetromino.Blocks.GetLength(1) / 2));
             if (this.IsSpawnPossible(tetromino, board, tetrominoSpawnPoint))
             {
                 for (int i = 0; i < tetromino.Blocks.GetLength(0); i++)

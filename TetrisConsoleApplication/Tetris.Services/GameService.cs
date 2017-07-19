@@ -1,13 +1,9 @@
-﻿using Tetris.Models;
-
-namespace Tetris.Services
+﻿namespace Tetris.Services
 {
-    using System;
     using Tetris.Models.Contracts;
 
     public class GameService
     {
-       
         public void StartTimers(IGame game)
         {
             game.DropTimer.Start();
